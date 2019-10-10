@@ -3,6 +3,9 @@
 set -x
 
 
+xcode-select --install
+
+
 project_name='platform'
 
 if [ ! -d '~/projects/'${project_name} ]; then

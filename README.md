@@ -23,5 +23,5 @@ sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/eddie/master/ubuntu
 System bootstrap
 
 ```sh
-sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/platform/master/mac/setup.sh -O -)"
+sh -c "$(curl https://raw.githubusercontent.com/ChillarAnand/platform/master/mac/setup.sh)"
 ```
