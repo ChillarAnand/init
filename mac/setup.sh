@@ -46,6 +46,9 @@ if [ ! -d ~/.emacs.d/ ]; then
 fi
 
 
+./python.sh
+
+
 # utils
 brew install wget
 
