@@ -16,7 +16,7 @@ project_name='platform'
 config_dir=${HOME}'/projects/'${project_name}
 
 
-if [ ! -d '~/projects/'${project_name} ]; then
+if [ ! -d ~/projects/${project_name} ]; then
     cd
     mkdir -p projects
     cd projects
