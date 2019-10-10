@@ -6,6 +6,10 @@ set -x
 xcode-select --install
 
 
+# install brew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+
 project_name='platform'
 
 if [ ! -d '~/projects/'${project_name} ]; then
@@ -28,7 +32,12 @@ defaults write com.apple.screencapture location ~/Pictures
 
 
 # utils
-brew cask install stretchly quitter
+brew install wget
+
+
+# breaks
+# brew cask install stretchly
+brew cask install timeout
 
 
 # editors
@@ -70,7 +79,7 @@ brew cask install google-chrome
 # brew install mas
 
 # brew cask install HazeOver
-brew cask install time-out
+
 
 # brew cask install platypus
 
