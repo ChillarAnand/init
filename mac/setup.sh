@@ -19,7 +19,11 @@ if [ ! -d '~/projects/'${project_name} ]; then
     mkdir -p projects
     cd projects
     git clone 'https://github.com/chillaranand/'${project_name}
+else
+    cd $config_dir
+    git pull origin master
 fi
+
 
 cd $config_dir
 
