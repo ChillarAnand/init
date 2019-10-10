@@ -29,8 +29,8 @@ fi
 
 cd $config_dir
 
-bootstrap_script=${config_dir}'/mac/bootstrap_terminal.sh'
-sh $bootstrap_script
+
+sh ${config_dir}'/terminal.sh'
 
 
 rm ~/.zshrc
@@ -52,7 +52,7 @@ if [ ! -d ~/.emacs.d/ ]; then
 fi
 
 
-./python.sh
+sh ${config_dir}'/python.sh'
 
 
 # utils
@@ -88,5 +88,19 @@ brew cask install google-chrome
 # brew cask install HazeOver
 # brew cask install platypus
 
+
+# brew install cowsay nmap antigen mas
+
+# utils
+brew cask install karabiner-elements
+cp $config_dir'/mac/space_control.json' ~/.config/karabiner/assets/complex_modifications/
+
+
+# Blackmagic Disk Speed Test
+# mas install 425264550
+
+
+# locate
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 echo "Successfully bootstrapped"
