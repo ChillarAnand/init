@@ -11,6 +11,8 @@ xcode-select --install
 
 
 project_name='platform'
+config_dir=${HOME}'/projects/'${project_name}
+
 
 if [ ! -d '~/projects/'${project_name} ]; then
     cd
@@ -19,25 +21,19 @@ if [ ! -d '~/projects/'${project_name} ]; then
     git clone 'https://github.com/chillaranand/'${project_name}
 fi
 
-
-config_dir=${HOME}'/projects/'${project_name}
 cd $config_dir
 
 bootstrap_script=${config_dir}'/mac/bootstrap_terminal.sh'
 sh $bootstrap_script
 
 
+rm ~/.zshrc
+ln -s $config_dir'/cli/zshrc.sh' ~/.zshrc
+
+
 # set screenshots folder
 defaults write com.apple.screencapture location ~/Pictures
 
-
-# utils
-brew install wget
-
-
-# breaks
-# brew cask install stretchly
-brew cask install timeout
 
 
 # editors
@@ -50,17 +46,23 @@ if [ ! -d ~/.emacs.d/ ]; then
 fi
 
 
+# utils
+brew install wget
+
+
+# breaks
+# brew cask install stretchly
+brew cask install timeout
+
+
+brew install emacs
+
 # browser
 brew cask install google-chrome
 
 
-
 # adb
 # brew cask install android-platform-tools
-
-
-# oh my zsh
-# emacs
 
 
 # ms
@@ -71,16 +73,10 @@ brew cask install google-chrome
 # brew cask install virtualbox
 
 
-# cyber security
-# brew install masscan
-# brew tap caffix/amass
-# brew install amass
-# brew cask install wireshark
-# brew install mas
+# network & cyber security tools
+# ./network.sh
 
 # brew cask install HazeOver
-
-
 # brew cask install platypus
 
 
