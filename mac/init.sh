@@ -12,7 +12,7 @@ if [ ! -f /usr/local/bin/brew ]; then
 fi
 
 
-project_name='platform'
+project_name='init'
 config_dir=${HOME}'/projects/'${project_name}
 
 
@@ -61,10 +61,12 @@ brew install wget
 
 # breaks
 # brew cask install stretchly
-brew cask install timeout
+brew cask install time-out
 
 
 brew install emacs
+brew cask install pycharm
+
 
 # browser
 brew cask install google-chrome
