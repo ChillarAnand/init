@@ -43,8 +43,9 @@ defaults write com.apple.screencapture location ~/Pictures
 
 
 # editors
-brew cask install emacs
+
 if [ ! -d ~/.emacs.d/ ]; then
+    brew cask install emacs
     ln -s ${config_dir}'/emacs' ~/.emacs.d/
     touch ~/.emacs.d/custom.el
     touch ~/.emacs.d/private.el
@@ -55,16 +56,11 @@ fi
 sh ${config_dir}'/python.sh'
 
 
-# utils
-brew install wget
-
-
 # breaks
 # brew cask install stretchly
 brew cask install time-out
 
 
-brew install emacs
 brew cask install pycharm
 
 
