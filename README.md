@@ -8,7 +8,7 @@ This repo contains setup files.
 System bootstrap
 
 ```sh
-sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/01/master/ubuntu/bin/start.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/init/master/ubuntu/bin/start.sh -O -)"
 ```
 
 Terminal only bootstrap
@@ -23,5 +23,5 @@ sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/eddie/master/ubuntu
 System bootstrap
 
 ```sh
-sh -c "$(curl https://raw.githubusercontent.com/ChillarAnand/platform/master/mac/setup.sh)"
+sh -c "$(curl https://raw.githubusercontent.com/ChillarAnand/init/master/mac/init.sh)"
 ```
