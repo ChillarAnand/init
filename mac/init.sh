@@ -63,6 +63,9 @@ brew cask install time-out
 
 brew cask install pycharm
 
+# kindle
+brew cask install kindle
+
 
 # browser
 brew cask install google-chrome
