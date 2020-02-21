@@ -27,6 +27,10 @@ else
 fi
 
 
+# locate
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
+
 cd $config_dir
 
 
@@ -34,7 +38,7 @@ sh ${config_dir}'/terminal.sh'
 
 
 rm ~/.zshrc
-ln -s $config_dir'/cli/zshrc.sh' ~/.zshrc
+ln -s $config_dir'/zshrc.sh' ~/.zshrc
 
 
 # set screenshots folder
@@ -56,52 +60,37 @@ fi
 sh ${config_dir}'/python.sh'
 
 
-# breaks
-# brew cask install stretchly
-brew cask install time-out
+brew cask install pycharm google-chrome
 
 
-brew cask install pycharm
+# utils
+brew install clean-me cowsay
+brew cask install stretchly karabiner-elements
+# brew cask install platypus HazeOver
+
+cp $config_dir'/mac/space_control.json' ~/.config/karabiner/assets/complex_modifications/
+
+# debookee_tools, Blackmagic Disk Speed Test
+mas install 1110355801 425264550
+
 
 # kindle
-brew cask install kindle
-
-
-# browser
-brew cask install google-chrome
-
+# brew cask install kindle
 
 # adb
 # brew cask install android-platform-tools
 
-
 # ms
 # brew cask install microsoft-office
-
 
 # virtualbox
 # brew cask install virtualbox
 
-
 # network & cyber security tools
-# ./network.sh
-
-# brew cask install HazeOver
-# brew cask install platypus
-
-
-# brew install cowsay nmap antigen mas
-
-# utils
-brew cask install karabiner-elements
-cp $config_dir'/mac/space_control.json' ~/.config/karabiner/assets/complex_modifications/
+brew tap caffix/amass
+brew install amass masscan nmap
+brew cask install wireshark
 
 
-# Blackmagic Disk Speed Test
-# mas install 425264550
-
-
-# locate
-sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 echo "Successfully bootstrapped"
