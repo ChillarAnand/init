@@ -1065,11 +1065,10 @@ export PATH=$PATH:/usr/local/go/bin
 source ~/Dropbox/tech/private.sh
 # workon py36
 
+# source ~/.zsh-autosuggestions/zsh-autosuggestions.zsh || true
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/.zaw/zaw.zsh
-
-
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -1150,9 +1149,7 @@ source .env || true
 
 
 # mac
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source ~/.zsh-autosuggestions/zsh-autosuggestions.zsh || true
+
 
 
 rdb(){
