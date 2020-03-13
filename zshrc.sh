@@ -716,15 +716,14 @@ vagrant_kube () {
 
 
 alias kc='kubectl '
+alias kca='kubectl apply'
 
 alias kcp='google-chrome http://127.0.0.1:8001/ui/ && kubectl proxy'
-
 
 alias kci='kubectl cluster-info'
 
 
 alias kcc='kubectl create'
-
 
 alias kccc='kubectl config current-context'
 alias kcv='kubectl config view'
@@ -733,6 +732,7 @@ alias kcum='kubectl config use-context minikube'
 
 
 alias kd='kubectl describe'
+
 alias kddp='kubectl --namespace=deis describe pod '
 
 alias kdd='kubectl describe deployments'
@@ -755,6 +755,7 @@ alias ked='kubectl exec -n deis'
 
 
 alias kg='kubectl get '
+alias kga='kubectl get all'
 
 alias kgd='kubectl get deployments'
 alias kgda='kubectl get deployments --all-namespaces'
@@ -770,7 +771,6 @@ alias kgpk='kubectl get pods --namespace=kube-system'
 alias kgps='kubectl get pods --namespace=sherlock'
 
 alias kgs='kubectl get services'
-
 
 alias kl='kubectl logs'
 alias kld='kubectl logs --namespace=deis'
@@ -1065,9 +1065,9 @@ export PATH=$PATH:/usr/local/go/bin
 source ~/Dropbox/tech/private.sh
 # workon py36
 
-# source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source ~/.zsh-history-substring-search/zsh-history-substring-search.zsh
-# source ~/.zaw/zaw.zsh
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.zaw/zaw.zsh
 
 
 
@@ -1124,7 +1124,12 @@ alias nds='androidstudio'
 # export ANDROID_HOME="/home/chillar/projects/android/sdk/"
 # export ANDROID_HOME="/home/chillar/projects/android/Android"
 # export ANDROID_HOME="/home/chillar/projects/android"
-export ANDROID_HOME="/home/chillar/Android/Sdk/"
+# export ANDROID_HOME="/home/chillar/Android/Sdk/"
+export ANDROID_HOME="/Users/curatech/Library/Android/Sdk/"
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 export VAGRANT_NO_COLOR=True
 
 
@@ -1242,3 +1247,5 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 
 alias tm=tmuxinator
+alias tms=tmuxinator start
+alias tmx=tmuxinator stop

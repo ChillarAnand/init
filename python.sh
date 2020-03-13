@@ -7,4 +7,4 @@ if [ ! -f $(which pip) ]; then
 fi
 
 
-pip install glaces pydf
+pip install glances pydf
