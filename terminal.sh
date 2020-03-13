@@ -8,16 +8,16 @@ if [ ! -d ~/.oh-my-zsh/ ]; then
 fi
 
 
-if [ ! -d ~/.zsh/zsh-autosuggestions/ ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+if [ ! -d ~/.zsh-autosuggestions/ ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh-autosuggestions
 fi
 
 
-if [ ! -d ~/.zsh/zsh-history-substring-search/ ]; then
-    git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/zsh-history-substring-search
+if [ ! -d ~/.zsh-history-substring-search/ ]; then
+    git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh-history-substring-search
 fi
 
 
-if [ ! -d ~/.zsh/zaw/ ]; then
-    git clone https://github.com/zsh-users/zaw ~/.zsh/zaw
+if [ ! -d ~/.zaw/ ]; then
+    git clone https://github.com/zsh-users/zaw ~/.zaw
 fi
