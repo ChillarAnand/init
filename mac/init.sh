@@ -5,7 +5,7 @@ set -x
 project_name='init'
 config_dir=${HOME}'/projects/'${project_name}
 
-sh ${config_dir}'/bootstrap.sh'
+sh ${config_dir}'/mac/bootstrap.sh'
 
 
 # locate
