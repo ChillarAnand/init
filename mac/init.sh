@@ -22,6 +22,13 @@ rm ~/.zshrc
 ln -s $config_dir'/zshrc.sh' ~/.zshrc
 
 
+if [ -f ~/Dropbox/tech/init/zsh_history ]; then 
+    cp .zsh_history .zsh_history-$(date "+%Y.%m.%d-%H.%M.%S").bkp
+    rm ~/.zsh_history
+    ln -s ~/Dropbox/tech/init/zsh_history ~/.zsh_history
+fi
+   
+
 # set screenshots folder
 defaults write com.apple.screencapture location ~/Pictures
 
