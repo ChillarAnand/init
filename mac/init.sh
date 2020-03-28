@@ -41,7 +41,7 @@ fi
 sh ${config_dir}'/python.sh'
 
 
-brew cask install pycharm google-chrome
+brew cask install pycharm
 
 
 # utils

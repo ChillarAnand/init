@@ -2,7 +2,7 @@
 # ln ~/.custom_zsh/zshrc ~/.zshrc
 # ln ~/.custom_zsh/themes/ys2.zsh-theme ~/.oh-my-zsh/themes/ys2.zsh-theme
 
-source /usr/local/share/antigen/antigen.zsh
+# source /usr/local/share/antigen/antigen.zsh
 
 
 ZSH_DISABLE_COMPFIX="true"
@@ -1065,7 +1065,7 @@ export PATH=$PATH:/usr/local/go/bin
 source ~/Dropbox/tech/private.sh
 # workon py36
 
-# source ~/.zsh-autosuggestions/zsh-autosuggestions.zsh || true
+source ~/.zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/.zaw/zaw.zsh
@@ -1217,7 +1217,7 @@ alias dkm='docker-machine'
 
 km () {
     j kumbha
-    . ~/.local/share/virtualenvs/cura_server-pc50wcPX/bin/activate
+    . ~/.local/share/virtualenvs/cura_server/bin/activate
 }
 
 alias os='openssl'
@@ -1246,3 +1246,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 alias tm=tmuxinator
 alias tms=tmuxinator start
 alias tmx=tmuxinator stop
+
+export PATH="/usr/local/Cellar/postgresql@9.6/9.6.17/bin:$PATH"
+
+alias init='bash ~/projects/init/mac/init.sh'
+alias mi='sh -c "$(curl https://raw.githubusercontent.com/ChillarAnand/init/master/mac/init.sh)"'
+
