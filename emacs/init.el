@@ -270,12 +270,20 @@
   (define-key magit-mode-map (kbd "p") 'magit-push-popup)
   (define-key magit-mode-map (kbd "f") 'magit-pull-popup)
   (define-key magit-mode-map (kbd "F") 'magit-fetch-popup)
-  (define-key magit-mode-map (kbd "C-c C-s") 'git-sync))
+  (define-key magit-mode-map (kbd "C-c C-s") 'git-sync)
+  )
 
+
+;; (use-package git-gutter
 ;;   :config
-;;   (global-git-gutter-mode +1))
+;;   (global-git-gutter-mode +1)
+;;   )
 
-
+(use-package diff-hl
+  :config
+  (global-diff-hl-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  )
 
 
 ;; theme
@@ -553,21 +561,3 @@
 ;; (find-file "~/Dropbox/do.org")
 
 (message "Successfully loaded config... ")
-
-;; (defun byte-compile-current-buffer ()
-;;   "`byte-compile' current buffer if it's emac
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
- '(package-selected-packages
-   (quote
-    (engine-mode coffee-mode restclient ob-translate ox-reveal sql-indent sqlup-mode paradox lispy flycheck-pos-tip bm expand-region which-key keyfreq xterm-color writeroom-mode writegood-mode wrap-region web-mode vimish-fold use-package sotlisp smart-mode-line slim-mode salt-mode real-auto-save prodigy pointback openwith nyan-mode multi-term markdown-mode magit-gh-pulls key-chord js-comint ivy-dired-history indium impatient-mode highlight-symbol helm-swoop helm-projectile helm-github-stars helm-flx helm-dired-recent-dirs helm-descbinds helm-chrome helm-ag goto-last-change google-translate free-keys focus flycheck ember-mode elpy electric-operator edit-server easy-kill direx dired-subtree dimmer diff-hl company-quickhelp comment-dwim-2 circe benchmark-init bash-completion artbollocks-mode arduino-mode ace-window ace-link))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
