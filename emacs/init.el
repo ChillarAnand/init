@@ -462,11 +462,14 @@
 
  ("C-x C-f" . helm-find-files)
  ("C-c C-g" . beginning-of-buffer)
+
+ ("M-o" . other-window)
  ("M-y" . helm-show-kill-ring)
  ("M-z" . zop-up-to-char)
  ("M-Z" . zop-to-char)
  ("M-?" . mark-paragraph)
  ("M-/" . hippie-expand)
+
  )
 
 

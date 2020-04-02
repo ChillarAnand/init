@@ -1025,6 +1025,7 @@ export PATH="$HOME/.cask/bin:$PATH"
 export PATH="$HOME/projects/eddie/ubuntu/bin:$PATH"
 export PATH="$HOME/rr/prebuilts/sdk/tools:$PATH"
 export PATH="$HOME/usr/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 
 
 
@@ -1251,4 +1252,3 @@ export PATH="/usr/local/Cellar/postgresql@9.6/9.6.17/bin:$PATH"
 
 alias init='bash ~/projects/init/mac/init.sh'
 alias mi='sh -c "$(curl https://raw.githubusercontent.com/ChillarAnand/init/master/mac/init.sh)"'
-
