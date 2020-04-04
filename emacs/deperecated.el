@@ -194,8 +194,8 @@
   :config (magithub-feature-autoinject t))
 
 (use-package magit-gh-pulls
- :config
- (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+  :config
+  (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
 
 (use-package multi-term
@@ -563,3 +563,9 @@
   (eval-after-load 'flycheck
     '(custom-set-variables
       '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages))))
+
+(defun git-sync ()
+  (interactive)
+  (message "Syncing repo...")
+  (async-shell-command "git pull && git push")
+  (magit-refresh))

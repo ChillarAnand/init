@@ -254,11 +254,13 @@
       (magit-section-forward-sibling)
       (magit-section-forward)))
 
-  (defun git-sync ()
-    (interactive)
-    (message "Syncing repo...")
-    (async-shell-command "git pull && git push")
-    (magit-refresh))
+  (defun auto-display-magit-process-buffer (&rest args)
+    "Automatically display the process buffer when it is updated."
+    (let ((magit-display-buffer-noselect t))
+      (magit-process-buffer)))
+
+  (advice-add 'magit-process-insert-section :before
+              #'auto-display-magit-process-buffer)
 
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
