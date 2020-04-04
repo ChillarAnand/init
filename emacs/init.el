@@ -267,9 +267,9 @@
   (global-git-commit-mode)
 
   (define-key magit-mode-map (kbd "M-p") nil)
-  (define-key magit-mode-map (kbd "p") 'magit-push-popup)
+  (define-key magit-mode-map (kbd "p") 'magit-push)
   (define-key magit-mode-map (kbd "f") 'magit-pull-popup)
-  (define-key magit-mode-map (kbd "F") 'magit-fetch-popup)
+  (define-key magit-mode-map (kbd "F") 'magit-fetch)
   (define-key magit-mode-map (kbd "C-c C-s") 'git-sync)
   )
 
@@ -464,12 +464,12 @@
  ("C-c C-g" . beginning-of-buffer)
 
  ("M-o" . other-window)
+ ("M-x" . helm-M-x)
  ("M-y" . helm-show-kill-ring)
  ("M-z" . zop-up-to-char)
  ("M-Z" . zop-to-char)
  ("M-?" . mark-paragraph)
  ("M-/" . hippie-expand)
-
  )
 
 
