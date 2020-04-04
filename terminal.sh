@@ -17,6 +17,10 @@ if [ ! -d ~/.zsh-history-substring-search/ ]; then
     git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh-history-substring-search
 fi
 
+if [ ! -d ~/.zsh-syntax-highlighting/ ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh-syntax-highlighting
+fi
+
 
 if [ ! -d ~/.zaw/ ]; then
     git clone https://github.com/zsh-users/zaw ~/.zaw

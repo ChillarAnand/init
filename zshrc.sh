@@ -65,8 +65,8 @@ ZSH_CUSTOM=~/projects/eddie/ubuntu/config/zsh
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git z extract dirpersist autoenv web-search pip)
-plugins=(git z extract dirpersist pip zsh-autosuggestions)
+# plugins=(git z extract dirpersist autoenv web-search pip zsh-autosuggestions)
+plugins=(git z extract dirpersist pip)
 
 
 
@@ -763,7 +763,9 @@ alias kgda='kubectl get deployments --all-namespaces'
 alias kgn='kubectl get nodes'
 
 alias kgp='kubectl get pods'
-alias kgpa='kubectl get pods --all-namespaces -o wide'
+alias kgpa='kubectl get pods --all-namespaces'
+alias kpa=kgpa
+alias pa=kgpa
 
 alias kgpd='kubectl get pods --namespace=deis'
 alias kdgp='kubectl --namespace=deis get pod'
@@ -771,6 +773,8 @@ alias kgpk='kubectl get pods --namespace=kube-system'
 alias kgps='kubectl get pods --namespace=sherlock'
 
 alias kgs='kubectl get services'
+alias kgsa='kubectl get services --all-namespaces'
+alias ksa='kubectl get services --all-namespaces'
 
 alias kl='kubectl logs'
 alias kld='kubectl logs --namespace=deis'
@@ -1252,3 +1256,14 @@ export PATH="/usr/local/Cellar/postgresql@9.6/9.6.17/bin:$PATH"
 
 alias init='bash ~/projects/init/mac/init.sh'
 alias mi='sh -c "$(curl https://raw.githubusercontent.com/ChillarAnand/init/master/mac/init.sh)"'
+
+
+alias mst='minikube status'
+alias sz='source ~/.zshrc'
+alias kgp='kubectl get pods'
+alias kgd='kubectl get deployments'
+alias k=kubectl
+alias kd='kubectl --namespace=deis'
+alias d=docker
+alias m=minikube
+alias mk='minikube kubectl'
