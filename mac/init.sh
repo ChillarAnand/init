@@ -9,7 +9,7 @@ sh ${config_dir}'/mac/bootstrap.sh'
 
 
 # locate
-sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+# sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 
 cd $config_dir
@@ -22,12 +22,12 @@ rm ~/.zshrc
 ln -s $config_dir'/zshrc.sh' ~/.zshrc
 
 
-if [ -f ~/Dropbox/tech/init/zsh_history ]; then 
+if [ -f ~/Dropbox/tech/init/zsh_history ]; then
     cp .zsh_history .zsh_history-$(date "+%Y.%m.%d-%H.%M.%S").bkp
     rm ~/.zsh_history
     ln -s ~/Dropbox/tech/init/zsh_history ~/.zsh_history
 fi
-   
+
 
 # set screenshots folder
 defaults write com.apple.screencapture location ~/Pictures
@@ -35,7 +35,6 @@ defaults write com.apple.screencapture location ~/Pictures
 
 
 # editors
-
 if [ ! -d ~/.emacs.d/ ]; then
     brew cask install emacs
     ln -s ${config_dir}'/emacs' ~/.emacs.d/
@@ -48,12 +47,37 @@ fi
 sh ${config_dir}'/python.sh'
 
 
-brew cask install pycharm
+installed_packages=($(brew list; brew cask list))
+# brew_list=($(brew list))
+# brew_cask_list=($(brew cask list))
+
+function brew_install() {
+    for i in "${installed_packages[@]}"
+    do
+        echo "$i"
+        if [ "$i" = "$1" ] ; then
+            echo "Package $1 already installed"
+            return
+        fi
+    done
+
+    if [ "$2" ];
+    then
+        brew cask install $1
+    else
+        brew install $1
+    fi
+}
+
+brew_install pycharm cask
 
 
 # utils
-brew install clean-me cowsay
-brew cask install stretchly karabiner-elements
+brew_install clean-me
+brew_install cowsay
+brew_install stretchly cask
+brew_install karabiner-elements cask
+
 # brew cask install platypus HazeOver
 
 cp $config_dir'/mac/space_control.json' ~/.config/karabiner/assets/complex_modifications/
@@ -75,9 +99,9 @@ mas install 1110355801 425264550
 # brew cask install virtualbox
 
 # network & cyber security tools
-brew tap caffix/amass
-brew install amass masscan nmap
-brew cask install wireshark
+# brew tap caffix/amass
+# brew install amass masscan nmap
+# brew cask install wireshark
 
 
 

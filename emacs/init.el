@@ -259,8 +259,16 @@
     (let ((magit-display-buffer-noselect t))
       (magit-process-buffer)))
 
+  (defun auto-hide-magit-process-buffer (&rest args)
+    "Automatically display the process buffer when it is updated."
+    (let ((magit-display-buffer-noselect nil))
+      (magit-process-buffer)))
+
   (advice-add 'magit-process-insert-section :before
               #'auto-display-magit-process-buffer)
+
+  ;; (advice-add 'magit-process-insert-section :after
+  ;;             #'auto-hide-magit-process-buffer)
 
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 

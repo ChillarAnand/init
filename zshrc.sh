@@ -463,7 +463,7 @@ alias nt='nautilus .'
 
 alias n='nikola'
 alias na='nikola auto'
-alias naa='j avilpage.com; nikola auto'
+alias naa='j avilpage.com; wo avilpage; nikola auto'
 alias naf='rf output cache && rf cache && nikola auto'
 # alias ng='nikola github_deploy'
 alias ngd='nikola github_deploy'
