@@ -278,7 +278,7 @@
 
   (define-key magit-mode-map (kbd "M-p") nil)
   (define-key magit-mode-map (kbd "p") 'magit-push)
-  (define-key magit-mode-map (kbd "f") 'magit-pull-popup)
+  (define-key magit-mode-map (kbd "f") 'magit-pull)
   (define-key magit-mode-map (kbd "F") 'magit-fetch)
   (define-key magit-mode-map (kbd "C-c C-s") 'git-sync)
   )

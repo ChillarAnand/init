@@ -75,8 +75,12 @@ brew_install pycharm cask
 # utils
 brew_install clean-me
 brew_install cowsay
-brew_install stretchly cask
 brew_install karabiner-elements cask
+brew_install stretchly cask
+brew_install watch
+brew_install foxitreader
+brew_install mucommander
+
 
 # brew cask install platypus HazeOver
 

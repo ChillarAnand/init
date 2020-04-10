@@ -55,6 +55,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd/mm/yyyy"
+HIST_STAMPS="%d/%m/%y %T"
+
 
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=~/projects/01/ubuntu/config/zsh
@@ -147,7 +149,7 @@ alias p2='wo py27'
 alias wo='workon'
 alias wp='workon py35'
 alias wj='workon py35'
-alias we='workon exp'
+# alias we='workon exp'
 
 
 
@@ -196,7 +198,7 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
 
-export HISTSIZE=10000000
+export HISTSIZE=10000000000
 export SAVEHIST=$HISTSIZE
 
 
@@ -756,6 +758,7 @@ alias ked='kubectl exec -n deis'
 
 alias kg='kubectl get '
 alias kga='kubectl get all'
+alias kgaa='kubectl get all --all-namespaces'
 
 alias kgd='kubectl get deployments'
 alias kgda='kubectl get deployments --all-namespaces'
@@ -1169,7 +1172,7 @@ rdb(){
 alias bsl='brew services list'
 
 
-eval $(thefuck --alias)
+
 
 
 nwe (){

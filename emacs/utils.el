@@ -87,6 +87,11 @@
     (dired name)))
 
 
+(defun remote-avilpage ()
+  (interactive)
+  (dired "/ssh:ubuntu@avilpage.com:/home/ubuntu/"))
+
+
 (defun is-line-empty-p ()
   "Return t if current line is empty."
   (save-excursion
