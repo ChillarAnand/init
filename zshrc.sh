@@ -720,13 +720,14 @@ vagrant_kube () {
 alias kc='kubectl '
 alias kca='kubectl apply'
 
-alias kcp='google-chrome http://127.0.0.1:8001/ui/ && kubectl proxy'
+alias kcp='open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/; kubectl proxy'
 
 alias kci='kubectl cluster-info'
 
 
 alias kcc='kubectl create'
 
+alias kcgc='kubectl config get-contexts'
 alias kccc='kubectl config current-context'
 alias kcv='kubectl config view'
 alias kcu='kubectl config use-context'
@@ -1223,10 +1224,6 @@ alias ara='aptible restart --app'
 alias dkm='docker-machine'
 
 
-km () {
-    j kumbha
-    . ~/.local/share/virtualenvs/cura_server/bin/activate
-}
 
 alias os='openssl'
 alias ov='openssl verify'
@@ -1237,9 +1234,15 @@ wol () {
     wo library
 }
 
-wok () {
+rcs () {
+    j _server
+    wo cura_server
+    dr
+}
+
+km () {
     j kumbha
-    . ~/.local/share/virtualenvs/cura_server-pc50wcPX/bin/activate
+    . ~/.local/share/virtualenvs/cura_server/bin/activate
 }
 
 
@@ -1267,6 +1270,6 @@ alias kgp='kubectl get pods'
 alias kgd='kubectl get deployments'
 alias k=kubectl
 alias kd='kubectl --namespace=deis'
-alias d=docker
+alias dk=docker
 alias m=minikube
 alias mk='minikube kubectl'
