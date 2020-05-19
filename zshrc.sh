@@ -625,13 +625,15 @@ alias dk=docker
 
 alias dkb=dk' build'
 alias dkbc=dk' build .'
+alias dbc=dk' build .'
 
 alias dki=dk' images'
 
 
 alias dkps=dk' ps'
 alias dps=dk' ps'
-alias dkps=dk' ps -a'
+alias dkps=dk' ps'
+alias dkpsa=dk' ps -a'
 alias dpa=dk' ps -a'
 alias dpaq=dk' ps -aq'
 
@@ -718,9 +720,16 @@ vagrant_kube () {
 
 
 alias kc='kubectl '
-alias kca='kubectl apply'
 
-alias kcp='open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/; kubectl proxy'
+alias kca='kubectl apply'
+alias kaf='kubectl apply -f'
+
+kcp() {
+    kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}') | grep 'token:' | awk '{print $2}' | pbcopy
+    open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+    # open 'http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=_all'
+    kubectl proxy
+}
 
 alias kci='kubectl cluster-info'
 
@@ -732,6 +741,7 @@ alias kccc='kubectl config current-context'
 alias kcv='kubectl config view'
 alias kcu='kubectl config use-context'
 alias kcum='kubectl config use-context minikube'
+alias ksn='kubectl config set-context --current --namespace'
 
 
 alias kd='kubectl describe'
@@ -739,6 +749,8 @@ alias kd='kubectl describe'
 alias kddp='kubectl --namespace=deis describe pod '
 
 alias kdd='kubectl describe deployments'
+
+alias kdel='kubectl delete'
 
 
 alias kx='kubectl delete'
@@ -754,6 +766,7 @@ alias kds='kubectl describe services'
 
 
 alias ke='kubectl exec'
+alias ket='kubectl exec -it'
 alias ked='kubectl exec -n deis'
 
 
@@ -1269,7 +1282,14 @@ alias sz='source ~/.zshrc'
 alias kgp='kubectl get pods'
 alias kgd='kubectl get deployments'
 alias k=kubectl
-alias kd='kubectl --namespace=deis'
+# alias kd='kubectl --namespace=deis'
 alias dk=docker
 alias m=minikube
 alias mk='minikube kubectl'
+
+
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export LLVM_CONFIG="/usr/local/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
+# export PATH="/usr/local/opt/helm@2/bin:$PATH"

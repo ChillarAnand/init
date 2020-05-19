@@ -87,6 +87,7 @@ brew_install mucommander
 cp $config_dir'/mac/space_control.json' ~/.config/karabiner/assets/complex_modifications/
 
 # debookee_tools, Blackmagic Disk Speed Test
+brew install mas
 mas install 1110355801 425264550
 
 

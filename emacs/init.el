@@ -107,10 +107,18 @@
   )
 
 
-(use-package real-auto-save
-  :config
-  (add-hook 'prog-mode-hook 'real-auto-save-mode)
-  (setq real-auto-save-interval 10))
+;; (use-package real-auto-save
+;;   :config
+;;   (add-hook 'prog-mode-hook 'real-auto-save-mode)
+;;   (setq real-auto-save-interval 10))
+
+(load-file "~/projects/real-auto-save/real-auto-save.el")
+(require 'real-auto-save)
+(add-hook 'prog-mode-hook 'real-auto-save-mode)
+;; (setq real-auto-save-use-idle-timer nil)
+(setq real-auto-save-interval 5) ;; in seconds
+
+
 
 (use-package yasnippet
   :config
@@ -148,7 +156,8 @@
 (setq elpy-rpc-timeout nil)
 (setq elpy-rgrep-file-pattern "*.py *.html")
 (setq elpy-rpc-backend "jedi")
-(setq elpy-rpc-python-command "python3")
+(setq elpy-rpc-virtualenv-path `current)
+;; (setq elpy-rpc-python-command "python3")
 (pyvenv-workon "py35")
 (elpy-rpc-restart)
 
