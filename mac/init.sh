@@ -83,6 +83,7 @@ brew_install mucommander
 
 
 # brew cask install platypus HazeOver
+# brew cask install db-browser-for-sqlite
 
 cp $config_dir'/mac/space_control.json' ~/.config/karabiner/assets/complex_modifications/
 

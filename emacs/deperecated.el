@@ -569,3 +569,10 @@
   (message "Syncing repo...")
   (async-shell-command "git pull && git push")
   (magit-refresh))
+
+
+(use-package engine-mode
+  :config
+  (defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d"))

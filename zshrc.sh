@@ -319,6 +319,10 @@ alias djcd="python manage.py createsuperuser --username f --email a@a.com"
 
 alias dm="python manage.py migrate"
 alias dmm="python manage.py makemigrations"
+
+alias dm="python manage.py migrate --noinput"
+alias dmm="python manage.py makemigrations --noinput"
+
 alias dmmm="dmm && dm"
 
 alias dr="python manage.py runserver --no-color"
@@ -1247,17 +1251,6 @@ wol () {
     wo library
 }
 
-rcs () {
-    j _server
-    wo cura_server
-    dr
-}
-
-km () {
-    j kumbha
-    . ~/.local/share/virtualenvs/cura_server/bin/activate
-}
-
 
 export COMPOSE_HTTP_TIMEOUT=120
 
@@ -1268,8 +1261,12 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 
 alias tm=tmuxinator
-alias tms=tmuxinator start
-alias tmx=tmuxinator stop
+alias tms='tmuxinator start'
+alias tmx='tmuxinator stop'
+tmr () {
+    tmuxinator stop $1
+    tmuxinator start $1
+}
 
 export PATH="/usr/local/Cellar/postgresql@9.6/9.6.17/bin:$PATH"
 
@@ -1285,7 +1282,13 @@ alias k=kubectl
 # alias kd='kubectl --namespace=deis'
 alias dk=docker
 alias m=minikube
-alias mk='minikube kubectl'
+alias mkc='minikube kubectl'
+alias mk='minikube'
+
+
+alias ft=flutter
+alias ftd='ft doctor'
+
 
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
