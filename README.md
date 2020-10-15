@@ -14,7 +14,7 @@ sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/init/master/ubuntu/
 Terminal only bootstrap
 
 ```sh
-sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/eddie/master/ubuntu/scripts/bootstrap_terminal.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/init/master/ubuntu/bootstrap_terminal.sh -O -)"
 ```
 
 

@@ -158,7 +158,6 @@ alias wj='workon py35'
 
 # Load pyenv automatically
 # export PATH="/home/anand/.pyenv/bin:$PATH"
-# export PATH="/Users/curatech/.pyenv/bin:$PATH"
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 
@@ -278,6 +277,7 @@ alias py2='python2'
 alias ipy2='ipython2'
 
 alias da='deactivate'
+alias pip='python -m pip'
 alias pf='pip freeze | sort'
 alias pfl='pip freeze | sort | less'
 alias pi='pip install'
@@ -320,8 +320,8 @@ alias djcd="python manage.py createsuperuser --username f --email a@a.com"
 alias dm="python manage.py migrate"
 alias dmm="python manage.py makemigrations"
 
-alias dm="python manage.py migrate --noinput"
-alias dmm="python manage.py makemigrations --noinput"
+alias dmn="python manage.py migrate --noinput"
+alias dmmn="python manage.py makemigrations --noinput"
 
 alias dmmm="dmm && dm"
 
@@ -329,7 +329,9 @@ alias dr="python manage.py runserver --no-color"
 
 # alias dr="python manage.py runserver_plus --pm --no-color 0.0.0.0:8000"
 alias drp="python manage.py runserver_plus"
-alias drps="python manage.py runserver_plus --print-sql --pm --no-color 0.0.0.0:8000"
+alias drps="python manage.py runserver_plus --print-sql"
+alias drpsp="python manage.py runserver_plus --print-sql --pm --no-color 0.0.0.0:8000"
+
 
 alias ds="python manage.py shell_plus --print-sql"
 alias dsp="python manage.py shell_plus"
@@ -467,9 +469,9 @@ alias me='chmod +x '
 
 alias nt='nautilus .'
 
-alias n='nikola'
+alias nk='nikola'
 alias na='nikola auto'
-alias naa='j avilpage.com; wo avilpage; nikola auto'
+alias naa='j avilpage.com; wo py38; nikola auto'
 alias naf='rf output cache && rf cache && nikola auto'
 # alias ng='nikola github_deploy'
 alias ngd='nikola github_deploy'
@@ -679,13 +681,14 @@ ifs () {
 
 
 alias fl=flash
+alias flo='flash otp'
 alias tv=tvol
 
 
 
 
 alias rnm='sudo systemctl restart NetworkManager'
-alias rps='sudo systemctl restart '
+# alias rps='sudo systemctl restart '
 
 alias sub='subliminal download -s -l en '
 alias subs='subliminal download -s -l en '
@@ -910,11 +913,17 @@ dpkg_unlock() {
 
 
 
+
 alias he='heroku'
 alias hc='heroku config'
 alias hcs='heroku config:set'
 
 alias hlw='heroku local web'
+
+
+alias hk='heroku'
+alias hkc='heroku config'
+alias hkcs='heroku config:set'
 
 
 
@@ -1150,7 +1159,6 @@ alias nds='androidstudio'
 # export ANDROID_HOME="/home/chillar/projects/android/Android"
 # export ANDROID_HOME="/home/chillar/projects/android"
 # export ANDROID_HOME="/home/chillar/Android/Sdk/"
-export ANDROID_HOME="/Users/curatech/Library/Android/Sdk/"
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
@@ -1165,7 +1173,7 @@ gai() {
 }
 
 
-source .env || true
+# source .env || true
 
 # The next line updates PATH for the Google Cloud SDK.
 # if [ -f '/home/chillar/google-cloud-sdk/path.zsh.inc' ]; then source '/home/chillar/google-cloud-sdk/path.zsh.inc'; fi
@@ -1225,16 +1233,13 @@ alias ala='aptible logs --app'
 alias asa='aptible ssh --app'
 
 alias adt='aptible db:tunnel'
+alias adr='aptible db:restart'
 # alias adtp='aptible db:tunnel --type postgres'
 alias adtp='aptible db:tunnel --port 55555'
 alias adtm='aptible db:tunnel --type management'
 
-alias asn='aptible ssh --app nh-prod-south'
-alias asd='aptible ssh --app dia-prod-new-south'
-alias asg='aptible ssh --app gastro-prod-south'
-alias asp='aptible ssh --app pulmo-prod-south'
-
 alias ara='aptible restart --app'
+
 
 
 
@@ -1254,7 +1259,6 @@ wol () {
 
 export COMPOSE_HTTP_TIMEOUT=120
 
-export PATH="/Users/curatech/.crc/bin:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -1288,11 +1292,14 @@ alias mk='minikube'
 
 alias ft=flutter
 alias ftd='ft doctor'
+alias ftr='ft run'
 
 
 
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export LLVM_CONFIG="/usr/local/opt/llvm/bin:$PATH"
+# export PATH="/usr/local/opt/llvm/bin:$PATH"
+# export LLVM_CONFIG="/usr/local/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"
 # export PATH="/usr/local/opt/helm@2/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+export PATH="/usr/local/Cellar/postgresql@9.6/9.6.17/bin/:$PATH"
