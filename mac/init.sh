@@ -2,9 +2,25 @@
 
 set -x
 
+echo "Setting up mac..."
+
+
+# brew
+which -s brew
+if [[ $? != 0 ]] ; then
+    # Install Homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+
+brew install git
+
+
 project_name='init'
 config_dir=${HOME}'/projects/'${project_name}
 
+
+git clone https://github.com/chillaranand/init $config_dir || true
 sh ${config_dir}'/mac/bootstrap.sh'
 
 
@@ -110,5 +126,7 @@ mas install 1110355801 425264550
 # brew cask install wireshark
 
 
+# pypirc
+ln -s "$HOME/Dropbox/tech/notes/init/pypirc" "$HOME/.pypirc"
 
 echo "Successfully bootstrapped"
