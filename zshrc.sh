@@ -271,10 +271,13 @@ alias pgi='ps -ef | grep -i'
 
 
 # python aliases
+alias p='python'
+alias p310='python3.10'
+alias p311='python3.11'
+
 alias py='python'
 alias ipy='ipython'
-alias py2='python2'
-alias ipy2='ipython2'
+
 
 alias da='deactivate'
 alias pip='python -m pip'
@@ -1303,3 +1306,8 @@ export CPPFLAGS="-I/usr/local/opt/llvm/include"
 # export PATH="/usr/local/opt/helm@2/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
 export PATH="/usr/local/Cellar/postgresql@9.6/9.6.17/bin/:$PATH"
+
+
+export PATH="$HOME/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/Cellar/ffmpeg/4.4.1_5/bin/:$PATH"
+export PATH="/Users/chillaranand/Library/Python/3.8/bin/:$PATH"

@@ -4,7 +4,7 @@
 set -x
 
 sudo apt update
-sudo apt install --yes zsh byobu tree git
+sudo apt install --yes zsh byobu tree git nmap telnet
 
 
 # oh my zsh

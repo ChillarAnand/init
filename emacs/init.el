@@ -112,17 +112,64 @@
 ;;   (add-hook 'prog-mode-hook 'real-auto-save-mode)
 ;;   (setq real-auto-save-interval 10))
 
-(load-file "~/projects/real-auto-save/real-auto-save.el")
-(require 'real-auto-save)
-(add-hook 'prog-mode-hook 'real-auto-save-mode)
-;; (setq real-auto-save-use-idle-timer nil)
-(setq real-auto-save-interval 5) ;; in seconds
-
 
 
 (use-package yasnippet
   :config
   (yas-global-mode 1))
+
+
+;; (use-package auctex
+;;   :ensure t
+;; )
+
+(defun reload-pdf ()
+  (interactive
+  (let* ((fname buffer-file-name)
+        (fname-no-ext (substring fname 0 -4))
+        (pdf-file (concat fname-no-ext ".pdf"))
+        (cmd (format "pdflatex %s" fname)))
+    (delete-other-windows)
+    (split-window-horizontally)
+    (split-window-vertically)
+    (shell-command cmd)
+    (other-window 2)
+    (find-file pdf-file)
+    (balance-windows))))
+
+(global-set-key "\C-x\p" 'reload-pdf)
+
+
+;; AucTeX
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+(setq TeX-PDF-mode t)
+
+;; Use Skim as viewer, enable source <-> PDF sync
+;; make latexmk available via C-c C-c
+;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
+(add-hook 'LaTeX-mode-hook (lambda ()
+  (push
+    '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
+      :help "Run latexmk on file")
+    TeX-command-list)))
+(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+
+;; use Skim as default pdf viewer
+;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; option -b highlights the current line; option -g opens Skim in the background
+(setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+(setq TeX-view-program-list
+     '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+
+
+
 
 
 ;; python mode
@@ -583,3 +630,17 @@
 ;; (find-file "~/Dropbox/do.org")
 
 (message "Successfully loaded config... ")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(auctex-latexmk auctex acutex engine-mode paradox lispy expand-region which-key key-chord artbollocks-mode writeroom-mode writegood-mode helm-flx helm-swoop helm-github-stars helm-dired-recent-dirs helm-ag helm-projectile helm-descbinds helm-chrome easy-kill comment-dwim-2 smart-mode-line diff-hl magit nyan-mode web-mode multiple-cursors wrap-region elpy company highlight-indentation pyvenv yasnippet use-package projectile goto-last-change)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(put 'set-goal-column 'disabled nil)
