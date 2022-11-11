@@ -23,5 +23,5 @@ sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/init/master/ubuntu/
 System bootstrap
 
 ```sh
-sh -c "$(curl https://raw.githubusercontent.com/ChillarAnand/init/master/mac/init.sh)"
+curl https://raw.githubusercontent.com/ChillarAnand/init/master/mac_init.sh | bash
 ```

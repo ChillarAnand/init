@@ -10,9 +10,9 @@ sudo apt install --yes zsh byobu tree git nmap telnet unzip
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
-sudo apt install --yes python3 python3-pip
+sudo apt install --yes python3 python3-pip python3-distutils
 
-pip install pyflash
+pip install pyflash glances
 
 
 # byobu-enable
