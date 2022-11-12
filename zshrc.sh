@@ -1311,3 +1311,6 @@ export PATH="/usr/local/Cellar/postgresql@9.6/9.6.17/bin/:$PATH"
 export PATH="$HOME/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/Cellar/ffmpeg/4.4.1_5/bin/:$PATH"
 export PATH="/Users/chillaranand/Library/Python/3.8/bin/:$PATH"
+export PATH="/Users/chillaranand/homebrew/bin/:$PATH"
+
+export HOMEBREW_NO_AUTO_UPDATE=1

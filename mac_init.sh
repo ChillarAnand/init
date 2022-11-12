@@ -30,6 +30,7 @@ brew install openssl libjpeg
 brew install nvm pyenv sqlite
 brew install cheatsheet git-gui
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc
+# brew install logstash elasticsearch kibana
 # archived
 # brew install joplin obsidian graphviz
 
