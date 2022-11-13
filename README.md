@@ -1,21 +1,6 @@
-### Programming Journal
+## init
 
-This repo contains setup files.
-
-
-### Linux
-
-System bootstrap
-
-```sh
-sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/init/master/ubuntu/bin/start.sh -O -)"
-```
-
-Terminal only bootstrap
-
-```sh
-sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/init/master/ubuntu/bootstrap_terminal.sh -O -)"
-```
+This repo contains initial setup files.
 
 
 ### Mac
@@ -23,5 +8,14 @@ sh -c "$(wget https://raw.githubusercontent.com/ChillarAnand/init/master/ubuntu/
 System bootstrap
 
 ```sh
-curl https://raw.githubusercontent.com/ChillarAnand/init/master/mac_init.sh | bash
+curl https://raw.githubusercontent.com/ChillarAnand/init/main/mac_init.sh | bash
+```
+
+
+### Ubuntu
+
+Server bootstrap
+
+```sh
+curl https://raw.githubusercontent.com/ChillarAnand/init/main/ubuntu_init.sh | bash
 ```

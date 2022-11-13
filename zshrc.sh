@@ -59,18 +59,24 @@ HIST_STAMPS="%d/%m/%y %T"
 
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=~/projects/01/ubuntu/config/zsh
-ZSH_CUSTOM=~/projects/eddie/ubuntu/config/zsh
-
+# ZSH_CUSTOM=~/projects/01/ubuntu/config/zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git z extract dirpersist autoenv web-search pip zsh-autosuggestions)
-plugins=(git z extract dirpersist pip)
+plugins=(
+    git z extract dirpersist pip
+    cmdtime
+    zsh-autocomplete
+    zsh-autosuggestions
+    # zsh-history-substring-search
+    zsh-syntax-highlighting
+)
 
 
+zstyle ':autocomplete:*' default-context history-incremental-search-backward
 
 
 # User configuration
@@ -104,15 +110,6 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-
-
-
-
-
-# user config
-BASE_DIR=$HOME'/projects/eddie'
-
-
 # set utf8
 LANG="en_US.UTF-8"
 # LANG="te_IN.UTF-8"
@@ -139,7 +136,7 @@ fi
 # export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 # export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 # source /usr/local/bin/virtualenvwrapper.sh
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
 
 export PYTHONDONTWRITEBYTECODE=1
@@ -197,7 +194,7 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
 
-export HISTSIZE=10000000000
+export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 
 
@@ -379,8 +376,6 @@ alias ka='killall '
 # alias ke='killall emacs'
 alias kb="pgi byobu | awk '{print $2}' | xargs kill -9 "
 
-alias l='clear && ls'
-alias l='ll'
 
 alias le=less
 
@@ -853,13 +848,8 @@ alias drr='deis releases | tac'
 
 
 
-helma() {}
 alias hla='helm ls --all'
 
-
-
-
-awsa() {}
 
 alias ae='aws ec2'
 alias aed='aws ec2 describe-instances'
@@ -1100,13 +1090,9 @@ PERL_MM_OPT="INSTALL_BASE=/home/chillaranand/perl5"; export PERL_MM_OPT;
 export PATH=$PATH:/usr/local/go/bin
 
 # [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
-source ~/Dropbox/tech/private.sh
-# workon py36
 
-source ~/.zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/.zaw/zaw.zsh
+
+# source ~/.zaw/zaw.zsh
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -1264,7 +1250,7 @@ export COMPOSE_HTTP_TIMEOUT=120
 
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
 
 
 alias tm=tmuxinator
@@ -1297,7 +1283,11 @@ alias ft=flutter
 alias ftd='ft doctor'
 alias ftr='ft run'
 
+alias ll='exa -l'
+# alias ls='ll'
+alias l='ll'
 
+alias cat='bat'
 
 # export PATH="/usr/local/opt/llvm/bin:$PATH"
 # export LLVM_CONFIG="/usr/local/opt/llvm/bin:$PATH"
@@ -1314,3 +1304,29 @@ export PATH="/Users/chillaranand/Library/Python/3.8/bin/:$PATH"
 export PATH="/Users/chillaranand/homebrew/bin/:$PATH"
 
 export HOMEBREW_NO_AUTO_UPDATE=1
+
+# HSTR configuration - add this to ~/.zshrc
+# alias hh=hstr                    # hh to be alias for hstr
+# setopt histignorespace           # skip cmds w/ leading space from history
+# export HSTR_CONFIG=hicolor       # get more colors
+# bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+
+
+# Up arrow:
+bindkey '\e[A' up-line-or-search
+bindkey '\eOA' up-line-or-search
+# up-line-or-search:  Open history menu.
+# up-line-or-history: Cycle to previous history line.
+
+# Down arrow:
+bindkey '\e[B' down-line-or-select
+bindkey '\eOB' down-line-or-select
+# down-line-or-select:  Open completion menu.
+# down-line-or-history: Cycle to next history line.
+
+# Created by `pipx` on 2022-11-13 00:47:45
+export PATH="$PATH:/Users/chillaranand/.local/bin"
+
+
+# end
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

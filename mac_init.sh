@@ -24,10 +24,10 @@ fi
 brew tap espanso/espanso
 
 # utils
-brew install git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
+brew install exa git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
 brew install fzf bat rg stats espanso trash
 brew install openssl libjpeg
-brew install nvm pyenv sqlite
+brew install nvm pyenv sqlite pipx
 brew install cheatsheet git-gui
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc
 # brew install logstash elasticsearch kibana
@@ -35,7 +35,7 @@ brew install cheatsheet git-gui
 # brew install joplin obsidian graphviz
 
 
-brew install --cask emacs flycut grandperspective vlc rar
+brew install --cask dash emacs flycut grandperspective vlc rar
 # brew install --cask visual-studio-code qbittorrent rectangle android-platform-tools
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
 # archived
