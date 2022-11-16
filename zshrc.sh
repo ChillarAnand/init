@@ -71,7 +71,20 @@ ZSH_THEME="ys"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+
+zstyle ':autocomplete:*' widget-style menu-select
+
+plugins=(
+    cmdtime
+    dirpersist
+    extract
+    git
+    z
+    zsh-autocomplete
+    zsh-autosuggestions
+)
+
+zstyle ':autocomplete:*' widget-style menu-select
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,6 +115,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
+ZSH_THEME="ys"
+
+
 # history
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
@@ -112,4 +128,42 @@ export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 
 
-ZSH_THEME="ys"
+zstyle ':autocomplete:*' default-context history-incremental-search-backward
+zstyle ':autocomplete:tab:*' widget-style menu-complete
+
+# bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' down-line-or-select
+bindkey '^[[B' down-line-or-select
+bindkey '^[OB' down-line-or-select
+
+
+# alias
+alias cl="git clone"
+
+alias flo='flash otp'
+
+alias p="python"
+alias py="python"
+alias ipy='ipython'
+
+alias hgi='history | grep -i'
+
+alias j=z
+alias js="~/projects/sandbox/"
+alias jd="~/Downloads/"
+
+alias i='brew installl'
+
+alias l='exa -l'
+alias ll='exa -l'
+
+alias naa='j avilpage.com; nikola auto'
+alias ty='type'
+
+alias whereis
+
+
+
+# env vars
+export NIKOLA_MONO=true
+export HOMEBREW_NO_AUTO_UPDATE=1

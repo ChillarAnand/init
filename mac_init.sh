@@ -32,7 +32,7 @@ brew install cheatsheet git-gui
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc
 # brew install logstash elasticsearch kibana
 # archived
-# brew install joplin obsidian graphviz
+# brew install joplin obsidian graphviz fig
 
 
 brew install --cask dash emacs flycut grandperspective vlc rar
@@ -66,6 +66,8 @@ chmod 600 ~/.ssh/id_rsa
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
