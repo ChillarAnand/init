@@ -72,7 +72,7 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-zstyle ':autocomplete:*' widget-style menu-select
+
 
 plugins=(
     cmdtime
@@ -83,8 +83,6 @@ plugins=(
     zsh-autocomplete
     zsh-autosuggestions
 )
-
-zstyle ':autocomplete:*' widget-style menu-select
 
 source $ZSH/oh-my-zsh.sh
 
@@ -129,7 +127,9 @@ export SAVEHIST=$HISTSIZE
 
 
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
-zstyle ':autocomplete:tab:*' widget-style menu-complete
+zstyle ':autocomplete:*' widget-style menu-select
+# zstyle ':autocomplete:tab:*' widget-style menu-complete
+
 
 # bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' down-line-or-select
@@ -138,9 +138,15 @@ bindkey '^[OB' down-line-or-select
 
 
 # alias
+alias c=bat
+
 alias cl="git clone"
 
+alias dcu='docker compose up'
+
 alias flo='flash otp'
+
+alias ja='j avilpage.com'
 
 alias p="python"
 alias py="python"
@@ -152,12 +158,15 @@ alias j=z
 alias js="~/projects/sandbox/"
 alias jd="~/Downloads/"
 
-alias i='brew installl'
+alias i='brew install'
 
 alias l='exa -l'
 alias ll='exa -l'
 
+alias s=sudo
+
 alias naa='j avilpage.com; nikola auto'
+alias ngd='nikola github_deploy'
 alias ty='type'
 
 alias whereis
@@ -167,3 +176,9 @@ alias whereis
 # env vars
 export NIKOLA_MONO=true
 export HOMEBREW_NO_AUTO_UPDATE=1
+
+
+export LC_CTYPE=C
+export LANG=C
+
+exa

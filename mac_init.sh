@@ -53,17 +53,6 @@ ln -s "$INIT_DIR/emacs/custom.el" "$HOME/.emacs.d/custom.el"
 ln -s "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
 
 
-# ssh keys
-mv "$INIT_DIR/keys/id_rsa" "/tmp/id_rsa"
-mv "$INIT_DIR/keys/id_rsa.pub" "/tmp/id_rsa.pub"
-
-ln -s "$INIT_DIR/keys/id_rsa" "$HOME/.ssh/id_rsa"
-ln -s "$INIT_DIR/keys/id_rsa.pub" "$HOME/.ssh/id_rsa.pub"
-
-chmod 644 ~/.ssh/id_rsa.pub
-chmod 600 ~/.ssh/id_rsa
-
-
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -76,6 +65,8 @@ mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
 ln -s "$INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
 
 # ipython
+python -m pip install ipython
+ipython profile create
 mv "$HOME/.ipython/profile_default/ipython_config.py" "/tmp/ipython_config.py"
 ln -s "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_config.py"
 
