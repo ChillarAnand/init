@@ -140,19 +140,17 @@ bindkey '^[OB' down-line-or-select
 # alias
 alias c=bat
 
+alias ci="curl ipinfo.io"
+
 alias cl="git clone"
 
 alias dcu='docker compose up'
 
 alias flo='flash otp'
 
-alias ja='j avilpage.com'
-
-alias p="python"
-alias py="python"
-alias ipy='ipython'
-
 alias hgi='history | grep -i'
+
+alias ja='j avilpage.com'
 
 alias j=z
 alias js="~/projects/sandbox/"
@@ -163,13 +161,21 @@ alias i='brew install'
 alias l='exa -l'
 alias ll='exa -l'
 
+alias p="ping 8.8.8.8"
+
+alias py="python"
+alias ipy='ipython'
+
+alias t=tree
+
 alias s=sudo
+
+alias sed=gsed
+
 
 alias naa='j avilpage.com; nikola auto'
 alias ngd='nikola github_deploy'
 alias ty='type'
-
-alias whereis
 
 
 
@@ -181,4 +187,5 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export LC_CTYPE=C
 export LANG=C
 
+# list files on new tab
 exa
