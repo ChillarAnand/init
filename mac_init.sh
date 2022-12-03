@@ -12,7 +12,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 defaults write com.apple.screencapture location ~/Pictures
 
 # shortcut for icloud
-ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/icloud
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud
 
 
 # install homebrew
@@ -29,8 +29,14 @@ brew install fzf bat rg stats espanso trash gnu-sed
 brew install openssl libjpeg
 brew install nvm pyenv sqlite pipx
 brew install cheatsheet git-gui
-# brew install scrcpy jadx apktool wireshark postgresql mactex pandoc
-# brew install logstash elasticsearch kibana
+brew install pulumi
+
+
+# brew tap elastic/tap
+# brew install elastic/tap/elasticsearch-full
+# brew install logstash kibana
+
+# brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick
 # archived
 # brew install joplin obsidian graphviz fig
 

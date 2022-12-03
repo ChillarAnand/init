@@ -80,7 +80,7 @@ plugins=(
     extract
     git
     z
-    zsh-autocomplete
+    # zsh-autocomplete
     zsh-autosuggestions
 )
 
@@ -113,6 +113,14 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
+# functions
+
+pyclean () {
+    sudo find . -type f -name "*.py[co]" -delete
+    sudo find . -type d -name "__pycache__" -delete
+}
+
+
 ZSH_THEME="ys"
 
 
@@ -132,18 +140,22 @@ zstyle ':autocomplete:*' widget-style menu-select
 
 
 # bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' down-line-or-select
-bindkey '^[[B' down-line-or-select
-bindkey '^[OB' down-line-or-select
+# bindkey -M emacs '^N' down-line-or-select
+# bindkey '^[[B' down-line-or-select
+# bindkey '^[OB' down-line-or-select
+
 
 
 # alias
+alias bsl='brew services list'
+
 alias c=bat
 
 alias ci="curl ipinfo.io"
 
 alias cl="git clone"
 
+alias dk='docker'
 alias dcu='docker compose up'
 
 alias flo='flash otp'
@@ -161,22 +173,37 @@ alias i='brew install'
 alias l='exa -l'
 alias ll='exa -l'
 
+alias me='chmod +x'
+
 alias p="ping 8.8.8.8"
 
 alias py="python"
 alias ipy='ipython'
 
-alias t=tree
+alias t='tree -Cfh'
 
 alias s=sudo
 
+# gnu utils
 alias sed=gsed
+alias xargs=gxargs
 
 
-alias naa='j avilpage.com; nikola auto'
+alias sz='source ~/.zshrc'
+
+
+alias na='j avilpage.com; nikola auto'
 alias ngd='nikola github_deploy'
 alias ty='type'
 
+alias pirr='python -m pip install -r requirements.txt'
+alias pi='python -m pip install'
+alias pir='python -m pip install -r'
+alias wo='workon'
+
+alias pgi='ps -ef | grep -i'
+alias tgi='tree -Cfh | grep -i'
+alias hgi='history | grep -i'
 
 
 # env vars
@@ -188,4 +215,19 @@ export LC_CTYPE=C
 export LANG=C
 
 # list files on new tab
-exa
+# exa
+
+
+# kafka - confluent-kafka
+export C_INCLUDE_PATH=~/homebrew/Cellar/librdkafka/1.9.2/include
+export LIBRARY_PATH=~/homebrew/Cellar/librdkafka/1.9.2/lib
+
+export JAVA_HOME="$(/usr/libexec/java_home)"
+export ES_JAVA_HOME="$(/usr/libexec/java_home)"
+
+
+export WORKON_HOME=$HOME/.virtualenvs
+source /Library/Frameworks/Python.framework/Versions/3.9/bin/virtualenvwrapper.sh
+
+
+export PYTHONDONTWRITEBYTECODE=1
