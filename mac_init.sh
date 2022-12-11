@@ -25,7 +25,7 @@ brew tap espanso/espanso
 
 # utils
 brew install exa git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
-brew install fzf bat rg stats espanso trash gnu-sed
+brew install fzf bat rg stats espanso trash gnu-sed coreutils
 brew install openssl libjpeg
 brew install nvm pyenv sqlite pipx
 brew install cheatsheet git-gui

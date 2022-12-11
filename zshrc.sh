@@ -148,6 +148,8 @@ zstyle ':autocomplete:*' widget-style menu-select
 
 # alias
 alias bsl='brew services list'
+alias bsa='brew services start'
+alias bsz='brew services stop'
 
 alias c=bat
 
@@ -161,6 +163,8 @@ alias dcu='docker compose up'
 alias flo='flash otp'
 
 alias hgi='history | grep -i'
+
+alias gcom='gco master'
 
 alias ja='j avilpage.com'
 
@@ -186,6 +190,7 @@ alias s=sudo
 
 # gnu utils
 alias sed=gsed
+alias timeout=gtimeout
 alias xargs=gxargs
 
 
@@ -194,10 +199,16 @@ alias sz='source ~/.zshrc'
 
 alias na='j avilpage.com; nikola auto'
 alias ngd='nikola github_deploy'
+alias naf='j avilpage.com; trash output; trash cache; nikola auto'
+
 alias ty='type'
+alias rm='trash'
+alias rf='trash'
+
 
 alias pirr='python -m pip install -r requirements.txt'
 alias pi='python -m pip install'
+alias pf='python -m pip freeze'
 alias pir='python -m pip install -r'
 alias wo='workon'
 
