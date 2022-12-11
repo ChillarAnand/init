@@ -71,7 +71,7 @@ mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
 ln -s "$INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
 
 # ipython
-python -m pip install ipython
+python -m pip install ipython stdlib_list
 ipython profile create
 mv "$HOME/.ipython/profile_default/ipython_config.py" "/tmp/ipython_config.py"
 ln -s "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_config.py"
