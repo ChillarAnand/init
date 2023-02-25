@@ -25,11 +25,11 @@ brew tap espanso/espanso
 
 # utils
 brew install exa git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
-brew install fzf bat rg stats espanso trash gnu-sed coreutils
+brew install fzf bat rg stats espanso trash gnu-sed coreutils p7zip duf entr ripgrep
 brew install openssl libjpeg
 brew install nvm pyenv sqlite pipx
-brew install cheatsheet git-gui
-brew install pulumi
+brew install cheatsheet git-gui gource
+# brew install pulumi
 
 
 # brew tap elastic/tap
@@ -41,13 +41,18 @@ brew install pulumi
 # brew install joplin obsidian graphviz fig
 
 
-brew install --cask dash emacs flycut grandperspective vlc rar
+brew install --cask dash emacs flycut grandperspective vlc rar kdiff3
+brew install --cask tunnelblick
+brew install --cask mambaforge
+# brew install --cask jetbrains-toolbox
+# brew install --cask pycharm
 # brew install --cask visual-studio-code qbittorrent rectangle android-platform-tools
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
 # archived
-# brew install --cask codeql beekeeper-studio  iglance
+# brew install --cask codeql beekeeper-studio iglance
 
 INIT_DIR="$HOME/init"
+PRIVATE_INIT_DIR="$HOME/cloud/tech/notes/init"
 git clone https://github.com/chillaranand/init $INIT_DIR
 
 
@@ -65,6 +70,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
+
+mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
+ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
 
 # espanso
 mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"

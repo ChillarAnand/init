@@ -121,7 +121,9 @@ pyclean () {
 }
 
 
-ZSH_THEME="ys"
+# ZSH_THEME="ys"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
 
 
 # history
@@ -129,6 +131,14 @@ setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
+
+# no dups
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
@@ -158,6 +168,7 @@ alias ci="curl ipinfo.io"
 alias cl="git clone"
 
 alias dk='docker'
+alias drr='docker run --rm'
 alias dcu='docker compose up'
 
 alias flo='flash otp'
@@ -165,6 +176,11 @@ alias flo='flash otp'
 alias hgi='history | grep -i'
 
 alias gcom='gco master'
+
+alias kcc='kafka-console-consumer'
+alias kcp='kafka-console-producer'
+alias kss='kafka-server-start'
+alias kssk='kafka-server-start $HOME/homebrew/etc/kafka/kraft/server.properties'
 
 alias ja='j avilpage.com'
 
@@ -199,6 +215,7 @@ alias sz='source ~/.zshrc'
 
 alias na='j avilpage.com; nikola auto'
 alias ngd='nikola github_deploy'
+alias ngd='ssh-add -D; ssh-add ~/.ssh/id_rsa; nikola github_deploy'
 alias naf='j avilpage.com; trash output; trash cache; nikola auto'
 
 alias ty='type'
