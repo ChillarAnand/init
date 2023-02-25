@@ -43,7 +43,10 @@ brew install cheatsheet git-gui gource
 
 brew install --cask dash emacs flycut grandperspective vlc rar kdiff3
 brew install --cask tunnelblick
+
 brew install --cask mambaforge
+conda init "$(basename "${SHELL}")"
+
 # brew install --cask jetbrains-toolbox
 # brew install --cask pycharm
 # brew install --cask visual-studio-code qbittorrent rectangle android-platform-tools

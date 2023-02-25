@@ -160,12 +160,14 @@ zstyle ':autocomplete:*' widget-style menu-select
 alias bsl='brew services list'
 alias bsa='brew services start'
 alias bsz='brew services stop'
+alias bsr='brew services restart'
 
 alias c=bat
 
 alias ci="curl ipinfo.io"
 
 alias cl="git clone"
+alias glom="git pull origin master"
 
 alias dk='docker'
 alias drr='docker run --rm'
@@ -213,7 +215,7 @@ alias xargs=gxargs
 alias sz='source ~/.zshrc'
 
 
-alias na='j avilpage.com; nikola auto'
+alias na='z avilpage.com; nikola auto'
 alias ngd='nikola github_deploy'
 alias ngd='ssh-add -D; ssh-add ~/.ssh/id_rsa; nikola github_deploy'
 alias naf='j avilpage.com; trash output; trash cache; nikola auto'
