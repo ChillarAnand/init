@@ -42,7 +42,7 @@ brew install cheatsheet git-gui gource
 
 
 brew install --cask dash emacs flycut grandperspective vlc rar kdiff3
-brew install --cask tunnelblick
+brew install --cask tunnelblick google-drive
 
 brew install --cask mambaforge
 conda init "$(basename "${SHELL}")"
@@ -55,7 +55,8 @@ conda init "$(basename "${SHELL}")"
 # brew install --cask codeql beekeeper-studio iglance
 
 INIT_DIR="$HOME/init"
-PRIVATE_INIT_DIR="$HOME/cloud/tech/notes/init"
+PRIVATE_INIT_DIR="$HOME/cloud/tech/notes/private_init/"
+
 git clone https://github.com/chillaranand/init $INIT_DIR
 
 
@@ -90,5 +91,9 @@ ln -s "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_conf
 # karabiner
 mv "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
 ln -s "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/complex_modifications/space_control.json"
+
+# pyflash
+mv "$HOME/.pyflash.ini" "/tmp/pyflash.ini"
+ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
 
 echo "init.sh ran successfully"
