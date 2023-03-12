@@ -55,7 +55,7 @@ conda init "$(basename "${SHELL}")"
 # brew install --cask codeql beekeeper-studio iglance
 
 INIT_DIR="$HOME/init"
-PRIVATE_INIT_DIR="$HOME/cloud/tech/notes/private_init/"
+PRIVATE_INIT_DIR="$HOME/cloud/tech/notes/private_init"
 
 git clone https://github.com/chillaranand/init $INIT_DIR
 
@@ -75,9 +75,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
-mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
-ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
-
 # espanso
 mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
 ln -s "$INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
@@ -95,5 +92,10 @@ ln -s "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/c
 # pyflash
 mv "$HOME/.pyflash.ini" "/tmp/pyflash.ini"
 ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
+
+# zsh_history
+mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
+ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
+
 
 echo "init.sh ran successfully"

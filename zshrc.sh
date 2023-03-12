@@ -140,12 +140,12 @@ setopt INC_APPEND_HISTORY        # Write to the history file immediately, not wh
 setopt SHARE_HISTORY             # Share history between all sessions.
 
 # no dups
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
+# setopt HIST_EXPIRE_DUPS_FIRST
+# setopt HIST_IGNORE_DUPS
+# setopt HIST_IGNORE_ALL_DUPS
+# setopt HIST_FIND_NO_DUPS
+# setopt HIST_SAVE_NO_DUPS
 setopt HIST_IGNORE_SPACE
-setopt HIST_FIND_NO_DUPS
-setopt HIST_SAVE_NO_DUPS
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
@@ -279,6 +279,8 @@ alias jl='just -l'
 
 alias lc='limactl'
 alias lcl='limactl list'
+
+alias hwc='history | wc'
 
 
 # source ~/zsh-autocomplete/zsh-autocomplete.plugin.zsh
