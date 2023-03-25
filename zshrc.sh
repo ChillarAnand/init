@@ -11,13 +11,6 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="ys"
-
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -68,7 +61,7 @@ ZSH_THEME="ys"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -78,9 +71,6 @@ ZSH_THEME="ys"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-
-
-
 plugins=(
     # cmdtime
     dirpersist
@@ -95,10 +85,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -120,12 +108,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-# functions
-
-pyclean () {
-    sudo find . -type f -name "*.py[co]" -delete
-    sudo find . -type d -name "__pycache__" -delete
-}
 
 
 # ZSH_THEME="ys"
@@ -162,98 +144,85 @@ zstyle ':autocomplete:*' widget-style menu-select
 # bindkey '^[OB' down-line-or-select
 
 
+# functions
+pyclean () {
+    sudo find . -type f -name "*.py[co]" -delete
+    sudo find . -type d -name "__pycache__" -delete
+}
+
+
 
 # alias
-alias bsl='brew services list'
 alias bsa='brew services start'
-alias bsz='brew services stop'
+alias bsl='brew services list'
 alias bsr='brew services restart'
-
+alias bsz='brew services stop'
+alias bse='bench --site edge.localhost'
+alias bsd='bench --site demo.localhost'
+alias bs='bench start'
+alias bga='bench get-app'
 alias c=bat
-
 alias ci="curl ipinfo.io"
-
 alias cl="git clone"
-alias glom="git pull origin master"
-
+alias dcu='docker compose up'
 alias dk='docker'
 alias drr='docker run --rm'
-alias dcu='docker compose up'
-
 alias flo='flash otp'
-
-alias hgi='history | grep -i'
-
 alias gcom='gco master'
-
+alias glom="git pull origin master"
+alias hgi='history | grep -i'
+alias hgi='history | grep -i'
+alias hwc='history | wc'
+alias i='brew install'
+alias ipy='ipython'
+alias j=z
+alias ja='j avilpage.com; ssh-add -D; ssh-add ~/.ssh/id_rsa'
+alias jd="~/Downloads/"
+alias jl='just -l'
+alias js="~/projects/sandbox/"
+alias jra='just a'
 alias kcc='kafka-console-consumer'
 alias kcp='kafka-console-producer'
 alias kss='kafka-server-start'
 alias kssk='kafka-server-start $HOME/homebrew/etc/kafka/kraft/server.properties'
-
-alias ja='j avilpage.com'
-
-alias j=z
-alias js="~/projects/sandbox/"
-alias jd="~/Downloads/"
-
-alias i='brew install'
-
 alias l='exa -l'
+alias lc='limactl'
+alias lcl='limactl list'
+alias lcr='limactl stop default; limactl delete default; limactl start default --tty=false'
+alias lima='limactl start default; lima'
 alias ll='exa -l'
-
 alias me='chmod +x'
-
-alias p="ping 8.8.8.8"
-
-alias py="python"
-alias ipy='ipython'
-
-alias t='tree -Cfh'
-
-alias s=sudo
-
-# gnu utils
-alias sed=gsed
-alias timeout=gtimeout
-alias xargs=gxargs
-
-
-alias sz='source ~/.zshrc'
-
-
+alias mp='multipass'
+alias mpl='multipass list'
 alias na='z avilpage.com; nikola auto'
+alias naf='j avilpage.com; trash output; trash cache; nikola auto'
 alias ngd='nikola github_deploy'
 alias ngd='ssh-add -D; ssh-add ~/.ssh/id_rsa; nikola github_deploy'
-alias naf='j avilpage.com; trash output; trash cache; nikola auto'
-
-alias ty='type'
-alias rm='trash'
-alias rf='trash'
-
-
-alias pirr='python -m pip install -r requirements.txt'
-alias pi='python -m pip install'
+alias p="ping 8.8.8.8"
 alias pf='python -m pip freeze'
-alias pir='python -m pip install -r'
-alias wo='workon'
-
 alias pgi='ps -ef | grep -i'
+alias pi='python -m pip install'
+alias pir='python -m pip install -r'
+alias pirr='python -m pip install -r requirements.txt'
+alias py="python"
+alias s=sudo
+alias sed=gsed
+alias sz='source ~/.zshrc'
+alias t='tree -Cfh'
 alias tgi='tree -Cfh | grep -i'
-alias hgi='history | grep -i'
+alias timeout=gtimeout
+alias ty='type'
+alias wo='workon'
+alias xargs=gxargs
+
 
 
 # env vars
 export NIKOLA_MONO=true
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-
 export LC_CTYPE=C
 export LANG=C
-
-# list files on new tab
-# exa
-
 
 # kafka - confluent-kafka
 export C_INCLUDE_PATH=~/homebrew/Cellar/librdkafka/1.9.2/include
@@ -262,25 +231,16 @@ export LIBRARY_PATH=~/homebrew/Cellar/librdkafka/1.9.2/lib
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export ES_JAVA_HOME="$(/usr/libexec/java_home)"
 
+export PATH="/Users/chillaranand/homebrew/opt/socket_vmnet/bin:$PATH"
 
 export WORKON_HOME=$HOME/.virtualenvs
 source /Library/Frameworks/Python.framework/Versions/3.9/bin/virtualenvwrapper.sh
 
-
 export PYTHONDONTWRITEBYTECODE=1
-source ~/powerlevel10k/powerlevel10k.zsh-theme
 
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
-alias j=just
-alias jl='just -l'
-
-alias lc='limactl'
-alias lcl='limactl list'
-
-alias hwc='history | wc'
 
 
 # source ~/zsh-autocomplete/zsh-autocomplete.plugin.zsh
