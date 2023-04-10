@@ -21,11 +21,12 @@ if [[ $? != 0 ]] ; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-brew tap espanso/espanso
+
 
 # utils
 brew install exa git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
-brew install fzf bat rg stats espanso trash gnu-sed coreutils p7zip duf entr ripgrep
+brew install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
+
 brew install openssl libjpeg
 brew install nvm pyenv sqlite pipx
 brew install cheatsheet git-gui gource
@@ -35,6 +36,9 @@ brew install cheatsheet git-gui gource
 # brew tap elastic/tap
 # brew install elastic/tap/elasticsearch-full
 # brew install logstash kibana
+
+# brew tap espanso/espanso
+# brew install espanso
 
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick
 # archived
@@ -91,8 +95,8 @@ mv "$HOME/.pyflash.ini" "/tmp/pyflash.ini"
 ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
 
 # zsh_history
-mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
-ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
+#mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
+#ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
 
 # espanso
 mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
