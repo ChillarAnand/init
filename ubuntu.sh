@@ -7,7 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 sudo apt update
 
-sudo apt install --yes byobu git trash tree unzip vim zsh
+sudo apt install --yes byobu git trash-cli tree unzip vim zsh
 sudo apt install --yes nmap net-tools telnet
 
 sudo apt install --yes python3 python3-pip python3-distutils
@@ -28,6 +28,6 @@ ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 # byobu-enable
 
 # install docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
-dockerd-rootless-setuptool.sh install
+# curl -fsSL https://get.docker.com -o get-docker.sh
+# sh get-docker.sh
+# dockerd-rootless-setuptool.sh install

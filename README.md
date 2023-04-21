@@ -21,6 +21,15 @@ curl https://raw.githubusercontent.com/ChillarAnand/init/main/ubuntu.sh | bash
 ```
 
 
+### Install docker on linux
+
+```sh
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+dockerd-rootless-setuptool.sh install
+```
+
+
 ### Docker
 
 Docker bootstrap
