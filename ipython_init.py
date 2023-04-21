@@ -101,14 +101,14 @@ s = {1, "333", "foo"}
 
 
 # data analysis
-columns =  ['name', 'float', 'gender', 'bool', 'complex', 'int', 'sint', 'date']
+columns =  ['name', 'float', 'gender', 'bool', 'complex', 'int', 'sint', 'date', 'sdate']
 data = [
-    ['anand', 2, 'M', True, '1j', 2, '-1', '20200101'],
-    ['test', -2, 'N/A', True, '3j', 4, '-2', None],
-    ['nanda', 3, 'M', False, '2j', 3, '2', ''],
-    ['multi', 2.0, 'F', True, '-2j', 1, '3', pd.NaT],
-    ['test', -2, 'N/A', True, '3j', 4, '-2', ''],
-    ['float', 2.34, 'N/A', False, '2j', 3, '1', '20500102'],
+    ['anand', 2, 'M', True, '1j', 2, '-1', '20200101', '2001-01-01'],
+    ['test', -2, 'N/A', True, '3j', 4, '-2', None, ''],
+    ['nanda', 3, 'M', False, '2j', 3, '2', '', ''],
+    ['multi', 2.0, 'F', True, '-2j', 1, '3', pd.NaT, ''],
+    ['test', -2, 'N/A', True, '3j', 4, '-2', '', ''],
+    ['float', 2.34, 'N/A', False, '2j', 3, '1', '20500102', ''],
 ]
 
 df = pd.DataFrame(data, columns=columns)

@@ -77,7 +77,7 @@ plugins=(
     extract
     git
     z
-    # zsh-autocomplete
+    zsh-autocomplete
     zsh-autosuggestions
 )
 
@@ -109,24 +109,22 @@ export LANG=en_US.UTF-8
 
 
 
-
 # ZSH_THEME="ys"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 # history
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
-setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+# setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
 
 # no dups
-# setopt HIST_EXPIRE_DUPS_FIRST
-# setopt HIST_IGNORE_DUPS
-# setopt HIST_IGNORE_ALL_DUPS
-# setopt HIST_FIND_NO_DUPS
-# setopt HIST_SAVE_NO_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
 setopt HIST_IGNORE_SPACE
 
 export HISTSIZE=1000000000
@@ -135,7 +133,7 @@ export SAVEHIST=$HISTSIZE
 
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 zstyle ':autocomplete:*' widget-style menu-select
-# zstyle ':autocomplete:tab:*' widget-style menu-complete
+zstyle ':autocomplete:tab:*' widget-style menu-complete
 
 
 # bindkey -M emacs '^P' history-substring-search-up
@@ -154,10 +152,15 @@ pyclean () {
 
 # alias
 alias bsa='brew services start'
+alias bsak='brew services start kafka'
 alias bsl='brew services list'
 alias bsr='brew services restart'
 alias bsz='brew services stop'
 alias bse='bench --site edge.localhost'
+alias bst='bench --site t'
+alias bsec='bench --site edge.localhost console'
+alias bsem='bench --site edge.localhost migrate'
+alias cie='conda info --envs'
 alias bsd='bench --site demo.localhost'
 alias bs='bench start'
 alias bga='bench get-app'
@@ -187,6 +190,8 @@ alias kss='kafka-server-start'
 alias kssk='kafka-server-start $HOME/homebrew/etc/kafka/kraft/server.properties'
 alias l='exa -l'
 alias lc='limactl'
+alias lca='limactl start'
+alias lcz='limactl stop'
 alias lcl='limactl list'
 alias lcr='limactl stop default; limactl delete default; limactl start default --tty=false'
 alias lima='limactl start default; lima'
@@ -214,7 +219,8 @@ alias timeout=gtimeout
 alias ty='type'
 alias wo='workon'
 alias xargs=gxargs
-
+alias charm='open -na "PyCharm.app" --args'
+alias lcs='lc shell'
 
 
 # env vars
@@ -244,7 +250,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 
 # source ~/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source ~/cloud/tech/notes/private_init/private.sh
+source ~/cloud/private_init/private.sh
 
 
 # >>> conda initialize >>>

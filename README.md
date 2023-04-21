@@ -17,7 +17,7 @@ curl https://raw.githubusercontent.com/ChillarAnand/init/main/mac_init.sh | bash
 Server bootstrap
 
 ```sh
-curl https://raw.githubusercontent.com/ChillarAnand/init/main/ubuntu_init.sh | bash
+curl https://raw.githubusercontent.com/ChillarAnand/init/main/ubuntu.sh | bash
 ```
 
 

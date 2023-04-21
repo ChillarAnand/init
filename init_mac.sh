@@ -79,6 +79,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
+mv "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bkp"
+ln -s "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
+
 # ipython
 python -m pip install ipython stdlib_list
 ipython profile create
