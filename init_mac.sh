@@ -11,6 +11,10 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 # set screenshots folder
 defaults write com.apple.screencapture location ~/Pictures
 
+# analog clock
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+
+
 # shortcut for icloud
 ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud
 
@@ -29,39 +33,42 @@ brew install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
 
 brew install openssl libjpeg
 brew install nvm pyenv sqlite pipx
-brew install cheatsheet git-gui gource
-# brew install pulumi
+brew install git-gui gource
 
 
-# brew tap elastic/tap
-# brew install elastic/tap/elasticsearch-full
-# brew install logstash kibana
-
-# brew tap espanso/espanso
-# brew install espanso
-
-# brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick
-# archived
-# brew install joplin obsidian graphviz fig
-
-
-brew install --cask dash emacs flycut grandperspective vlc rar kdiff3
+brew install --cask dash emacs flycut grandperspective vlc rar kdiff3 hammerspoon
 brew install --cask tunnelblick google-drive
 
 brew install --cask mambaforge
 conda init "$(basename "${SHELL}")"
 
+# archived
+
+# brew tap jkfran/killport
+# brew install killport
+
+# brew install cheatsheet joplin obsidian graphviz fig
+# brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick pulumi
+
+# brew tap elastic/tap
+# brew install elastic/tap/elasticsearch-full logstash-full kibana-full
+
+# brew tap espanso/espanso
+# brew install espanso
+
 # brew install --cask jetbrains-toolbox
 # brew install --cask pycharm
 # brew install --cask visual-studio-code qbittorrent rectangle android-platform-tools
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
-# archived
 # brew install --cask codeql beekeeper-studio iglance
 
+
 INIT_DIR="$HOME/init"
-PRIVATE_INIT_DIR="$HOME/cloud/tech/notes/private_init"
+PRIVATE_INIT_DIR="$HOME/cloud/notes/private_init"
 
 git clone https://github.com/chillaranand/init $INIT_DIR
+
+# git clone https://github.com/agzam/spacehammer ~/.hammerspoon
 
 
 # emacs
@@ -104,5 +111,17 @@ ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
 # espanso
 mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
 ln -s "$PRIVATE_INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
+
+# space hammer
+# mv "$HOME/.hammerspoon/userconfig.lua" "/tmp/userconfig.lua"
+# mv "$HOME/.hammerspoon/userconfigprivate.lua" "/tmp/userconfigprivate.lua"
+# ln -s "$HOME/init/hammerspoon/init.lua" "$HOME/.hammerspoon/userconfig.lua"
+# ln -s "$PRIVATE_INIT_DIR/private_init.lua" "$HOME/.hammerspoon/userconfigprivate.lua"
+
+
+# hammerspoon
+rm -rf "$HOME/.hammerspoon"
+mkdir -p "$HOME/.hammerspoon"
+ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
 
 echo "init.sh ran successfully"

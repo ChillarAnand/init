@@ -77,7 +77,7 @@ plugins=(
     extract
     git
     z
-    zsh-autocomplete
+    # zsh-autocomplete
     zsh-autosuggestions
 )
 
@@ -172,6 +172,7 @@ alias dk='docker'
 alias drr='docker run --rm'
 alias flo='flash otp'
 alias gcom='gco master'
+alias glo="git pull origin"
 alias glom="git pull origin master"
 alias hgi='history | grep -i'
 alias hgi='history | grep -i'
@@ -210,6 +211,7 @@ alias pi='python -m pip install'
 alias pir='python -m pip install -r'
 alias pirr='python -m pip install -r requirements.txt'
 alias py="python"
+alias rs="python run_smoke_tests.py"
 alias s=sudo
 alias sed=gsed
 alias sz='source ~/.zshrc'
@@ -221,6 +223,8 @@ alias wo='workon'
 alias xargs=gxargs
 alias charm='open -na "PyCharm.app" --args'
 alias lcs='lc shell'
+alias im='sh ~/init/init_mac.sh'
+alias mi='sh ~/init/init_mac.sh'
 
 
 # env vars
@@ -249,8 +253,18 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
+ji() {
+    python -m json.tool $1 > /tmp/a.json
+    mv /tmp/a.json $1
+}
+
 # source ~/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source ~/cloud/private_init/private.sh
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 # >>> conda initialize >>>
