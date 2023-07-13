@@ -13,13 +13,13 @@ sudo apt install --yes nmap net-tools telnet
 sudo apt install --yes python3 python3-pip python3-distutils
 pip install pyflash glances
 
-# oh my zsh
+# oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# starship
+curl -sS https://starship.rs/install.sh | sh
 
 # byobu-enable
-
-# install docker
-# curl -fsSL https://get.docker.com -o get-docker.sh
-# sh get-docker.sh
-# dockerd-rootless-setuptool.sh install

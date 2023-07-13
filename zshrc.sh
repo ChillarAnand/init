@@ -151,7 +151,9 @@ pyclean () {
 ladf() {
     limactl stop default -f
     limactl delete default
-    limactl start --tty=false
+    # limactl start --tty=false
+    limactl start template://ubuntu-lts --name=default --tty=false
+    lima
 }
 
 
@@ -247,7 +249,7 @@ export C_INCLUDE_PATH=~/homebrew/Cellar/librdkafka/1.9.2/include
 export LIBRARY_PATH=~/homebrew/Cellar/librdkafka/1.9.2/lib
 
 export JAVA_HOME="$(/usr/libexec/java_home)"
-export ES_JAVA_HOME="$(/usr/libexec/java_home)"
+export ES_JAVA_HOME="$JAVA_HOME"
 
 export PATH="/Users/chillaranand/homebrew/opt/socket_vmnet/bin:$PATH"
 
