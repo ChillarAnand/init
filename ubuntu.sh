@@ -16,14 +16,6 @@ pip install pyflash glances
 # oh my zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-INIT_DIR="$HOME/init"
-
-git clone https://github.com/chillaranand/init $INIT_DIR
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-
-mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
-ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
 # byobu-enable
 

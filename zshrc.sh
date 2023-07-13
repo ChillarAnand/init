@@ -148,6 +148,11 @@ pyclean () {
     sudo find . -type d -name "__pycache__" -delete
 }
 
+ladf() {
+    limactl stop default -f
+    limactl delete default
+    limactl start --tty=false
+}
 
 
 # alias
@@ -174,6 +179,7 @@ alias flo='flash otp'
 alias gcom='gco master'
 alias glo="git pull origin"
 alias glom="git pull origin master"
+alias gpom="git push origin master"
 alias hgi='history | grep -i'
 alias hgi='history | grep -i'
 alias hwc='history | wc'

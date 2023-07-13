@@ -20,6 +20,14 @@ Server bootstrap
 curl https://raw.githubusercontent.com/ChillarAnand/init/main/ubuntu.sh | bash
 ```
 
+Custom zshrc
+
+```
+wget https://raw.githubusercontent.com/ChillarAnand/init/main/zshrc.sh
+mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
+ln -s zshrc.sh "$HOME/.zshrc"
+```
+
 
 ### Install docker on linux
 
