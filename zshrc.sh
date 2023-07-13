@@ -225,6 +225,8 @@ alias charm='open -na "PyCharm.app" --args'
 alias lcs='lc shell'
 alias im='sh ~/init/init_mac.sh'
 alias mi='sh ~/init/init_mac.sh'
+alias jl='jupyter-lab'
+
 
 
 # env vars
@@ -248,9 +250,9 @@ source /Library/Frameworks/Python.framework/Versions/3.9/bin/virtualenvwrapper.s
 
 export PYTHONDONTWRITEBYTECODE=1
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 ji() {
@@ -266,6 +268,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+eval "$(starship init zsh)"
+
+# conda init zsh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -281,3 +286,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc

@@ -113,15 +113,19 @@ mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
 ln -s "$PRIVATE_INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
 
 # space hammer
-# mv "$HOME/.hammerspoon/userconfig.lua" "/tmp/userconfig.lua"
+git clone https://github.com/agzam/spacehammer ~/.hammerspoon
+mv "$HOME/.hammerspoon/hammerspoon_init.lua" "/tmp/hammerspoon_init.lua"
+ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/hammerspoon_init.lua"
+
+
 # mv "$HOME/.hammerspoon/userconfigprivate.lua" "/tmp/userconfigprivate.lua"
 # ln -s "$HOME/init/hammerspoon/init.lua" "$HOME/.hammerspoon/userconfig.lua"
 # ln -s "$PRIVATE_INIT_DIR/private_init.lua" "$HOME/.hammerspoon/userconfigprivate.lua"
 
 
 # hammerspoon
-rm -rf "$HOME/.hammerspoon"
-mkdir -p "$HOME/.hammerspoon"
-ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
+# rm -rf "$HOME/.hammerspoon"
+# mkdir -p "$HOME/.hammerspoon"
+# ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
 
 echo "init.sh ran successfully"
