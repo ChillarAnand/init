@@ -25,6 +25,7 @@ function resize(a, b, c, d)
    f.w = max.w * c
    f.h = max.h * d
    win:setFrame(f)
+   -- win:setFullScreen(true)
 end
 
 
@@ -33,6 +34,7 @@ function finder(appObject)
    appObject:selectMenuItem({"Window", "Merge All Windows"})
    appObject:selectMenuItem({"Window", "Bring All to Front"})
 end
+
 
 function excel(appObject)
    log('Excel auto')
@@ -49,7 +51,7 @@ end
 
 function applicationWatcher(appName, eventType, appObject)
    local w = hs.application.watcher
-   if (appName == 'Microsoft AutoUpdate' or appName == 'Raycast' or appName == 'Stats' or appName == 'Microsoft Teams') then
+   if (appName == 'Microsoft AutoUpdate' or appName == 'Raycast' or appName =='Alfred' or appName == 'Stats' or appName == 'Microsoft Teams') then
       log('Ignoring ' .. appName)
       return
    end
@@ -143,9 +145,8 @@ end)
 
 
 -- bind key to automator script
-hs.hotkey.bind({"cmd", "ctrl"}, "k", function()
-
-end)
+-- hs.hotkey.bind({"cmd", "ctrl"}, "k", function()
+-- end)
 
 
 -- open url in brave
