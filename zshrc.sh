@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -87,6 +87,7 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -110,7 +111,8 @@ export LANG=en_US.UTF-8
 
 
 # ZSH_THEME="ys"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="ys2"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 # history
@@ -158,25 +160,34 @@ ladf() {
 
 
 # alias
+alias bga='bench get-app'
+alias bs='bench start'
 alias bsa='brew services start'
 alias bsak='brew services start kafka'
-alias bsl='brew services list'
-alias bsr='brew services restart'
-alias bsz='brew services stop'
+alias bsd='bench --site demo.localhost'
 alias bse='bench --site edge.localhost'
-alias bst='bench --site t'
 alias bsec='bench --site edge.localhost console'
 alias bsem='bench --site edge.localhost migrate'
-alias cie='conda info --envs'
-alias bsd='bench --site demo.localhost'
-alias bs='bench start'
-alias bga='bench get-app'
+alias bsl='brew services list'
+alias bsr='brew services restart'
+alias bst='bench --site t'
+alias bsz='brew services stop'
 alias c=bat
+alias ca='conda activate'
+alias charm='open -na "PyCharm.app" --args'
 alias ci="curl ipinfo.io"
+alias cie='conda info --envs'
 alias cl="git clone"
 alias dcu='docker compose up'
+alias dj='./manage.py'
 alias dk='docker'
+alias dm='./manage.py migrate'
+alias dmm='./manage.py makemigrations'
+alias dr='./manage.py runserver'
 alias drr='docker run --rm'
+alias ect='python etl_config_migration_scripts/ETL_Config_Tool.py'
+alias edm='python etl_config_migration_scripts/ETL_Config_Tool.py -o overwrite -t config -f settings/etl_tool/dev.json -dc C97'
+alias fb='fastboot'
 alias flo='flash otp'
 alias gcom='gco master'
 alias glo="git pull origin"
@@ -186,13 +197,15 @@ alias hgi='history | grep -i'
 alias hgi='history | grep -i'
 alias hwc='history | wc'
 alias i='brew install'
+alias im='sh ~/init/init_mac.sh'
 alias ipy='ipython'
 alias j=z
 alias ja='j avilpage.com; ssh-add -D; ssh-add ~/.ssh/id_rsa'
 alias jd="~/Downloads/"
+alias jl='jupyter-lab'
 alias jl='just -l'
-alias js="~/projects/sandbox/"
 alias jra='just a'
+alias js="~/projects/sandbox/"
 alias kcc='kafka-console-consumer'
 alias kcp='kafka-console-producer'
 alias kss='kafka-server-start'
@@ -200,12 +213,14 @@ alias kssk='kafka-server-start $HOME/homebrew/etc/kafka/kraft/server.properties'
 alias l='exa -l'
 alias lc='limactl'
 alias lca='limactl start'
-alias lcz='limactl stop'
 alias lcl='limactl list'
 alias lcr='limactl stop default; limactl delete default; limactl start default --tty=false'
+alias lcs='lc shell'
+alias lcz='limactl stop'
 alias lima='limactl start default; lima'
 alias ll='exa -l'
 alias me='chmod +x'
+alias mi='sh ~/init/init_mac.sh'
 alias mp='multipass'
 alias mpl='multipass list'
 alias na='z avilpage.com; nikola auto'
@@ -219,22 +234,18 @@ alias pi='python -m pip install'
 alias pir='python -m pip install -r'
 alias pirr='python -m pip install -r requirements.txt'
 alias py="python"
-alias rs="python run_smoke_tests.py"
 alias s=sudo
+alias se='source .env'
 alias sed=gsed
 alias sz='source ~/.zshrc'
 alias t='tree -Cfh'
 alias tgi='tree -Cfh | grep -i'
 alias timeout=gtimeout
+alias ts='tailscale'
+alias tst='tailscale status'
 alias ty='type'
 alias wo='workon'
 alias xargs=gxargs
-alias charm='open -na "PyCharm.app" --args'
-alias lcs='lc shell'
-alias im='sh ~/init/init_mac.sh'
-alias mi='sh ~/init/init_mac.sh'
-alias jl='jupyter-lab'
-
 
 
 # env vars
@@ -258,15 +269,18 @@ source /Library/Frameworks/Python.framework/Versions/3.9/bin/virtualenvwrapper.s
 
 export PYTHONDONTWRITEBYTECODE=1
 
-# source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 ji() {
     python -m json.tool $1 > /tmp/a.json
     mv /tmp/a.json $1
 }
+
+export NODE_OPTIONS="--max-old-space-size=8192"
+
 
 # source ~/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source ~/cloud/private_init/private.sh
@@ -276,7 +290,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(starship init zsh)"
+
+
+# eval "$(starship init zsh)"
 
 # conda init zsh
 

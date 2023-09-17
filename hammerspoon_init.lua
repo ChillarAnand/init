@@ -3,7 +3,9 @@ require "string"
 local debug = false
 
 hs.console.clearConsole()
+
 local log = hs.logger.new('init', 'debug')
+
 function log(message)
    if debug then
       hs.alert.show(message)
@@ -56,6 +58,12 @@ function applicationWatcher(appName, eventType, appObject)
       return
    end
 
+   if (appName == 'Clocker') then
+      log('Ignoring' .. appName)
+      return
+   end
+
+
    if (eventType == w.activated or eventType == w.launched) then
       log(appName .. ' -> Auto maximising window')
       resize(1, 1, 1, 1)
@@ -77,26 +85,26 @@ appWatcher = hs.application.watcher.new(applicationWatcher)
 appWatcher:start()
 
 
-mappings = {
-   B = 'Brave Browser',
-   C = 'Google Chrome',
-   E = 'Emacs',
-   F = 'Finder',
-   K = 'KDiff3',
-   M = 'Microsoft Teams',
-   O = 'Microsoft Outlook',
-   P = 'PyCharm',
-   T = 'iTerm',
-   V = 'Visual Studio Code'
-}
+-- mappings = {
+--    B = 'Brave Browser',
+--    C = 'Google Chrome',
+--    E = 'Emacs',
+--    F = 'Finder',
+--    K = 'KDiff3',
+--    M = 'Microsoft Teams',
+--    O = 'Microsoft Outlook',
+--    P = 'PyCharm',
+--    T = 'iTerm',
+--    V = 'Visual Studio Code'
+-- }
 
-for key, app in pairs(mappings) do
-   hs.hotkey.bind({"cmd", "ctrl"}, key, function()
-         --   hs.alert.show("Focusing " .. app)
-         log("Focusing " .. app)
-         hs.application.launchOrFocus(app)
-   end)
-end
+-- for key, app in pairs(mappings) do
+--    hs.hotkey.bind({"cmd", "ctrl"}, key, function()
+--          --   hs.alert.show("Focusing " .. app)
+--          log("Focusing " .. app)
+--          hs.application.launchOrFocus(app)
+--    end)
+-- end
 
 
 
@@ -137,6 +145,10 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
 end)
 
 
+hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
+     hs.application.launchOrFocus("Raycast")
+end)
+
 -- long press cmd to activate ksheet and disable it on key down
 -- local ksheet = hs.loadSpoon("KSheet")
 -- ksheet:bindHotkeys({
@@ -144,7 +156,7 @@ end)
 -- })
 
 
--- bind key to automator script
+-- Bind Key to automator script
 -- hs.hotkey.bind({"cmd", "ctrl"}, "k", function()
 -- end)
 

@@ -64,7 +64,7 @@ conda init "$(basename "${SHELL}")"
 
 
 INIT_DIR="$HOME/init"
-PRIVATE_INIT_DIR="$HOME/cloud/notes/private_init"
+PRIVATE_INIT_DIR="$HOME/cloud/private_init"
 
 git clone https://github.com/chillaranand/init $INIT_DIR
 
@@ -98,6 +98,7 @@ ln -s "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_conf
 # karabiner
 mv "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
 ln -s "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/complex_modifications/space_control.json"
+ln -s "$INIT_DIR/karabiner_windows_remote.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_remote.json"
 
 
 # pyflash
