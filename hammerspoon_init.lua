@@ -146,7 +146,7 @@ end)
 
 
 hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
-     hs.application.launchOrFocus("Raycast")
+   hs.application.launchOrFocus("Raycast")
 end)
 
 -- long press cmd to activate ksheet and disable it on key down
@@ -170,22 +170,12 @@ function BraveOpenURL(url)
    hs.eventtap.keyStrokes(url)
    hs.eventtap.keyStroke({}, "return")
 
-
-   -- hs.osascript.javascript([[
-   -- (function() {
-   --   var brave = Application('Brave');
-   --   brave.activate();
-
-   --   for (win of brave.windows()) {
-   --     var tabIndex =
-   --       win.tabs().findIndex(tab => tab.url().match(/]] .. url .. [[/));
-
-   --     if (tabIndex != -1) {
-   --       win.activeTabIndex = (tabIndex + 1);
-   --       win.index = 1;
-   --     }
-   --   }
-   -- })()
-   -- ]])
-
 end
+
+
+hs.hotkey.bind({"cmd", "ctrl"}, "g", function()
+      url = 'https://github.com/Qontigo/Axioma.ETL.Tasks.Python/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc'
+      BraveOpenURL(url)
+end)
+
+
