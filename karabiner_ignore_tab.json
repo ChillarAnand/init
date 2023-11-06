@@ -1,0 +1,20 @@
+{
+    "title": "Ignore Tab",
+    "rules": [
+        {
+            "description": "Ignore Tab",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "tab",
+                        "modifiers": {
+                            "optional": ["any"]
+                        }
+                    },
+                    "to": [],
+                    "type": "basic"
+                }
+            ]
+        }
+    ]
+}
