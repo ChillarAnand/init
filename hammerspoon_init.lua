@@ -179,3 +179,33 @@ hs.hotkey.bind({"cmd", "ctrl"}, "g", function()
 end)
 
 
+hs.hotkey.bind({"cmd", "ctrl"}, "i", function()
+      -- hs.application:selectMenuItem({"Tab", "Select Next Tab"})
+        hs.eventtap.keyStroke({"ctrl"}, "tab")
+end)
+
+
+hs.hotkey.bind({"ctrl"}, "i", function()
+      -- hs.application:selectMenuItem({"Tab", "Select Next Tab"})
+        hs.eventtap.keyStroke({"ctrl"}, "tab")
+end)
+
+
+hs.hotkey.bind({"cmd", "ctrl"}, "k", function()
+   hs.execute("sh ~/init/zscaler_toggle.sh")
+end)
+
+
+-- hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
+--       hs.reload()
+--       hs.alert.show("HammerSpoon User Config Loaded")
+-- end)
+
+
+-- mouse_follows_focus = hs.loadSpoon("MouseFollowsFocus")
+-- mouse_follows_focus:configure({})
+-- mouse_follows_focus:start()
+
+
+hs.alert.show("HammerSpoon User Config Loaded")
+
