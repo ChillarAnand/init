@@ -16,7 +16,7 @@ defaults write com.apple.menuextra.clock IsAnalog -bool false
 
 
 # shortcut for icloud
-ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud
+# ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud
 
 
 # install homebrew
@@ -28,7 +28,7 @@ fi
 
 
 # utils
-brew install exa git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
+brew install git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
 brew install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
 
 brew install openssl libjpeg
@@ -39,8 +39,8 @@ brew install git-gui gource
 brew install --cask dash emacs flycut grandperspective vlc rar kdiff3 hammerspoon
 brew install --cask tunnelblick google-drive
 
-brew install --cask mambaforge
-conda init "$(basename "${SHELL}")"
+# brew install --cask mambaforge
+# conda init "$(basename "${SHELL}")"
 
 # archived
 
@@ -61,6 +61,7 @@ conda init "$(basename "${SHELL}")"
 # brew install --cask visual-studio-code qbittorrent rectangle android-platform-tools
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
 # brew install --cask codeql beekeeper-studio iglance
+# brew install exa
 
 
 INIT_DIR="$HOME/init"
@@ -99,6 +100,7 @@ ln -s "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_conf
 mv "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
 ln -s "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/complex_modifications/space_control.json"
 ln -s "$INIT_DIR/karabiner_windows_remote.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_remote.json"
+ln -s "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_ignore_tab.json"
 
 
 # pyflash
