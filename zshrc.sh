@@ -77,7 +77,7 @@ plugins=(
     extract
     git
     z
-    # zsh-autocomplete
+    zsh-autocomplete
     zsh-autosuggestions
 )
 
@@ -150,17 +150,11 @@ pyclean () {
     sudo find . -type d -name "__pycache__" -delete
 }
 
-ladf() {
-    limactl stop default -f
-    limactl delete default
-    # limactl start --tty=false
-    limactl start template://ubuntu-lts --name=default --tty=false
-    lima
-}
-
-
 # alias
+alias awk=gawk
 alias bga='bench get-app'
+alias bi='brew install'
+alias bl='brew list'
 alias bs='bench start'
 alias bsa='brew services start'
 alias bsak='brew services start kafka'
@@ -172,7 +166,8 @@ alias bsl='brew services list'
 alias bsr='brew services restart'
 alias bst='bench --site t'
 alias bsz='brew services stop'
-alias c=bat
+alias bu='brew uninstall'
+alias c='bat'
 alias ca='conda activate'
 alias charm='open -na "PyCharm.app" --args'
 alias ci="curl ipinfo.io"
@@ -231,14 +226,13 @@ alias p="ping 8.8.8.8"
 alias pf='python -m pip freeze'
 alias pgi='ps -ef | grep -i'
 alias pi='python -m pip install'
-alias pu='python -m pip uninstall'
 alias pir='python -m pip install -r'
 alias pirr='python -m pip install -r requirements.txt'
+alias pu='python -m pip uninstall'
 alias py="python"
 alias s=sudo
 alias se='source .env'
 alias sed=gsed
-alias awk=gawk
 alias sz='source ~/.zshrc'
 alias t='tree -Cfh'
 alias tgi='tree -Cfh | grep -i'
@@ -246,12 +240,9 @@ alias timeout=gtimeout
 alias ts='tailscale'
 alias tst='tailscale status'
 alias ty='type'
+alias w1='watch -n1'
 alias wo='workon'
 alias xargs=gxargs
-alias w1='watch -n1'
-alias bi='brew install'
-alias bu='brew uninstall'
-alias bl='brew list'
 
 
 
@@ -276,7 +267,6 @@ source /Library/Frameworks/Python.framework/Versions/3.9/bin/virtualenvwrapper.s
 
 export PYTHONDONTWRITEBYTECODE=1
 
-
 export PATH="/Users/chillaranand/homebrew/opt/make/libexec/gnubin:$PATH"
 export LDFLAGS="-L/Users/chillaranand/homebrew/opt/zlib/lib"
 export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/zlib/include"
@@ -285,8 +275,6 @@ export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/zlib/include"
 # export GEOS_LIBRARY_PATH="$(geos-config --prefix)/lib/libgeos_c.dylib"
 
 export PATH="/Users/chillaranand/homebrew/sbin:$PATH"
-
-
 
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
@@ -334,3 +322,5 @@ unset __conda_setup
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
+
+# [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
