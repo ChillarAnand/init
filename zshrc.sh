@@ -77,7 +77,7 @@ plugins=(
     extract
     git
     z
-    zsh-autocomplete
+    # zsh-autocomplete
     zsh-autosuggestions
 )
 
@@ -196,7 +196,7 @@ alias im='sh ~/init/init_mac.sh'
 alias ipy='ipython'
 alias j=z
 alias ja='j avilpage.com; ssh-add -D; ssh-add ~/.ssh/id_rsa'
-alias jd="~/Downloads/"
+# alias jd="~/Downloads/"
 alias jl='jupyter-lab'
 alias jl='just -l'
 alias jra='just a'
@@ -233,6 +233,7 @@ alias py="python"
 alias s=sudo
 alias se='source .env'
 alias sed=gsed
+alias cat=gcat
 alias sz='source ~/.zshrc'
 alias t='tree -Cfh'
 alias tgi='tree -Cfh | grep -i'
@@ -243,7 +244,8 @@ alias ty='type'
 alias w1='watch -n1'
 alias wo='workon'
 alias xargs=gxargs
-
+alias proxy_off='sudo networksetup -setwebproxystate wi-fi off; sudo networksetup -setsecurewebproxystate wi-fi off'
+alias proxy_on='sudo networksetup -setwebproxystate wi-fi on; sudo networksetup -setsecurewebproxystate wi-fi on'
 
 
 # env vars
@@ -299,6 +301,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+# rye
+source "$HOME/.rye/env"
+
 
 # eval "$(starship init zsh)"
 
@@ -324,3 +329,10 @@ zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
 # [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
+export PATH="/Users/chillaranand/homebrew/opt/libpq/bin:$PATH"
+export LDFLAGS="-L/Users/chillaranand/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/libpq/include"
+export PATH="/Users/chillaranand/homebrew/opt/dotnet@6/bin:$PATH"
+
+# add Pulumi to the PATH
+export PATH=$PATH:/Users/chillaranand/.pulumi/bin

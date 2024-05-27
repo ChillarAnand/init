@@ -1,32 +1,31 @@
 {
-  "title": "Change spacebar to spacebar & control",
-  "rules": [
-    {
-      "description": "SpaceControl",
-      "manipulators": [
-          {
-
-          "from": {
-            "key_code": "spacebar",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "right_control"
-            }
-          ],
-          "to_if_alone": [
-            {
-              "key_code": "spacebar"
-            }
-          ],
-          "type": "basic"
+    "title": "Change spacebar to spacebar & control",
+    "rules": [
+        {
+            "description": "Change spacebar to spacebar & control",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "spacebar",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_control"
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "spacebar"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }

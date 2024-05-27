@@ -26,7 +26,6 @@ if [[ $? != 0 ]] ; then
 fi
 
 
-
 # utils
 brew install git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
 brew install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
@@ -68,8 +67,6 @@ INIT_DIR="$HOME/init"
 PRIVATE_INIT_DIR="$HOME/cloud/private_init"
 
 git clone https://github.com/chillaranand/init $INIT_DIR
-
-# git clone https://github.com/agzam/spacehammer ~/.hammerspoon
 
 
 # emacs
@@ -116,9 +113,13 @@ mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
 ln -s "$PRIVATE_INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
 
 # space hammer
-git clone https://github.com/agzam/spacehammer ~/.hammerspoon
-mv "$HOME/.hammerspoon/hammerspoon_init.lua" "/tmp/hammerspoon_init.lua"
-ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/hammerspoon_init.lua"
+#git clone https://github.com/agzam/spacehammer ~/.hammerspoon
+#mv "$HOME/.hammerspoon/hammerspoon_init.lua" "/tmp/hammerspoon_init.lua"
+#ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/hammerspoon_init.lua"
+
+# hammerspoon
+mkdir -p "$HOME/.hammerspoon"
+ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
 
 
 # mv "$HOME/.hammerspoon/userconfigprivate.lua" "/tmp/userconfigprivate.lua"

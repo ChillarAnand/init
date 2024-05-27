@@ -64,6 +64,7 @@ function applicationWatcher(appName, eventType, appObject)
    end
 
 
+   -- if (eventType == w.launched) then
    if (eventType == w.activated or eventType == w.launched) then
       log(appName .. ' -> Auto maximising window')
       resize(1, 1, 1, 1)
@@ -85,31 +86,7 @@ appWatcher = hs.application.watcher.new(applicationWatcher)
 appWatcher:start()
 
 
--- mappings = {
---    B = 'Brave Browser',
---    C = 'Google Chrome',
---    E = 'Emacs',
---    F = 'Finder',
---    K = 'KDiff3',
---    M = 'Microsoft Teams',
---    O = 'Microsoft Outlook',
---    P = 'PyCharm',
---    T = 'iTerm',
---    V = 'Visual Studio Code'
--- }
-
--- for key, app in pairs(mappings) do
---    hs.hotkey.bind({"cmd", "ctrl"}, key, function()
---          --   hs.alert.show("Focusing " .. app)
---          log("Focusing " .. app)
---          hs.application.launchOrFocus(app)
---    end)
--- end
-
-
-
 -- bluetooth sleep
-
 function checkBluetoothResult(rc, stderr, stdout)
    if rc ~= 0 then
       print(string.format("Unexpected result executing `blueutil`: rc=%d stderr=%s stdout=%s", rc, stderr, stdout))
@@ -133,79 +110,8 @@ end
 watcher = hs.caffeinate.watcher.new(f)
 watcher:start()
 
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "Left", function()
-      resize(1, 1, 0.5, 1)
-end)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
-      resize(0.5, 1, 0.5, 1)
-end)
-
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
-      resize(1, 1, 1, 1)
-end)
-
-
 hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
    hs.application.launchOrFocus("Raycast")
 end)
 
--- long press cmd to activate ksheet and disable it on key down
--- local ksheet = hs.loadSpoon("KSheet")
--- ksheet:bindHotkeys({
--- toggle = {{"alt"}, "space"}
--- })
-
-
--- Bind Key to automator script
--- hs.hotkey.bind({"cmd", "ctrl"}, "k", function()
--- end)
-
-
--- open url in brave
-function BraveOpenURL(url)
-   log("opening" .. url)
-   hs.application.launchOrFocus("Brave Browser")
-   -- hs.application:selectMenuItem({"File", "New Tab"})
-   hs.eventtap.keyStroke({"cmd"}, "l")
-   hs.eventtap.keyStrokes(url)
-   hs.eventtap.keyStroke({}, "return")
-
-end
-
-
-hs.hotkey.bind({"cmd", "ctrl"}, "g", function()
-      url = 'https://github.com/Qontigo/Axioma.ETL.Tasks.Python/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc'
-      BraveOpenURL(url)
-end)
-
-
-hs.hotkey.bind({"cmd", "ctrl"}, "i", function()
-      -- hs.application:selectMenuItem({"Tab", "Select Next Tab"})
-        hs.eventtap.keyStroke({"ctrl"}, "tab")
-end)
-
-
-hs.hotkey.bind({"ctrl"}, "i", function()
-      -- hs.application:selectMenuItem({"Tab", "Select Next Tab"})
-        hs.eventtap.keyStroke({"ctrl"}, "tab")
-end)
-
-
-hs.hotkey.bind({"cmd", "ctrl"}, "k", function()
-   hs.execute("sh ~/init/zscaler_toggle.sh")
-end)
-
-
--- hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
---       hs.reload()
---       hs.alert.show("HammerSpoon User Config Loaded")
--- end)
-
-
--- mouse_follows_focus = hs.loadSpoon("MouseFollowsFocus")
--- mouse_follows_focus:configure({})
--- mouse_follows_focus:start()
-
-
 hs.alert.show("HammerSpoon User Config Loaded")
-

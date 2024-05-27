@@ -113,6 +113,17 @@ data = [
 
 df = pd.DataFrame(data, columns=columns)
 
+data = [
+    ['anand', 2, 'M', True, '1j', 2, '-1', '20200101', '2001-01-01'],
+    ['test', -2, 'N/A', True, '3j', 4, '-2', None, ''],
+    ['nanda', 3, 'M', False, '2j', 3, '2', '', ''],
+    ['multi', 2.0, 'F', True, '-2j', 1, '3', pd.NaT, ''],
+    ['float', 2.34, 'N/A', False, '2j', 3, '1', '20500102', ''],
+    ['test', -2, 'N/A', True, '3j', 4, '-2', '', ''],
+
+]
+df2 = pd.DataFrame(data, columns=columns)
+
 
 # os.system('cls' if os.name == 'nt' else 'clear')
 

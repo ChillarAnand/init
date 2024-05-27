@@ -13,9 +13,9 @@ then
 else
     osascript -e 'display notification "Starting..." with title "ZScaler"' -e 'delay 1'
     # pgrep 'Google Chrome' | xargs kill -9
-    pgrep Tailscale | xargs kill -9
-    pgrep Vivaldi | xargs kill -9
-    echo "Starting Zscaler"
+    # pgrep Tailscale | xargs kill -9
+    # pgrep Vivaldi | xargs kill -9
+    # echo "Starting Zscaler"
     # pkill -f 'Google Chrome'
     open -a /Applications/Zscaler/Zscaler.app --hide
     sudo find /Library/LaunchDaemons -name '*zscaler*' -exec launchctl load {} \;
