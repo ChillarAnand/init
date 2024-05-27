@@ -2,7 +2,7 @@
 ;;; basic config
 
 ;; load custom variables
-(load "~/.emacs.d/custom.el")
+;; (load "~/.emacs.d/custom.el")
 ;;(load-file "~/Dropbox/tech/private.el")
 
 
