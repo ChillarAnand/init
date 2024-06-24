@@ -1,6 +1,13 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
@@ -112,7 +119,16 @@ export LC_CTYPE=en_US.UTF-8
 
 # ZSH_THEME="ys"
 # ZSH_THEME="ys2"
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# eval "$(starship init zsh)"
+
+# export SPACESHIP_PROMPT_ASYNC=false
+# source "/Users/chillaranand/homebrew/opt/spaceship/spaceship.zsh"
 
 
 # history
@@ -133,9 +149,9 @@ export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 
 
-zstyle ':autocomplete:*' default-context history-incremental-search-backward
-zstyle ':autocomplete:*' widget-style menu-select
-zstyle ':autocomplete:tab:*' widget-style menu-complete
+# zstyle ':autocomplete:*' default-context history-incremental-search-backward
+# zstyle ':autocomplete:*' widget-style menu-select
+# zstyle ':autocomplete:tab:*' widget-style menu-complete
 
 
 # bindkey -M emacs '^P' history-substring-search-up
@@ -246,6 +262,9 @@ alias wo='workon'
 alias xargs=gxargs
 alias proxy_off='sudo networksetup -setwebproxystate wi-fi off; sudo networksetup -setsecurewebproxystate wi-fi off'
 alias proxy_on='sudo networksetup -setwebproxystate wi-fi on; sudo networksetup -setsecurewebproxystate wi-fi on'
+alias kgpa='kubectl get pods --all-namespaces'
+alias kci='kubectl cluster-info'
+alias kcgc='kubectl config get-contexts'
 
 
 # env vars
@@ -256,16 +275,16 @@ export LC_CTYPE=C
 export LANG=C
 
 # kafka - confluent-kafka
-export C_INCLUDE_PATH=~/homebrew/Cellar/librdkafka/1.9.2/include
-export LIBRARY_PATH=~/homebrew/Cellar/librdkafka/1.9.2/lib
+export C_INCLUDE_PATH=~/homebrew/Cellar/librdkafka/2.2.0/include
+export LIBRARY_PATH=~/homebrew/Cellar/librdkafka/2.2.0/lib
 
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export ES_JAVA_HOME="$JAVA_HOME"
 
 export PATH="/Users/chillaranand/homebrew/opt/socket_vmnet/bin:$PATH"
 
-export WORKON_HOME=$HOME/.virtualenvs
-source /Library/Frameworks/Python.framework/Versions/3.9/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# source /Library/Frameworks/Python.framework/Versions/3.9/bin/virtualenvwrapper.sh
 
 export PYTHONDONTWRITEBYTECODE=1
 
@@ -279,9 +298,6 @@ export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/zlib/include"
 export PATH="/Users/chillaranand/homebrew/sbin:$PATH"
 
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 ji() {
@@ -324,9 +340,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-autoload -Uz compinit
-zstyle ':completion:*' menu select
-fpath+=~/.zfunc
+# autoload -Uz compinit
+# zstyle ':completion:*' menu select
+# fpath+=~/.zfunc
 
 # [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
 export PATH="/Users/chillaranand/homebrew/opt/libpq/bin:$PATH"
