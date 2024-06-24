@@ -14,10 +14,8 @@ defaults write com.apple.screencapture location ~/Pictures
 # analog clock
 defaults write com.apple.menuextra.clock IsAnalog -bool false
 
-
 # shortcut for icloud
 # ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud
-
 
 # install homebrew
 which -s brew
