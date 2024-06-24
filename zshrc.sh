@@ -120,10 +120,7 @@ export LC_CTYPE=en_US.UTF-8
 # ZSH_THEME="ys"
 # ZSH_THEME="ys2"
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
-# source ~/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # eval "$(starship init zsh)"
 
@@ -321,8 +318,6 @@ export NVM_DIR="$HOME/.nvm"
 source "$HOME/.rye/env"
 
 
-# eval "$(starship init zsh)"
-
 # conda init zsh
 
 # >>> conda initialize >>>
@@ -352,3 +347,6 @@ export PATH="/Users/chillaranand/homebrew/opt/dotnet@6/bin:$PATH"
 
 # add Pulumi to the PATH
 export PATH=$PATH:/Users/chillaranand/.pulumi/bin
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
