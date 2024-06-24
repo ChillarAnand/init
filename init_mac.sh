@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 set -x
 
@@ -23,18 +23,28 @@ if [[ $? != 0 ]] ; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+brew_install() {
+    echo "\nInstalling $1"
+    if brew list $1 &>/dev/null; then
+        echo "${1} is already installed"
+    else
+        brew install $1 && echo "$1 is installed"
+    fi
+}
+
+
 
 # utils
-brew install git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
-brew install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
+brew_install git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
+brew_install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
 
-brew install openssl libjpeg
-brew install nvm pyenv sqlite pipx
-brew install git-gui gource
+brew_install openssl libjpeg
+brew_install nvm pyenv sqlite pipx
+brew_install git-gui gource
 
 
-brew install --cask dash emacs flycut grandperspective vlc rar kdiff3 hammerspoon
-brew install --cask tunnelblick google-drive
+brew_install --cask dash emacs flycut grandperspective vlc rar kdiff3 hammerspoon
+brew_install --cask tunnelblick google-drive
 
 # brew install --cask mambaforge
 # conda init "$(basename "${SHELL}")"
