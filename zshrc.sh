@@ -5,73 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
 HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -80,53 +17,35 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     # cmdtime
-    dirpersist
-    extract
-    git
-    z
-    # zsh-autocomplete
-    zsh-autosuggestions
+    dirpersist extract git globalias kubectl z
+    zsh-autocomplete
+    # zsh-autosuggestions
+    # zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+zstyle ':autocomplete:*' default-context history-incremental-search-backward
+
+zstyle ':autocomplete:*' list-lines 10
+zstyle ':autocomplete:history-incremental-search-*:*' list-lines 10
+zstyle ':autocomplete:history-search:*' list-lines 20
+
+bindkey -M menuselect '^M' .accept-line
+bindkey -M emacs '^N' menu-select
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-
-
-# ZSH_THEME="ys"
 # ZSH_THEME="ys2"
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # eval "$(starship init zsh)"
-
 # export SPACESHIP_PROMPT_ASYNC=false
 # source "/Users/chillaranand/homebrew/opt/spaceship/spaceship.zsh"
-
 
 # history
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
@@ -144,17 +63,7 @@ setopt HIST_IGNORE_SPACE
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
-
-
-# zstyle ':autocomplete:*' default-context history-incremental-search-backward
-# zstyle ':autocomplete:*' widget-style menu-select
-# zstyle ':autocomplete:tab:*' widget-style menu-complete
-
-
-# bindkey -M emacs '^P' history-substring-search-up
-# bindkey -M emacs '^N' down-line-or-select
-# bindkey '^[[B' down-line-or-select
-# bindkey '^[OB' down-line-or-select
+export HISTFILE=~/cloud/private_init/zsh_history
 
 
 # functions
@@ -201,6 +110,8 @@ alias gcom='gco master'
 alias glo="git pull origin"
 alias glom="git pull origin master"
 alias gpom="git push origin master"
+alias gpc="git push origin HEAD"
+alias gpcf="git push origin HEAD -f"
 alias hgi='history | grep -i'
 alias hgi='history | grep -i'
 alias hwc='history | wc'
@@ -208,8 +119,7 @@ alias i='brew install'
 alias im='sh ~/init/init_mac.sh'
 alias ipy='ipython'
 alias j=z
-alias ja='j avilpage.com; ssh-add -D; ssh-add ~/.ssh/id_rsa'
-# alias jd="~/Downloads/"
+alias jd="~/Downloads/"
 alias jl='jupyter-lab'
 alias jl='just -l'
 alias jra='just a'
@@ -220,13 +130,10 @@ alias kss='kafka-server-start'
 alias kssk='kafka-server-start $HOME/homebrew/etc/kafka/kraft/server.properties'
 alias l='exa -l'
 alias lc='limactl'
-alias lca='limactl start'
-alias lcl='limactl list'
-alias lcr='limactl stop default; limactl delete default; limactl start default --tty=false'
-alias lcs='lc shell'
-alias lcz='limactl stop'
-alias lima='limactl start default; lima'
 alias ll='exa -l'
+alias rf='trash'
+alias o='orbctl start'
+alias o='orb'
 alias me='chmod +x'
 alias mi='sh ~/init/init_mac.sh'
 alias mp='multipass'
@@ -241,12 +148,12 @@ alias pgi='ps -ef | grep -i'
 alias pi='python -m pip install'
 alias pir='python -m pip install -r'
 alias pirr='python -m pip install -r requirements.txt'
-alias pu='python -m pip uninstall'
+alias pu='python -m pip uninstall -y'
 alias py="python"
 alias s=sudo
 alias se='source .env'
 alias sed=gsed
-alias cat=gcat
+# alias cat=gcat
 alias sz='source ~/.zshrc'
 alias t='tree -Cfh'
 alias tgi='tree -Cfh | grep -i'
@@ -255,13 +162,15 @@ alias ts='tailscale'
 alias tst='tailscale status'
 alias ty='type'
 alias w1='watch -n1'
-alias wo='workon'
 alias xargs=gxargs
 alias proxy_off='sudo networksetup -setwebproxystate wi-fi off; sudo networksetup -setsecurewebproxystate wi-fi off'
 alias proxy_on='sudo networksetup -setwebproxystate wi-fi on; sudo networksetup -setsecurewebproxystate wi-fi on'
 alias kgpa='kubectl get pods --all-namespaces'
 alias kci='kubectl cluster-info'
+alias kc='kubectl'
 alias kcgc='kubectl config get-contexts'
+alias h=history
+alias ja='j avilpage.com'
 
 
 # env vars
@@ -280,9 +189,6 @@ export ES_JAVA_HOME="$JAVA_HOME"
 
 export PATH="/Users/chillaranand/homebrew/opt/socket_vmnet/bin:$PATH"
 
-# export WORKON_HOME=$HOME/.virtualenvs
-# source /Library/Frameworks/Python.framework/Versions/3.9/bin/virtualenvwrapper.sh
-
 export PYTHONDONTWRITEBYTECODE=1
 
 export PATH="/Users/chillaranand/homebrew/opt/make/libexec/gnubin:$PATH"
@@ -294,19 +200,12 @@ export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/zlib/include"
 
 export PATH="/Users/chillaranand/homebrew/sbin:$PATH"
 
-
-
-
 ji() {
     python -m json.tool $1 > /tmp/a.json
     mv /tmp/a.json $1
 }
 
 export NODE_OPTIONS="--max-old-space-size=8192"
-
-
-# source ~/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source ~/cloud/private_init/private.sh
 
 
 export NVM_DIR="$HOME/.nvm"
@@ -348,5 +247,18 @@ export PATH="/Users/chillaranand/homebrew/opt/dotnet@6/bin:$PATH"
 # add Pulumi to the PATH
 export PATH=$PATH:/Users/chillaranand/.pulumi/bin
 
+export DOTNET_ROOT="/Users/chillaranand/homebrew/opt/dotnet/libexec"
+export ELECTRON_DEV=true
+export GOARCH="arm64"
+
+
+source ~/cloud/private_init/private.sh
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# export MCFLY_LIGHT=TRUE
+# export MCFLY_DISABLE_MENU=TRUE
+# eval "$(mcfly init zsh)"
+
+# source /Users/chillaranand/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

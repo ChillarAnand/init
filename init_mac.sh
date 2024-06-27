@@ -46,6 +46,8 @@ brew_install git-gui gource
 brew_install --cask dash emacs flycut grandperspective vlc rar kdiff3 hammerspoon
 brew_install --cask tunnelblick google-drive
 
+npm install -g git-checkout-interactive
+
 # brew install --cask mambaforge
 # conda init "$(basename "${SHELL}")"
 
@@ -54,21 +56,16 @@ brew_install --cask tunnelblick google-drive
 # brew tap jkfran/killport
 # brew install killport
 
-# brew install cheatsheet joplin obsidian graphviz fig
+# brew install cheatsheet joplin obsidian graphviz fig exa
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick pulumi
 
 # brew tap elastic/tap
 # brew install elastic/tap/elasticsearch-full logstash-full kibana-full
 
-# brew tap espanso/espanso
-# brew install espanso
-
-# brew install --cask jetbrains-toolbox
-# brew install --cask pycharm
+# brew install --cask jetbrains-toolbox pycharm visual-studio-code
 # brew install --cask visual-studio-code qbittorrent rectangle android-platform-tools
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
 # brew install --cask codeql beekeeper-studio iglance
-# brew install exa
 
 
 INIT_DIR="$HOME/init"
@@ -87,7 +84,7 @@ ln -s "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
@@ -106,6 +103,7 @@ mv "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/t
 ln -s "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/complex_modifications/space_control.json"
 ln -s "$INIT_DIR/karabiner_windows_remote.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_remote.json"
 ln -s "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_ignore_tab.json"
+ln -s "$INIT_DIR/karabiner_iterm.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_iterm.json"
 
 
 # pyflash
@@ -113,8 +111,8 @@ mv "$HOME/.pyflash.ini" "/tmp/pyflash.ini"
 ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
 
 # zsh_history
-#mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
-#ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
+# mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
+# ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
 
 # espanso
 mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
