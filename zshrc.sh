@@ -19,7 +19,7 @@ plugins=(
     # cmdtime
     dirpersist extract git globalias kubectl z
     zsh-autocomplete
-    # zsh-autosuggestions
+    zsh-autosuggestions
     # zsh-syntax-highlighting
 )
 

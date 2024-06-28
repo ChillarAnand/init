@@ -20,6 +20,13 @@ Server bootstrap
 curl https://raw.githubusercontent.com/ChillarAnand/init/main/ubuntu.sh | bash
 ```
 
+Without sudo
+
+```sh
+curl https://raw.githubusercontent.com/ChillarAnand/init/main/ubuntu_nosudo.sh | bash
+```
+
+
 Custom zshrc
 
 ```

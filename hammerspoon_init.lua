@@ -115,3 +115,27 @@ hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
 end)
 
 hs.alert.show("HammerSpoon User Config Loaded")
+
+hs.hotkey.bind({"ctrl"}, "2", function()
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "return")
+end)
+
+
+-- on pressing ctrl+3, send down arrow key 3 times and enter
+hs.hotkey.bind({"ctrl"}, "3", function()
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "return")
+end)
+
+
+hs.hotkey.bind({"ctrl"}, "4", function()
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "down")
+   hs.eventtap.keyStroke({}, "return")
+end)
