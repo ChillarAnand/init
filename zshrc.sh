@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Path to your oh-my-zsh installation.
@@ -28,9 +28,9 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 
-zstyle ':autocomplete:*' list-lines 10
-zstyle ':autocomplete:history-incremental-search-*:*' list-lines 10
-zstyle ':autocomplete:history-search:*' list-lines 20
+zstyle ':autocomplete:*' list-lines 8
+zstyle ':autocomplete:history-incremental-search-*:*' list-lines 8
+zstyle ':autocomplete:history-search:*' list-lines 8
 
 bindkey -M menuselect '^M' .accept-line
 bindkey -M emacs '^N' menu-select
@@ -118,26 +118,18 @@ alias hwc='history | wc'
 alias i='brew install'
 alias im='sh ~/init/init_mac.sh'
 alias ipy='ipython'
+alias jl='jupyter-lab'
 alias j=z
 alias jd="~/Downloads/"
-alias jl='jupyter-lab'
-alias jl='just -l'
-alias jra='just a'
 alias js="~/projects/sandbox/"
-alias kcc='kafka-console-consumer'
-alias kcp='kafka-console-producer'
-alias kss='kafka-server-start'
-alias kssk='kafka-server-start $HOME/homebrew/etc/kafka/kraft/server.properties'
+alias jq="~/projects/qontigo/"
 alias l='exa -l'
 alias lc='limactl'
 alias ll='exa -l'
 alias rf='trash'
 alias o='orbctl start'
-alias o='orb'
 alias me='chmod +x'
 alias mi='sh ~/init/init_mac.sh'
-alias mp='multipass'
-alias mpl='multipass list'
 alias na='z avilpage.com; nikola auto'
 alias naf='j avilpage.com; trash output; trash cache; nikola auto'
 alias ngd='nikola github_deploy'
@@ -214,7 +206,7 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # rye
-source "$HOME/.rye/env"
+# source "$HOME/.rye/env"
 
 
 # conda init zsh
@@ -250,6 +242,9 @@ export PATH=$PATH:/Users/chillaranand/.pulumi/bin
 export DOTNET_ROOT="/Users/chillaranand/homebrew/opt/dotnet/libexec"
 export ELECTRON_DEV=true
 export GOARCH="arm64"
+
+alias dbc='osascript ~/init/setDefaultBrowser.scpt chrome'
+alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
 
 
 source ~/cloud/private_init/private.sh
