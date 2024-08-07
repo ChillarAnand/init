@@ -23,25 +23,29 @@ plugins=(
     # zsh-syntax-highlighting
 )
 
+# ZSH_THEME="ys2"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 
-zstyle ':autocomplete:*' list-lines 8
-zstyle ':autocomplete:history-incremental-search-*:*' list-lines 8
-zstyle ':autocomplete:history-search:*' list-lines 8
+# zstyle ':autocomplete:*' list-lines 5
+zstyle ':autocomplete:history-incremental-search-*:*' list-lines 10
+zstyle ':autocomplete:history-search:*' list-lines 5
 
 bindkey -M menuselect '^M' .accept-line
 bindkey -M emacs '^N' menu-select
+
+bindkey              '^I'         menu-complete
+bindkey "$terminfo[kcbt]" reverse-menu-complete
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-# ZSH_THEME="ys2"
-
-source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # eval "$(starship init zsh)"
 # export SPACESHIP_PROMPT_ASYNC=false
@@ -63,7 +67,9 @@ setopt HIST_IGNORE_SPACE
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
-export HISTFILE=~/cloud/private_init/zsh_history
+if [[ -f ~/cloud/private_init/zsh_history ]]; then
+    export HISTFILE=~/cloud/private_init/zsh_history
+fi
 
 
 # functions
@@ -176,8 +182,10 @@ export LANG=C
 export C_INCLUDE_PATH=~/homebrew/Cellar/librdkafka/2.2.0/include
 export LIBRARY_PATH=~/homebrew/Cellar/librdkafka/2.2.0/lib
 
-export JAVA_HOME="$(/usr/libexec/java_home)"
-export ES_JAVA_HOME="$JAVA_HOME"
+if [ -f /usr/libexec/java_home ]; then
+    export JAVA_HOME="$(/usr/libexec/java_home)"
+    export ES_JAVA_HOME="$JAVA_HOME"
+fi
 
 export PATH="/Users/chillaranand/homebrew/opt/socket_vmnet/bin:$PATH"
 
@@ -246,8 +254,9 @@ export GOARCH="arm64"
 alias dbc='osascript ~/init/setDefaultBrowser.scpt chrome'
 alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
 
-
-source ~/cloud/private_init/private.sh
+if [ -f ~/cloud/private_init/private.sh ]; then
+    source ~/cloud/private_init/private.sh
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
