@@ -42,6 +42,18 @@ bindkey -M emacs '^N' menu-select
 bindkey              '^I'         menu-complete
 bindkey "$terminfo[kcbt]" reverse-menu-complete
 
+zstyle ':autocomplete:*' ignored-input 'cd '
+zstyle ':autocomplete:*' ignored-input 'cd ..'
+zstyle ':autocomplete:*' ignored-input 'cd..'
+zstyle ':autocomplete:*' ignored-input 'cd##'
+
+autoload -Uz compinit && compinit
+
+# Set up a style to ignore 'cd' command for auto-completions
+zstyle ':completion:*:(cd):*' matcher-list '' 
+zstyle ':completion:*:cd:*' matcher-list ''
+
+
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
@@ -150,7 +162,6 @@ alias pu='python -m pip uninstall -y'
 alias py="python"
 alias s=sudo
 alias se='source .env'
-alias sed=gsed
 # alias cat=gcat
 alias sz='source ~/.zshrc'
 alias t='tree -Cfh'
@@ -160,7 +171,6 @@ alias ts='tailscale'
 alias tst='tailscale status'
 alias ty='type'
 alias w1='watch -n1'
-alias xargs=gxargs
 alias proxy_off='sudo networksetup -setwebproxystate wi-fi off; sudo networksetup -setsecurewebproxystate wi-fi off'
 alias proxy_on='sudo networksetup -setwebproxystate wi-fi on; sudo networksetup -setsecurewebproxystate wi-fi on'
 alias kgpa='kubectl get pods --all-namespaces'
@@ -169,6 +179,13 @@ alias kc='kubectl'
 alias kcgc='kubectl config get-contexts'
 alias h=history
 alias ja='j avilpage.com'
+
+
+# only for mac
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias xargs=gxargs
+    alias sed=gsed
+fi
 
 
 # env vars
