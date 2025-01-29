@@ -7,14 +7,10 @@ export DEBIAN_FRONTEND=noninteractive
 
 sudo apt update
 
-sudo apt install --yes byobu git trash-cli tree unzip vim zsh exa
+sudo apt install --yes byobu git trash-cli tree unzip vim zsh lsd
 sudo apt install --yes nmap net-tools telnet iotop-c htop atop
 
 sudo apt install --yes python3 python3-pip
-# pip install pyflash glances
-
-wget -c "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-bash Miniforge3-$(uname)-$(uname -m).sh -b -f
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -37,3 +33,8 @@ ln -s "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
 
 # starship
 # curl -sS https://starship.rs/install.sh | sh
+
+# pip install pyflash glances
+
+#wget -c "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+#bash Miniforge3-$(uname)-$(uname -m).sh -b -f
