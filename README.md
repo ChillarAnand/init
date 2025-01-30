@@ -41,6 +41,9 @@ ln -s zshrc.sh "$HOME/.zshrc"
 ```sh
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
+sudo sh -eux <<EOF
+apt-get install -y uidmap
+EOF
 dockerd-rootless-setuptool.sh install
 ```
 

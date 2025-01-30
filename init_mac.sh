@@ -10,12 +10,8 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 # set screenshots folder
 defaults write com.apple.screencapture location ~/Pictures
-
 # analog clock
 defaults write com.apple.menuextra.clock IsAnalog -bool false
-
-# shortcut for icloud
-# ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud
 
 # install homebrew
 which -s brew
@@ -24,27 +20,25 @@ if [[ $? != 0 ]] ; then
 fi
 
 brew_install() {
-    echo "\nInstalling $1"
-    if brew list $1 &>/dev/null; then
-        echo "${1} is already installed"
-    else
-        brew install $1 && echo "$1 is installed"
-    fi
+    for pkg in "$@"; do
+        if brew list -1 | grep -q "^${pkg}\$"; then
+            echo "$pkg is already installed"
+            continue
+        fi
+        brew install "$pkg"
+    done
 }
 
-
-
-# utils
-brew_install git tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
-brew_install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
+brew_install git git-gui tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
+brew_install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep zoxide
 
 brew_install openssl libjpeg
-brew_install nvm pyenv sqlite pipx
-brew_install git-gui gource
+brew_install nvm sqlite pipx gource
 
+brew_install --cask grandperspective rar kdiff3 hammerspoon stretchly
+brew_install --cask emacs vlc google-drive
 
-brew_install --cask dash emacs flycut grandperspective vlc rar kdiff3 hammerspoon
-brew_install --cask tunnelblick google-drive
+brew install --cask --no-quarantine stretchly
 
 npm install -g git-checkout-interactive
 
@@ -56,7 +50,8 @@ npm install -g git-checkout-interactive
 # brew tap jkfran/killport
 # brew install killport
 
-# brew install cheatsheet joplin obsidian graphviz fig exa
+# brew_install flycut dash tunnelblick unnatural-scrollwheels
+# brew install cheatsheet joplin obsidian graphviz fig exa pyenv
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick pulumi
 
 # brew tap elastic/tap
@@ -104,6 +99,7 @@ ln -s "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/c
 ln -s "$INIT_DIR/karabiner_windows_remote.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_remote.json"
 ln -s "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_ignore_tab.json"
 ln -s "$INIT_DIR/karabiner_iterm.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_iterm.json"
+ln -s "$INIT_DIR/karabiner_alt_win.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_alt_win.json"
 
 
 # pyflash
@@ -137,5 +133,8 @@ ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
 # rm -rf "$HOME/.hammerspoon"
 # mkdir -p "$HOME/.hammerspoon"
 # ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
+
+# shortcut for icloud
+# ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud
 
 echo "init.sh ran successfully"
