@@ -29,36 +29,28 @@ brew_install() {
     done
 }
 
-brew_install git git-gui tree htop nmap telnet watch wget zsh zsh-syntax-highlighting
+brew_install eza htop git git-gui tree nmap telnet watch wget zsh zsh-syntax-highlighting
 brew_install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep zoxide
 
-brew_install openssl libjpeg
-brew_install nvm sqlite pipx gource
-
-brew_install --cask grandperspective rar kdiff3 hammerspoon stretchly
-brew_install --cask emacs vlc google-drive
-
+brew install --cask grandperspective rar kdiff3 hammerspoon visual-studio-code emacs
+brew install --cask vlc google-drive
 brew install --cask --no-quarantine stretchly
 
+brew install nvm
 npm install -g git-checkout-interactive
-
-# brew install --cask mambaforge
-# conda init "$(basename "${SHELL}")"
 
 # archived
 
-# brew tap jkfran/killport
-# brew install killport
+# brew_install openssl libjpeg
+# brew_install nvm sqlite pipx gource
 
-# brew_install flycut dash tunnelblick unnatural-scrollwheels
-# brew install cheatsheet joplin obsidian graphviz fig exa pyenv
+# brew install cheatsheet joplin obsidian graphviz
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick pulumi
 
 # brew tap elastic/tap
 # brew install elastic/tap/elasticsearch-full logstash-full kibana-full
 
-# brew install --cask jetbrains-toolbox pycharm visual-studio-code
-# brew install --cask visual-studio-code qbittorrent rectangle android-platform-tools
+# brew install --cask jetbrains-toolbox pycharm 
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
 # brew install --cask codeql beekeeper-studio iglance
 
@@ -79,7 +71,6 @@ ln -s "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
@@ -111,8 +102,8 @@ ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
 # ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
 
 # espanso
-mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
-ln -s "$PRIVATE_INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
+# mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
+# ln -s "$PRIVATE_INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
 
 # space hammer
 #git clone https://github.com/agzam/spacehammer ~/.hammerspoon
@@ -122,17 +113,6 @@ ln -s "$PRIVATE_INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/b
 # hammerspoon
 mkdir -p "$HOME/.hammerspoon"
 ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
-
-
-# mv "$HOME/.hammerspoon/userconfigprivate.lua" "/tmp/userconfigprivate.lua"
-# ln -s "$HOME/init/hammerspoon/init.lua" "$HOME/.hammerspoon/userconfig.lua"
-# ln -s "$PRIVATE_INIT_DIR/private_init.lua" "$HOME/.hammerspoon/userconfigprivate.lua"
-
-
-# hammerspoon
-# rm -rf "$HOME/.hammerspoon"
-# mkdir -p "$HOME/.hammerspoon"
-# ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
 
 # shortcut for icloud
 # ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud

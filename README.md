@@ -8,7 +8,7 @@ This repo contains initial setup files.
 System bootstrap
 
 ```sh
-curl https://raw.githubusercontent.com/ChillarAnand/init/main/mac_init.sh | bash
+curl https://raw.githubusercontent.com/ChillarAnand/init/main/mac.sh | bash
 ```
 
 
