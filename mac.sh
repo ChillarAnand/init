@@ -42,7 +42,6 @@ npm install -g git-checkout-interactive
 # archived
 
 # brew_install openssl libjpeg
-# brew_install nvm sqlite pipx gource
 
 # brew install cheatsheet joplin obsidian graphviz
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick pulumi
