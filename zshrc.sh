@@ -5,6 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -17,7 +18,8 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     # cmdtime
-    dirpersist extract git globalias kubectl z
+    # z
+    zoxide dirpersist extract git globalias kubectl
     zsh-autocomplete
     zsh-autosuggestions
     # zsh-syntax-highlighting
@@ -30,11 +32,14 @@ source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# autocomplete
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 
 # zstyle ':autocomplete:*' list-lines 5
-zstyle ':autocomplete:history-incremental-search-*:*' list-lines 10
-zstyle ':autocomplete:history-search:*' list-lines 5
+# zstyle ':autocomplete:history-search:*' list-lines 5
+# zstyle ':autocomplete:history-incremental-search-*:*' list-lines 10
+zstyle ':autocomplete:history-incremental-search-backward:*' list-lines 10
 
 bindkey -M menuselect '^M' .accept-line
 bindkey -M emacs '^N' menu-select
@@ -42,6 +47,7 @@ bindkey -M emacs '^N' menu-select
 bindkey              '^I'         menu-complete
 bindkey "$terminfo[kcbt]" reverse-menu-complete
 
+zstyle ':autocomplete:*' delay 0.1
 zstyle ':autocomplete:*' ignored-input 'cd '
 zstyle ':autocomplete:*' ignored-input 'cd ..'
 zstyle ':autocomplete:*' ignored-input 'cd..'
@@ -50,7 +56,7 @@ zstyle ':autocomplete:*' ignored-input 'cd##'
 autoload -Uz compinit && compinit
 
 # Set up a style to ignore 'cd' command for auto-completions
-zstyle ':completion:*:(cd):*' matcher-list '' 
+zstyle ':completion:*:(cd):*' matcher-list ''
 zstyle ':completion:*:cd:*' matcher-list ''
 
 
@@ -139,11 +145,12 @@ alias ipy='ipython'
 alias jl='jupyter-lab'
 alias j=z
 alias jd="~/Downloads/"
+alias jp="~/projects/"
 alias js="~/projects/sandbox/"
-alias jq="~/projects/qontigo/"
-alias l='exa -l'
-alias lc='limactl'
-alias ll='exa -l'
+alias ls='ls --color=tty'
+alias ll='ls --color=tty -ll'
+# alias l='ls --color=tty -ll'
+alias l='eza -ll --icons=always'
 alias rf='trash'
 alias o='orbctl start'
 alias me='chmod +x'
@@ -179,10 +186,14 @@ alias kc='kubectl'
 alias kcgc='kubectl config get-contexts'
 alias h=history
 alias ja='j avilpage.com'
-
+alias grep='grep --exclude-dir=.git --exclude-dir=.idea'
+alias kcc='kafka-console-consumer --bootstrap-server localhost:9092 --topic'
+alias kcp='kafka-console-producer --bootstrap-server localhost:9092 --topic'
+alias kt='kafka-topics --bootstrap-server localhost:9092'
 
 # only for mac
 if [[ "$OSTYPE" == "darwin"* ]]; then
+    # echo "mac"
     alias xargs=gxargs
     alias sed=gsed
 fi
@@ -209,8 +220,14 @@ export PATH="/Users/chillaranand/homebrew/opt/socket_vmnet/bin:$PATH"
 export PYTHONDONTWRITEBYTECODE=1
 
 export PATH="/Users/chillaranand/homebrew/opt/make/libexec/gnubin:$PATH"
-export LDFLAGS="-L/Users/chillaranand/homebrew/opt/zlib/lib"
-export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/zlib/include"
+# export LDFLAGS="-L/Users/chillaranand/homebrew/opt/zlib/lib"
+# export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/zlib/include"
+
+# export LDFLAGS="$LDFLAGS -L/Users/chillaranand/homebrew/opt/libpq/lib"
+# export CPPFLAGS="$CPPFLAGS -I/Users/chillaranand/homebrew/opt/libpq/include"
+
+export LDFLAGS="-L/Users/chillaranand/homebrew/opt/curl/lib"
+export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/curl/include"
 
 # export GDAL_LIBRARY_PATH="$(gdal-config --prefix)/lib/libgdal.dylib"
 # export GEOS_LIBRARY_PATH="$(geos-config --prefix)/lib/libgeos_c.dylib"
@@ -257,8 +274,6 @@ unset __conda_setup
 
 # [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
 export PATH="/Users/chillaranand/homebrew/opt/libpq/bin:$PATH"
-export LDFLAGS="-L/Users/chillaranand/homebrew/opt/libpq/lib"
-export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/libpq/include"
 export PATH="/Users/chillaranand/homebrew/opt/dotnet@6/bin:$PATH"
 
 # add Pulumi to the PATH
@@ -274,6 +289,8 @@ alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
 if [ -f ~/cloud/private_init/private.sh ]; then
     source ~/cloud/private_init/private.sh
 fi
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -283,3 +300,8 @@ fi
 # eval "$(mcfly init zsh)"
 
 # source /Users/chillaranand/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+my_chpwd_hook() l
+chpwd_functions+=( my_chpwd_hook )
+
+l
