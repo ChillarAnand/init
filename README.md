@@ -11,6 +11,8 @@ System bootstrap
 curl https://raw.githubusercontent.com/ChillarAnand/init/main/mac.sh | bash
 ```
 
+Notes:
+Disable spotlight shortcut - Settings -> Keyboard -> Shortcuts -> Spotlight -> Uncheck
 
 ### Ubuntu
 

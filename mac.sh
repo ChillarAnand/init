@@ -29,19 +29,17 @@ brew_install() {
     done
 }
 
-brew_install eza htop git git-gui tree nmap telnet watch wget zsh zsh-syntax-highlighting
-brew_install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep zoxide
+brew_install iterm2 zsh zsh-syntax-highlighting zoxide
+brew_install eza htop git git-gui tree nmap telnet watch wget nvm
+brew_install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
 
 brew install --cask grandperspective rar kdiff3 hammerspoon visual-studio-code emacs
-brew install --cask vlc google-drive
+brew install --cask vlc google-drive karabiner-elements
 brew install --cask --no-quarantine stretchly
 
-brew install nvm
 npm install -g git-checkout-interactive
 
 # archived
-
-# brew_install openssl libjpeg
 
 # brew install cheatsheet joplin obsidian graphviz
 # brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick pulumi
@@ -71,6 +69,10 @@ ln -s "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# p10k
+brew install font-hack-nerd-font
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
@@ -91,7 +93,6 @@ ln -s "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/comp
 ln -s "$INIT_DIR/karabiner_iterm.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_iterm.json"
 ln -s "$INIT_DIR/karabiner_alt_win.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_alt_win.json"
 
-
 # pyflash
 mv "$HOME/.pyflash.ini" "/tmp/pyflash.ini"
 ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
@@ -99,15 +100,6 @@ ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
 # zsh_history
 # mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
 # ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
-
-# espanso
-# mv "$HOME/Library/Preferences/espanso/match/base.yml" "/tmp/base.yml"
-# ln -s "$PRIVATE_INIT_DIR/espanso.yml" "$HOME/Library/Preferences/espanso/match/base.yml"
-
-# space hammer
-#git clone https://github.com/agzam/spacehammer ~/.hammerspoon
-#mv "$HOME/.hammerspoon/hammerspoon_init.lua" "/tmp/hammerspoon_init.lua"
-#ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/hammerspoon_init.lua"
 
 # hammerspoon
 mkdir -p "$HOME/.hammerspoon"
