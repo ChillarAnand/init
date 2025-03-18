@@ -45,8 +45,6 @@ brew install --cask --no-quarantine stretchly
 
 npm install -g git-checkout-interactive
 
-export LS_COLORS="$(vivid generate ayu)"
-
 # archived
 
 # brew install cheatsheet joplin obsidian graphviz

@@ -262,6 +262,8 @@ export DOTNET_ROOT="/Users/chillaranand/homebrew/opt/dotnet/libexec"
 export ELECTRON_DEV=true
 export GOARCH="arm64"
 
+export LS_COLORS="$(vivid generate ayu)"
+
 alias dbc='osascript ~/init/setDefaultBrowser.scpt chrome'
 alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
 
