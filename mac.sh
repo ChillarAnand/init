@@ -29,15 +29,23 @@ brew_install() {
     done
 }
 
-brew_install iterm2 zsh zsh-syntax-highlighting zoxide
-brew_install eza htop git git-gui tree nmap telnet watch wget nvm
-brew_install fzf bat rg stats trash gnu-sed coreutils p7zip duf entr ripgrep
+# ls 
+brew_install eza vivid zsh zsh-syntax-highlighting tree zoxide
+
+# utils
+brew_install htop git nmap telnet watch wget 
+brew_install fzf bat rg trash gnu-sed coreutils p7zip duf entr ripgrep 
+
+# gui tools
+brew_install stats git-gui iterm2
 
 brew install --cask grandperspective rar kdiff3 hammerspoon visual-studio-code emacs
 brew install --cask vlc google-drive karabiner-elements
 brew install --cask --no-quarantine stretchly
 
 npm install -g git-checkout-interactive
+
+export LS_COLORS="$(vivid generate ayu)"
 
 # archived
 
