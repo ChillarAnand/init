@@ -57,3 +57,11 @@ Docker bootstrap
 ```sh
 curl https://raw.githubusercontent.com/ChillarAnand/init/main/docker_init.sh | bash
 ```
+
+
+## Windows
+
+```powershell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/ChillarAnand/init/main/windows.ps1 -OutFile windows.ps1; 
+.\windows.ps1
+```
