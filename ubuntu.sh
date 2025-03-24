@@ -7,10 +7,13 @@ export DEBIAN_FRONTEND=noninteractive
 
 sudo apt update
 
-sudo apt install --yes byobu git trash-cli tree unzip vim zsh lsd
+sudo apt install --yes byobu git trash-cli tree unzip vim zsh eza lsd 
 sudo apt install --yes nmap net-tools telnet iotop-c htop atop
 
 sudo apt install --yes python3 python3-pip
+
+# zoxide
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
