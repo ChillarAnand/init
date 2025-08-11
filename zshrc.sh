@@ -128,10 +128,10 @@ alias dr='./manage.py runserver'
 alias drr='docker run --rm'
 alias ect='python etl_config_migration_scripts/ETL_Config_Tool.py'
 alias edm='python etl_config_migration_scripts/ETL_Config_Tool.py -o overwrite -t config -f settings/etl_tool/dev.json -dc C97'
-alias fb='fastboot'
 alias flo='flash otp'
 alias gcom='gco master'
 alias glo="git pull origin"
+alias gpo="git push origin"
 alias glom="git pull origin master"
 alias gpom="git push origin master"
 alias gpc="git push origin HEAD"
@@ -155,10 +155,7 @@ alias rf='trash'
 alias o='orbctl start'
 alias me='chmod +x'
 alias mi='sh ~/init/init_mac.sh'
-alias na='z avilpage.com; nikola auto'
 alias naf='j avilpage.com; trash output; trash cache; nikola auto'
-alias ngd='nikola github_deploy'
-alias ngd='ssh-add -D; ssh-add ~/.ssh/id_rsa; nikola github_deploy'
 alias p="ping 8.8.8.8"
 alias pf='python -m pip freeze'
 alias pgi='ps -ef | grep -i'
@@ -190,6 +187,11 @@ alias grep='grep --exclude-dir=.git --exclude-dir=.idea'
 alias kcc='kafka-console-consumer --bootstrap-server localhost:9092 --topic'
 alias kcp='kafka-console-producer --bootstrap-server localhost:9092 --topic'
 alias kt='kafka-topics --bootstrap-server localhost:9092'
+alias sv='ssh -v'
+alias nrd='npm run dev'
+
+alias na='z avilpage.com; uv run nikola auto'
+alias ngd='ssh-add -D; ssh-add ~/.ssh/id_rsa; uv run nikola github_deploy'
 
 # only for mac
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -267,11 +269,24 @@ export LS_COLORS="$(vivid generate ayu)"
 alias dbc='osascript ~/init/setDefaultBrowser.scpt chrome'
 alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
 
-if [ -f ~/cloud/private_init/private.sh ]; then
-    source ~/cloud/private_init/private.sh
+if [ -f ~/cloud/private_init/private_init.sh ]; then
+    source ~/cloud/private_init/private_init.sh
 fi
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
+
+jc() {
+    echo "Cleaning up JetBrains cache..."
+    rm -rf ~/Library/Caches/JetBrains/
+    rm -rf ~/Library/Application\ Support/JetBrains/
+    rm -rf ~/Library/Preferences/com.jetbrains.*
+    rm -rf ~/Library/Logs/JetBrains/
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -282,7 +297,35 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # source /Users/chillaranand/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-my_chpwd_hook() l
+my_chpwd_hook() {
+    clear
+    eza -ll --icons=always --all --all
+}
+
 chpwd_functions+=( my_chpwd_hook )
 
-l
+eza -ll --icons=always --all --all
+
+
+. "$HOME/.local/bin/env"
+# export PATH="/opt/homebrew/anaconda3/bin:$PATH"  # commented out by conda initialize
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

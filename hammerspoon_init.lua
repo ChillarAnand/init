@@ -110,9 +110,9 @@ end
 watcher = hs.caffeinate.watcher.new(f)
 watcher:start()
 
-hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
-   hs.application.launchOrFocus("Raycast")
-end)
+-- hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
+--    hs.application.launchOrFocus("Raycast")
+-- end)
 
 hs.alert.show("HammerSpoon User Config Loaded")
 
