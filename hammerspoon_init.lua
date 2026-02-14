@@ -32,15 +32,20 @@ end
 
 
 function finder(appObject)
-   log('Finder auto')
+   log('Finder Automation')
    appObject:selectMenuItem({"Window", "Merge All Windows"})
    appObject:selectMenuItem({"Window", "Bring All to Front"})
 end
 
 
 function excel(appObject)
-   log('Excel auto')
-   ticks = {{"Data", "Auto-filter"}, {"Edit", "Select All"}, {"Format", "Column", "Auto-fit Selection"}}
+   log('Excel Automation')
+   ticks = {
+      {"Data", "Auto-filter"},
+      {"Edit", "Select All"},
+      {"Format", "Column", "Auto-fit Selection"},
+      {"Window", "Freeze Panes"}
+   }
 
    for key, value in pairs(ticks) do
       menuItem = appObject:findMenuItem(value)
@@ -53,7 +58,7 @@ end
 
 function applicationWatcher(appName, eventType, appObject)
    local w = hs.application.watcher
-   if (appName == 'Microsoft AutoUpdate' or appName == 'Raycast' or appName =='Alfred' or appName == 'Stats' or appName == 'Microsoft Teams') then
+   if (appName == 'Microsoft AutoUpdate' or appName == 'Raycast' or appName =='Alfred' or appName == 'Stats' or appName == 'Microsoft Teams' or appName == 'Windows' or appName == 'Windows App') then
       log('Ignoring ' .. appName)
       return
    end
@@ -69,7 +74,7 @@ function applicationWatcher(appName, eventType, appObject)
       log(appName .. ' -> Auto maximising window')
       resize(1, 1, 1, 1)
 
-      local w = hs.application.watcher
+      -- local w = hs.application.watcher
       if (appName == "Microsoft Excel") then
          excel(appObject)
          resize(1, 1, 1, 1)
@@ -139,3 +144,17 @@ hs.hotkey.bind({"ctrl"}, "4", function()
    hs.eventtap.keyStroke({}, "down")
    hs.eventtap.keyStroke({}, "return")
 end)
+
+
+-- Define a callback function to be called when application events happen
+-- function applicationWatcherCallback(appName, eventType, appObject)
+--   if (appName == "Windows App") then
+--     if (eventType == hs.application.watcher.activated) then
+--       -- Windows App just got focus, disable our hotkeys
+--       hotkeys:exit()
+--     elseif (eventType == hs.application.watcher.deactivated) then
+--       -- Windows App just lost focus, enable our hotkeys
+--       hotkeys:enter()
+--     end
+--   end
+-- end

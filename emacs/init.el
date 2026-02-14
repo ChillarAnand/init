@@ -651,8 +651,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(yaml lua-mode all-the-icons-dired-mode all-the-icons-dired all-the-icons dired-sidebar auctex-latexmk auctex acutex engine-mode paradox lispy expand-region which-key key-chord artbollocks-mode writeroom-mode writegood-mode helm-flx helm-swoop helm-github-stars helm-dired-recent-dirs helm-ag helm-projectile helm-descbinds helm-chrome easy-kill comment-dwim-2 smart-mode-line diff-hl magit nyan-mode web-mode multiple-cursors wrap-region elpy company highlight-indentation pyvenv yasnippet use-package projectile goto-last-change)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

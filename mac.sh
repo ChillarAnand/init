@@ -99,6 +99,7 @@ ln -s "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_conf
 mv "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
 ln -s "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/complex_modifications/space_control.json"
 ln -s "$INIT_DIR/karabiner_windows_remote.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_remote.json"
+ln -s "$INIT_DIR/karabiner_windows_app.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_app.json"
 ln -s "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_ignore_tab.json"
 ln -s "$INIT_DIR/karabiner_iterm.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_iterm.json"
 ln -s "$INIT_DIR/karabiner_alt_win.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_alt_win.json"

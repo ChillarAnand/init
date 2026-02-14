@@ -65,10 +65,6 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 
-# eval "$(starship init zsh)"
-# export SPACESHIP_PROMPT_ASYNC=false
-# source "/Users/chillaranand/homebrew/opt/spaceship/spaceship.zsh"
-
 # history
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 # setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
@@ -96,6 +92,16 @@ pyclean () {
     sudo find . -type d -name "__pycache__" -delete
 }
 
+disk_clean() {
+    uv cache clean
+    brew cleanup --scrub
+    docker system prune --all --force --volumes
+    sudo rm -rf ~/Library/Caches/*
+    sudo rm -rf /Library/Caches/*
+    sudo rm -rf /private/var/folders/*
+}
+alias dc=disk_clean
+
 # alias
 alias awk=gawk
 alias bga='bench get-app'
@@ -119,10 +125,9 @@ alias charm='open -na "PyCharm.app" --args'
 alias ci="curl ipinfo.io"
 alias cie='conda info --envs'
 alias cl="git clone"
-alias dcu='docker compose up'
+alias dcu='orbctl docker start; docker compose up'
 alias dj='./manage.py'
 alias dk='docker'
-alias dm='./manage.py migrate'
 alias dmm='./manage.py makemigrations'
 alias dr='./manage.py runserver'
 alias drr='docker run --rm'
@@ -140,7 +145,7 @@ alias hgi='history | grep -i'
 alias hgi='history | grep -i'
 alias hwc='history | wc'
 alias i='brew install'
-alias im='sh ~/init/init_mac.sh'
+alias im='sh ~/init/mac.sh'
 alias ipy='ipython'
 alias jl='jupyter-lab'
 alias j=z
@@ -159,10 +164,11 @@ alias naf='j avilpage.com; trash output; trash cache; nikola auto'
 alias p="ping 8.8.8.8"
 alias pf='python -m pip freeze'
 alias pgi='ps -ef | grep -i'
-alias pi='python -m pip install'
-alias pir='python -m pip install -r'
-alias pirr='python -m pip install -r requirements.txt'
-alias pu='python -m pip uninstall -y'
+alias pi='uv pip install'
+alias piu='uv pip install -U'
+alias pir='uv pip install -r'
+alias pirr='uv pip install -r requirements.txt'
+alias pu='uv pip uninstall -y'
 alias py="python"
 alias s=sudo
 alias se='source .env'
@@ -189,7 +195,7 @@ alias kcp='kafka-console-producer --bootstrap-server localhost:9092 --topic'
 alias kt='kafka-topics --bootstrap-server localhost:9092'
 alias sv='ssh -v'
 alias nrd='npm run dev'
-
+alias ns='j sandbox; rm -rf demo; take demo; uv venv --seed --clear; source .venv/bin/activate'
 alias na='z avilpage.com; uv run nikola auto'
 alias ngd='ssh-add -D; ssh-add ~/.ssh/id_rsa; uv run nikola github_deploy'
 
@@ -308,24 +314,20 @@ eza -ll --icons=always --all --all
 
 
 . "$HOME/.local/bin/env"
-# export PATH="/opt/homebrew/anaconda3/bin:$PATH"  # commented out by conda initialize
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+# bun completions
+[ -s "/Users/anand/.bun/_bun" ] && source "/Users/anand/.bun/_bun"
+
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby@3.2/bin:$PATH"
+
+export PATH="/Users/anand/.pixi/bin:$PATH"
+
+# export SPACESHIP_PROMPT_ASYNC=false
+# eval "$(starship init zsh)"
