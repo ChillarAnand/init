@@ -39,7 +39,7 @@ brew_install fzf bat rg trash gnu-sed coreutils p7zip duf entr ripgrep
 # gui tools
 brew_install stats git-gui iterm2
 
-brew install --cask grandperspective rar kdiff3 hammerspoon visual-studio-code emacs
+brew install --cask grandperspective kdiff3 hammerspoon visual-studio-code emacs
 brew install --cask vlc google-drive karabiner-elements
 brew install --cask --no-quarantine stretchly
 

@@ -22,6 +22,7 @@ plugins=(
     zoxide dirpersist extract git globalias kubectl
     zsh-autocomplete
     zsh-autosuggestions
+    pyautoenv
     # zsh-syntax-highlighting
 )
 
@@ -126,14 +127,12 @@ alias ci="curl ipinfo.io"
 alias cie='conda info --envs'
 alias cl="git clone"
 alias dcu='orbctl docker start; docker compose up'
-alias dj='./manage.py'
+alias dj='uv run python manage.py'
 alias dk='docker'
-alias dmm='./manage.py makemigrations'
-alias dr='./manage.py runserver'
+alias dmm='uv run python manage.py makemigrations'
+alias dm='uv run python manage.py migrate'
+alias dr='uv run python manage.py runserver'
 alias drr='docker run --rm'
-alias ect='python etl_config_migration_scripts/ETL_Config_Tool.py'
-alias edm='python etl_config_migration_scripts/ETL_Config_Tool.py -o overwrite -t config -f settings/etl_tool/dev.json -dc C97'
-alias flo='flash otp'
 alias gcom='gco master'
 alias glo="git pull origin"
 alias gpo="git push origin"
@@ -174,6 +173,7 @@ alias s=sudo
 alias se='source .env'
 # alias cat=gcat
 alias sz='source ~/.zshrc'
+alias spa='source ~/cloud/private_init/private_init_avilpage.sh'
 alias t='tree -Cfh'
 alias tgi='tree -Cfh | grep -i'
 alias timeout=gtimeout
@@ -195,6 +195,7 @@ alias kcp='kafka-console-producer --bootstrap-server localhost:9092 --topic'
 alias kt='kafka-topics --bootstrap-server localhost:9092'
 alias sv='ssh -v'
 alias nrd='npm run dev'
+alias ni='pnpm install'
 alias ns='j sandbox; rm -rf demo; take demo; uv venv --seed --clear; source .venv/bin/activate'
 alias na='z avilpage.com; uv run nikola auto'
 alias ngd='ssh-add -D; ssh-add ~/.ssh/id_rsa; uv run nikola github_deploy'
@@ -286,14 +287,6 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 
-jc() {
-    echo "Cleaning up JetBrains cache..."
-    rm -rf ~/Library/Caches/JetBrains/
-    rm -rf ~/Library/Application\ Support/JetBrains/
-    rm -rf ~/Library/Preferences/com.jetbrains.*
-    rm -rf ~/Library/Logs/JetBrains/
-}
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -331,3 +324,30 @@ export PATH="/Users/anand/.pixi/bin:$PATH"
 
 # export SPACESHIP_PROMPT_ASYNC=false
 # eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/anand/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Set default browser without macOS confirmation prompt
+defbro-silent() {
+    defbro "$1" &
+    osascript -e "
+    tell application \"System Events\"
+        repeat 10 times
+            try
+                click button 1 of window 1 of process \"CoreServicesUIAgent\"
+                exit repeat
+            end try
+            delay 0.5
+        end repeat
+    end tell"
+}
+
+
+# opencode
+export PATH=/Users/anand/.opencode/bin:$PATH
