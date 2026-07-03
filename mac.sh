@@ -1,7 +1,5 @@
 #! /bin/bash
 
-set -x
-
 echo "Setting up mac..."
 
 export HOMEBREW_NO_AUTO_UPDATE=1
@@ -29,12 +27,12 @@ brew_install() {
     done
 }
 
-# ls 
+# ls
 brew_install eza vivid zsh zsh-syntax-highlighting tree zoxide
 
 # utils
-brew_install htop git nmap telnet watch wget 
-brew_install fzf bat rg trash gnu-sed coreutils p7zip duf entr ripgrep 
+brew_install htop git nmap telnet watch wget
+brew_install fzf bat rg trash gnu-sed coreutils p7zip duf entr ripgrep
 
 # gui tools
 brew_install stats git-gui iterm2
@@ -53,7 +51,7 @@ npm install -g git-checkout-interactive
 # brew tap elastic/tap
 # brew install elastic/tap/elasticsearch-full logstash-full kibana-full
 
-# brew install --cask jetbrains-toolbox pycharm 
+# brew install --cask jetbrains-toolbox pycharm
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
 # brew install --cask codeql beekeeper-studio iglance
 

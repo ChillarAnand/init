@@ -5,11 +5,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd.mm.yyyy"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -17,7 +18,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    # cmdtime
+    cmdtime
     # z
     zoxide dirpersist extract git globalias kubectl
     zsh-autocomplete
@@ -36,6 +37,8 @@ source $ZSH/oh-my-zsh.sh
 
 # autocomplete
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
+zstyle ':autocomplete:*' widget-style menu-complete
+zstyle ':autocomplete:*' delay 0.1
 
 # zstyle ':autocomplete:*' list-lines 5
 # zstyle ':autocomplete:history-search:*' list-lines 5
@@ -45,20 +48,16 @@ zstyle ':autocomplete:history-incremental-search-backward:*' list-lines 10
 bindkey -M menuselect '^M' .accept-line
 bindkey -M emacs '^N' menu-select
 
-bindkey              '^I'         menu-complete
-bindkey "$terminfo[kcbt]" reverse-menu-complete
-
-zstyle ':autocomplete:*' delay 0.1
-zstyle ':autocomplete:*' ignored-input 'cd '
-zstyle ':autocomplete:*' ignored-input 'cd ..'
-zstyle ':autocomplete:*' ignored-input 'cd..'
-zstyle ':autocomplete:*' ignored-input 'cd##'
+# .menu-complete = original built-in (zsh-autocomplete replaces menu-complete via zle -C).
+# Original uses standard _cd completion (local dirs only, no history injection).
+# Cycling works because LASTWIDGET == .menu-complete on each Tab press.
+bindkey '^I' .menu-complete
+bindkey "$terminfo[kcbt]" .reverse-menu-complete
 
 autoload -Uz compinit && compinit
 
-# Set up a style to ignore 'cd' command for auto-completions
-zstyle ':completion:*:(cd):*' matcher-list ''
-zstyle ':completion:*:cd:*' matcher-list ''
+# cd: only local subdirs (no dirpersist stack)
+zstyle ':completion:*:cd:*' tag-order 'local-directories path-directories'
 
 
 # You may need to manually set your language environment
@@ -126,17 +125,17 @@ alias charm='open -na "PyCharm.app" --args'
 alias ci="curl ipinfo.io"
 alias cie='conda info --envs'
 alias cl="git clone"
-alias dcu='orbctl docker start; docker compose up'
+alias dcu="docker compose up"
 alias dj='uv run python manage.py'
 alias dk='docker'
 alias dmm='uv run python manage.py makemigrations'
-alias dm='uv run python manage.py migrate'
+# alias dm='uv run python manage.py migrate'
 alias dr='uv run python manage.py runserver'
 alias drr='docker run --rm'
-alias gcom='gco master'
+alias gcom='gco master || gco main'
 alias glo="git pull origin"
 alias gpo="git push origin"
-alias glom="git pull origin master"
+alias glom="git pull origin master || git pull origin main"
 alias gpom="git push origin master"
 alias gpc="git push origin HEAD"
 alias gpcf="git push origin HEAD -f"
@@ -147,14 +146,15 @@ alias i='brew install'
 alias im='sh ~/init/mac.sh'
 alias ipy='ipython'
 alias jl='jupyter-lab'
-alias j=z
+alias j=just
+alias f=z
 alias jd="~/Downloads/"
 alias jp="~/projects/"
 alias js="~/projects/sandbox/"
 alias ls='ls --color=tty'
 alias ll='ls --color=tty -ll'
 # alias l='ls --color=tty -ll'
-alias l='eza -ll --icons=always'
+alias l='eza --icons=always'
 alias rf='trash'
 alias o='orbctl start'
 alias me='chmod +x'
@@ -219,10 +219,10 @@ export LANG=C
 export C_INCLUDE_PATH=~/homebrew/Cellar/librdkafka/2.2.0/include
 export LIBRARY_PATH=~/homebrew/Cellar/librdkafka/2.2.0/lib
 
-if [ -f /usr/libexec/java_home ]; then
-    export JAVA_HOME="$(/usr/libexec/java_home)"
-    export ES_JAVA_HOME="$JAVA_HOME"
-fi
+# if [ -f /usr/libexec/java_home ]; then
+#     export JAVA_HOME="$(/usr/libexec/java_home)"
+#     export ES_JAVA_HOME="$JAVA_HOME"
+# fi
 
 export PATH="/Users/chillaranand/homebrew/opt/socket_vmnet/bin:$PATH"
 
@@ -298,13 +298,10 @@ export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 
 my_chpwd_hook() {
     clear
-    eza -ll --icons=always --all --all
+    eza --icons=always
 }
 
 chpwd_functions+=( my_chpwd_hook )
-
-eza -ll --icons=always --all --all
-
 
 . "$HOME/.local/bin/env"
 
@@ -351,3 +348,10 @@ defbro-silent() {
 
 # opencode
 export PATH=/Users/anand/.opencode/bin:$PATH
+
+# sentry
+fpath=("/Users/anand/.local/share/zsh/site-functions" $fpath)
+
+# Android SDK
+export ANDROID_HOME=$HOME/Android/sdk
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
