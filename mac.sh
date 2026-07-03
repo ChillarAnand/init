@@ -15,11 +15,11 @@ defaults write com.apple.menuextra.clock IsAnalog -bool false
 if ! xcode-select -p >/dev/null 2>&1; then
     echo ">>> Xcode Command Line Tools missing."
     echo ">>> A GUI dialog should pop up. Click 'Install' and wait for it to finish."
-    xcode-select --install 2>/dev/null
+    sudo xcode-select --install 2>/dev/null
     echo ">>> If NO dialog appeared, run manually in another Terminal:"
     echo ">>>     sudo rm -rf /Library/Developer/CommandLineTools"
     echo ">>>     sudo xcode-select --install"
-    echo ">>> Waiting for CLT to finish installing..."
+    echo ">>> Waiting for command-line tools to finish installing..."
     while ! xcode-select -p >/dev/null 2>&1; do
         printf '.'
         sleep 10
@@ -66,8 +66,8 @@ brew_install fzf bat rg trash gnu-sed coreutils p7zip duf entr ripgrep
 # gui tools
 brew_install stats git-gui iterm2
 
-brew install --cask grandperspective kdiff3 hammerspoon visual-studio-code emacs
-brew install --cask vlc google-drive karabiner-elements
+brew install --cask hammerspoon visual-studio-code emacs raycast
+brew install --cask grandperspective google-drive karabiner-elements vlc
 brew install --cask --no-quarantine stretchly
 
 npm install -g git-checkout-interactive
@@ -80,7 +80,7 @@ npm install -g git-checkout-interactive
 # brew tap elastic/tap
 # brew install elastic/tap/elasticsearch-full logstash-full kibana-full
 
-# brew install --cask jetbrains-toolbox pycharm
+# brew install --cask jetbrains-toolbox pycharm kdiff3
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
 # brew install --cask codeql beekeeper-studio iglance
 
