@@ -66,9 +66,10 @@ brew_install fzf bat rg trash gnu-sed coreutils p7zip duf entr ripgrep
 # gui tools
 brew_install stats git-gui iterm2
 
-brew install --cask hammerspoon visual-studio-code emacs raycast
+brew install --cask hammerspoon visual-studio-code emacs raycast zed
 brew install --cask grandperspective google-drive karabiner-elements vlc
-brew install --cask --no-quarantine stretchly
+brew install --cask google-chrome
+# brew install --cask --no-quarantine stretchly
 
 npm install -g git-checkout-interactive
 
