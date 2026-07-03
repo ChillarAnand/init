@@ -13,12 +13,18 @@ defaults write com.apple.menuextra.clock IsAnalog -bool false
 
 # xcode command line tools (brew needs these; fresh mac has none)
 if ! xcode-select -p >/dev/null 2>&1; then
-    echo "Installing Xcode Command Line Tools (accept GUI prompt)..."
-    xcode-select --install
-    # wait until installed
-    until xcode-select -p >/dev/null 2>&1; do
+    echo ">>> Xcode Command Line Tools missing."
+    echo ">>> A GUI dialog should pop up. Click 'Install' and wait for it to finish."
+    xcode-select --install 2>/dev/null
+    echo ">>> If NO dialog appeared, run manually in another Terminal:"
+    echo ">>>     sudo rm -rf /Library/Developer/CommandLineTools"
+    echo ">>>     sudo xcode-select --install"
+    echo ">>> Waiting for CLT to finish installing..."
+    while ! xcode-select -p >/dev/null 2>&1; do
+        printf '.'
         sleep 10
     done
+    echo " done."
 fi
 
 # install homebrew
