@@ -11,10 +11,33 @@ defaults write com.apple.screencapture location ~/Pictures
 # analog clock
 defaults write com.apple.menuextra.clock IsAnalog -bool false
 
+# xcode command line tools (brew needs these; fresh mac has none)
+if ! xcode-select -p >/dev/null 2>&1; then
+    echo "Installing Xcode Command Line Tools (accept GUI prompt)..."
+    xcode-select --install
+    # wait until installed
+    until xcode-select -p >/dev/null 2>&1; do
+        sleep 10
+    done
+fi
+
 # install homebrew
 which -s brew
 if [[ $? != 0 ]] ; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# add brew to PATH for this shell (Apple Silicon: /opt/homebrew, Intel: /usr/local)
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# bail if brew still missing
+if ! command -v brew >/dev/null 2>&1; then
+    echo "ERROR: homebrew install failed. Fix before continuing." >&2
+    exit 1
 fi
 
 brew_install() {
