@@ -1,0 +1,42 @@
+---
+- name: System initialization playbook
+  hosts: localhost
+  connection: local
+  become: no
+  
+  tasks:
+    - name: Check if running on macOS
+      command: uname -s
+      register: os_type
+      changed_when: false
+      
+    - name: Install byobu on macOS using Homebrew
+      command: brew install byobu
+      when: os_type.stdout == "Darwin"
+      register: brew_result
+      failed_when: brew_result.rc != 0 and "already installed" not in brew_result.stderr
+      changed_when: brew_result.rc == 0 and "already installed" not in brew_result.stderr
+      
+    - name: Install byobu on Ubuntu/Debian
+      apt:
+        name: byobu
+        state: present
+        update_cache: yes
+      become: yes
+      when: os_type.stdout == "Linux" and ansible_os_family == "Debian"
+      
+    - name: Install byobu on CentOS/RHEL/Fedora using dnf/yum
+      command: |
+        if command -v dnf >/dev/null 2>&1; then
+          sudo dnf install -y byobu
+        elif command -v yum >/dev/null 2>&1; then
+          sudo yum install -y byobu
+        fi
+      when: os_type.stdout == "Linux" and ansible_os_family == "RedHat"
+      register: rpm_result
+      changed_when: rpm_result.rc == 0
+      
+    - name: Enable byobu by default for current user
+      command: byobu-enable
+      changed_when: false
+      ignore_errors: yes
