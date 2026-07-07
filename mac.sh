@@ -56,20 +56,35 @@ brew_install() {
     done
 }
 
+# install cask only if missing; skip if app already present (avoids
+# downgrading self-updating apps like zed/vscode/chrome that brew lags on)
+brew_cask_install() {
+    for pkg in "$@"; do
+        if brew list --cask -1 | grep -q "^${pkg}\$"; then
+            echo "$pkg cask already installed"
+            continue
+        fi
+        brew install --cask --adopt "$pkg"
+    done
+}
+
+# move a real file aside once; skip if missing or already our symlink
+backup() {
+    [ -e "$1" ] && [ ! -L "$1" ] && mv "$1" "$2"
+}
+
 # ls
 brew_install eza vivid zsh zsh-syntax-highlighting tree zoxide
 
 # utils
-brew_install htop git nmap telnet watch wget
-brew_install fzf bat rg trash gnu-sed coreutils p7zip duf entr ripgrep
+brew_install htop git nmap telnet uv watch wget
+brew_install fzf bat trash gnu-sed coreutils p7zip duf entr ripgrep
 
 # gui tools
 brew_install stats git-gui iterm2
 
-brew install --cask hammerspoon visual-studio-code emacs raycast zed
-brew install --cask grandperspective google-drive karabiner-elements vlc
-brew install --cask google-chrome
-# brew install --cask --no-quarantine stretchly
+brew_cask_install hammerspoon visual-studio-code emacs raycast zed
+brew_cask_install grandperspective google-chrome google-drive karabiner-elements vlc
 
 npm install -g git-checkout-interactive
 
@@ -89,52 +104,53 @@ npm install -g git-checkout-interactive
 INIT_DIR="$HOME/init"
 PRIVATE_INIT_DIR="$HOME/cloud/private_init"
 
-git clone https://github.com/chillaranand/init $INIT_DIR
+[ -d "$INIT_DIR" ] || git clone https://github.com/chillaranand/init "$INIT_DIR"
 
 
 # emacs
 mkdir -p "$HOME/.emacs.d"
-ln -s "$INIT_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
-ln -s "$INIT_DIR/emacs/defaults.el" "$HOME/.emacs.d/defaults.el"
-ln -s "$INIT_DIR/emacs/custom.el" "$HOME/.emacs.d/custom.el"
-ln -s "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
+ln -sf "$INIT_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
+ln -sf "$INIT_DIR/emacs/defaults.el" "$HOME/.emacs.d/defaults.el"
+ln -sf "$INIT_DIR/emacs/custom.el" "$HOME/.emacs.d/custom.el"
+ln -sf "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
 
 
 # oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+[ -d "$HOME/.oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # p10k
-brew install font-hack-nerd-font
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+brew_install font-hack-nerd-font
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+[ -d "$ZSH_CUSTOM/themes/powerlevel10k" ] || git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
+[ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ] || git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+[ -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ] || git clone https://github.com/marlonrichert/zsh-autocomplete "$ZSH_CUSTOM/plugins/zsh-autocomplete"
 
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/marlonrichert/zsh-autocomplete ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
 
+backup "$HOME/.zshrc" "$HOME/.zshrc.bkp"
+ln -sf "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
-mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
-ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
-
-mv "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bkp"
-ln -s "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
+backup "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bkp"
+ln -sf "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
 
 # ipython
-python -m pip install ipython stdlib_list
-ipython profile create
-mv "$HOME/.ipython/profile_default/ipython_config.py" "/tmp/ipython_config.py"
-ln -s "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_config.py"
+#python -m pip install ipython stdlib_list
+#ipython profile create
+
+backup "$HOME/.ipython/profile_default/ipython_config.py" "/tmp/ipython_config.py"
+ln -sf "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_config.py"
 
 # karabiner
-mv "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
-ln -s "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/complex_modifications/space_control.json"
-ln -s "$INIT_DIR/karabiner_windows_remote.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_remote.json"
-ln -s "$INIT_DIR/karabiner_windows_app.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_app.json"
-ln -s "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_ignore_tab.json"
-ln -s "$INIT_DIR/karabiner_iterm.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_iterm.json"
-ln -s "$INIT_DIR/karabiner_alt_win.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_alt_win.json"
+backup "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
+ln -sf "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/complex_modifications/space_control.json"
+ln -sf "$INIT_DIR/karabiner_windows_remote.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_remote.json"
+ln -sf "$INIT_DIR/karabiner_windows_app.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_app.json"
+ln -sf "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_ignore_tab.json"
+ln -sf "$INIT_DIR/karabiner_iterm.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_iterm.json"
+ln -sf "$INIT_DIR/karabiner_alt_win.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_alt_win.json"
 
 # pyflash
-mv "$HOME/.pyflash.ini" "/tmp/pyflash.ini"
-ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
+backup "$HOME/.pyflash.ini" "/tmp/pyflash.ini"
+ln -sf "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
 
 # zsh_history
 # mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
@@ -142,7 +158,7 @@ ln -s "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
 
 # hammerspoon
 mkdir -p "$HOME/.hammerspoon"
-ln -s "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
+ln -sf "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
 
 # shortcut for icloud
 # ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud

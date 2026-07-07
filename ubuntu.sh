@@ -28,10 +28,10 @@ git fetch origin main
 git reset --hard origin/main
 
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
-ln -s "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
+ln -sf "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
 mv "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bkp"
-ln -s "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
+ln -sf "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
 
 
 # starship
