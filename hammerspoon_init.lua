@@ -146,6 +146,28 @@ hs.hotkey.bind({"ctrl"}, "4", function()
 end)
 
 
+-- Push-to-talk dictation DISABLED: using VoiceInk (local Whisper) which brings
+-- its own hold-to-talk hotkey. Re-enable this block only if reverting to macOS
+-- dictation. Set the dictation shortcut to Cmd+Ctrl+Alt+D (NOT Cmd+Alt+D — that
+-- is macOS "Turn Dock Hiding On/Off"). Fn has no keycode, watch the `fn` flag.
+-- local DICT_MODS = {"cmd", "ctrl", "alt"}
+-- local DICT_KEY = "d"
+-- local pttDown = false
+--
+-- pttWatcher = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(e)
+--    local fn = e:getFlags().fn
+--    if fn and not pttDown then
+--       pttDown = true
+--       hs.eventtap.keyStroke(DICT_MODS, DICT_KEY, 0)   -- start
+--    elseif not fn and pttDown then
+--       pttDown = false
+--       hs.eventtap.keyStroke(DICT_MODS, DICT_KEY, 0)   -- stop
+--    end
+--    return false
+-- end)
+-- pttWatcher:start()
+
+
 -- Define a callback function to be called when application events happen
 -- function applicationWatcherCallback(appName, eventType, appObject)
 --   if (appName == "Windows App") then

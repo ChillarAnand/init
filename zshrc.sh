@@ -23,7 +23,7 @@ plugins=(
     zoxide dirpersist extract git globalias kubectl
     zsh-autocomplete
     zsh-autosuggestions
-    pyautoenv
+    # pyautoenv
     # zsh-syntax-highlighting
 )
 
@@ -36,6 +36,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # autocomplete
+zstyle ':autocomplete:*' async no
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 zstyle ':autocomplete:*' widget-style menu-complete
 zstyle ':autocomplete:*' delay 0.1
@@ -164,7 +165,7 @@ alias naf='j avilpage.com; trash output; trash cache; nikola auto'
 alias p="ping 8.8.8.8"
 alias pf='python -m pip freeze'
 alias pgi='ps -ef | grep -i'
-alias pi='uv pip install'
+# alias pi='uv pip install'
 alias piu='uv pip install -U'
 alias pir='uv pip install -r'
 alias pirr='uv pip install -r requirements.txt'
@@ -304,7 +305,7 @@ my_chpwd_hook() {
 
 chpwd_functions+=( my_chpwd_hook )
 
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -356,3 +357,17 @@ fpath=("/Users/anand/.local/share/zsh/site-functions" $fpath)
 # Android SDK
 export ANDROID_HOME=$HOME/Android/sdk
 export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# WeasyPrint native libs (Pango/Cairo/GLib) — Homebrew on Apple Silicon
+export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+
+# rapid-mlx local model control (supervisor manual start; idle watchdog auto-stops)
+alias mlx-up='supervisorctl -c ~/supervisord.conf start rapid-mlx-9004'
+alias mlx-down='supervisorctl -c ~/supervisord.conf stop rapid-mlx-9004'
+alias mlx-status='supervisorctl -c ~/supervisord.conf status rapid-mlx-9004'

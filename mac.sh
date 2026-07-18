@@ -83,7 +83,7 @@ brew_install fzf bat trash gnu-sed coreutils p7zip duf entr ripgrep
 # gui tools
 brew_install stats git-gui iterm2
 
-brew_cask_install hammerspoon visual-studio-code emacs raycast zed
+brew_cask_install hammerspoon visual-studio-code emacs raycast shottr zed
 brew_cask_install grandperspective google-chrome google-drive karabiner-elements vlc
 
 npm install -g git-checkout-interactive
@@ -135,9 +135,8 @@ ln -sf "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
 # ipython
 #python -m pip install ipython stdlib_list
 #ipython profile create
-
-backup "$HOME/.ipython/profile_default/ipython_config.py" "/tmp/ipython_config.py"
-ln -sf "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_config.py"
+#backup "$HOME/.ipython/profile_default/ipython_config.py" "/tmp/ipython_config.py"
+#ln -sf "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_config.py"
 
 # karabiner
 backup "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
