@@ -1,0 +1,10 @@
+{
+  "description": "fn/Globe -> F14 (Talon push-to-talk)",
+  "manipulators": [
+    {
+      "type": "basic",
+      "from": { "key_code": "fn" },
+      "to": [{ "key_code": "f14" }]
+    }
+  ]
+}
