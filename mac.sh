@@ -88,24 +88,10 @@ brew_cask_install grandperspective google-chrome google-drive karabiner-elements
 
 npm install -g git-checkout-interactive
 
-# archived
-
-# brew install cheatsheet joplin obsidian graphviz
-# brew install scrcpy jadx apktool wireshark postgresql mactex pandoc tunnelblick pulumi
-
-# brew tap elastic/tap
-# brew install elastic/tap/elasticsearch-full logstash-full kibana-full
-
-# brew install --cask jetbrains-toolbox pycharm kdiff3
-# brew install --cask wireshark wireshark-chmodbpf alt-tab docker
-# brew install --cask codeql beekeeper-studio iglance
-
-
 INIT_DIR="$HOME/init"
 PRIVATE_INIT_DIR="$HOME/cloud/private_init"
 
 [ -d "$INIT_DIR" ] || git clone https://github.com/chillaranand/init "$INIT_DIR"
-
 
 # emacs
 mkdir -p "$HOME/.emacs.d"
@@ -113,7 +99,6 @@ ln -sf "$INIT_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
 ln -sf "$INIT_DIR/emacs/defaults.el" "$HOME/.emacs.d/defaults.el"
 ln -sf "$INIT_DIR/emacs/custom.el" "$HOME/.emacs.d/custom.el"
 ln -sf "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
-
 
 # oh-my-zsh
 [ -d "$HOME/.oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -125,18 +110,11 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 [ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ] || git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 [ -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ] || git clone https://github.com/marlonrichert/zsh-autocomplete "$ZSH_CUSTOM/plugins/zsh-autocomplete"
 
-
 backup "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -sf "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
 backup "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bkp"
 ln -sf "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
-
-# ipython
-#python -m pip install ipython stdlib_list
-#ipython profile create
-#backup "$HOME/.ipython/profile_default/ipython_config.py" "/tmp/ipython_config.py"
-#ln -sf "$INIT_DIR/ipython_config.py" "$HOME/.ipython/profile_default/ipython_config.py"
 
 # karabiner
 backup "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
@@ -147,19 +125,12 @@ ln -sf "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/com
 ln -sf "$INIT_DIR/karabiner_iterm.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_iterm.json"
 ln -sf "$INIT_DIR/karabiner_alt_win.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_alt_win.json"
 
-# pyflash
-backup "$HOME/.pyflash.ini" "/tmp/pyflash.ini"
-ln -sf "$PRIVATE_INIT_DIR/pyflash.ini" "$HOME/.pyflash.ini"
-
 # zsh_history
-# mv "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
-# ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
+backup "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
+ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
 
 # hammerspoon
 mkdir -p "$HOME/.hammerspoon"
 ln -sf "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
-
-# shortcut for icloud
-# ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs ~/cloud
 
 echo "init.sh ran successfully"
