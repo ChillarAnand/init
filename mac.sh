@@ -91,7 +91,11 @@ npm install -g git-checkout-interactive
 INIT_DIR="$HOME/init"
 PRIVATE_INIT_DIR="$HOME/cloud/private_init"
 
-[ -d "$INIT_DIR" ] || git clone https://github.com/chillaranand/init "$INIT_DIR"
+if [ -d "$INIT_DIR" ]; then
+    git -C "$INIT_DIR" pull
+else
+    git clone https://github.com/chillaranand/init "$INIT_DIR"
+fi
 
 # emacs
 mkdir -p "$HOME/.emacs.d"
@@ -106,9 +110,21 @@ ln -sf "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
 # p10k
 brew_install font-hack-nerd-font
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
-[ -d "$ZSH_CUSTOM/themes/powerlevel10k" ] || git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
-[ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ] || git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-[ -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ] || git clone https://github.com/marlonrichert/zsh-autocomplete "$ZSH_CUSTOM/plugins/zsh-autocomplete"
+if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+    git -C "$ZSH_CUSTOM/themes/powerlevel10k" pull
+else
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
+fi
+if [ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+    git -C "$ZSH_CUSTOM/plugins/zsh-autosuggestions" pull
+else
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+fi
+if [ -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ]; then
+    git -C "$ZSH_CUSTOM/plugins/zsh-autocomplete" pull
+else
+    git clone https://github.com/marlonrichert/zsh-autocomplete "$ZSH_CUSTOM/plugins/zsh-autocomplete"
+fi
 
 backup "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -sf "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"

@@ -364,6 +364,9 @@ export PATH="$HOME/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# npm global path
+export PATH="$(npm prefix -g)/bin:$PATH"
+
 # WeasyPrint native libs (Pango/Cairo/GLib) — Homebrew on Apple Silicon
 export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 
