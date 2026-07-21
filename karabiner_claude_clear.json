@@ -1,0 +1,30 @@
+{
+  "description": "Cmd+Ctrl+X -> type /clear + Enter (iTerm2 only)",
+  "manipulators": [
+    {
+      "type": "basic",
+      "from": {
+        "key_code": "x",
+        "modifiers": {
+          "mandatory": [
+            "command",
+            "control"
+          ]
+        }
+      },
+      "to": [
+        {
+          "shell_command": "osascript -e 'tell application \"System Events\" to keystroke \"/clear\" & return'"
+        }
+      ],
+      "conditions": [
+        {
+          "type": "frontmost_application_if",
+          "bundle_identifiers": [
+            "^com\\.googlecode\\.iterm2$"
+          ]
+        }
+      ]
+    }
+  ]
+}
