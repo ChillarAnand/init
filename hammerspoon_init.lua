@@ -14,8 +14,8 @@ function log(message)
 end
 
 
-function resize(a, b, c, d)
-   local win = hs.window.focusedWindow()
+function resize(a, b, c, d, appObject)
+   local win = appObject and appObject:focusedWindow() or hs.window.focusedWindow()
    if (not win) then
       return
    end
@@ -72,12 +72,12 @@ function applicationWatcher(appName, eventType, appObject)
    -- if (eventType == w.launched) then
    if (eventType == w.activated or eventType == w.launched) then
       log(appName .. ' -> Auto maximising window')
-      resize(1, 1, 1, 1)
+      resize(1, 1, 1, 1, appObject)
 
       -- local w = hs.application.watcher
       if (appName == "Microsoft Excel") then
          excel(appObject)
-         resize(1, 1, 1, 1)
+         resize(1, 1, 1, 1, appObject)
       end
 
       if (appName == "Finder") then
