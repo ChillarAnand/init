@@ -374,3 +374,15 @@ export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH
 alias mlx-up='supervisorctl -c ~/supervisord.conf start rapid-mlx-9004'
 alias mlx-down='supervisorctl -c ~/supervisord.conf stop rapid-mlx-9004'
 alias mlx-status='supervisorctl -c ~/supervisord.conf status rapid-mlx-9004'
+
+gh() {
+  local gh_account=$(git config github.account 2>/dev/null)
+
+  if [[ -n "$gh_account" ]]; then
+    if ! command gh auth status 2>&1 | grep -q "$gh_account.*Active account: true"; then
+      command gh auth switch --user "$gh_account" &>/dev/null
+    fi
+  fi
+
+  command gh "$@"
+}

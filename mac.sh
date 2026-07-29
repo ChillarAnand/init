@@ -83,7 +83,8 @@ brew_install fzf bat trash gnu-sed coreutils p7zip duf entr ripgrep
 # gui tools
 brew_install stats git-gui iterm2
 
-brew_cask_install hammerspoon visual-studio-code emacs raycast shottr zed
+brew_cask_install hammerspoon handy hiddenbar raycast shottr
+brew_cask_install visual-studio-code emacs zed
 brew_cask_install grandperspective google-chrome google-drive karabiner-elements vlc
 
 npm install -g git-checkout-interactive
