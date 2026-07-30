@@ -116,6 +116,7 @@ if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
 else
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 fi
+
 if [ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
     git -C "$ZSH_CUSTOM/plugins/zsh-autosuggestions" pull
 else

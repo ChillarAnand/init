@@ -175,7 +175,6 @@ alias s=sudo
 alias se='source .env'
 # alias cat=gcat
 alias sz='source ~/.zshrc'
-alias spa='source ~/cloud/private_init/private_init_avilpage.sh'
 alias t='tree -Cfh'
 alias tgi='tree -Cfh | grep -i'
 alias timeout=gtimeout
@@ -374,6 +373,7 @@ export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH
 alias mlx-up='supervisorctl -c ~/supervisord.conf start rapid-mlx-9004'
 alias mlx-down='supervisorctl -c ~/supervisord.conf stop rapid-mlx-9004'
 alias mlx-status='supervisorctl -c ~/supervisord.conf status rapid-mlx-9004'
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 gh() {
   local gh_account=$(git config github.account 2>/dev/null)
