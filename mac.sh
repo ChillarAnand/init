@@ -154,3 +154,8 @@ mkdir -p "$HOME/.hammerspoon"
 ln -sf "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
 
 echo "init.sh ran successfully"
+
+if [ -d "$PRIVATE_INIT_DIR" ]; then
+    echo "Found private init dir, running private init..."
+    bash "$PRIVATE_INIT_DIR/init.sh"
+fi
