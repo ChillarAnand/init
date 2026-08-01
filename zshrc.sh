@@ -146,6 +146,7 @@ alias hwc='history | wc'
 alias i='brew install'
 alias im='curl https://raw.githubusercontent.com/ChillarAnand/init/main/mac.sh | bash'
 alias iml='sh ~/init/mac.sh'
+alias ipi='sh ~/cloud/private_init/init.sh'
 alias ipy='ipython'
 alias jl='jupyter-lab'
 alias j=just
@@ -172,6 +173,7 @@ alias pirr='uv pip install -r requirements.txt'
 alias pu='uv pip uninstall -y'
 alias py="python"
 alias s=sudo
+alias sc="supervisorctl"
 alias se='source .env'
 # alias cat=gcat
 alias sz='source ~/.zshrc'
@@ -277,8 +279,8 @@ export LS_COLORS="$(vivid generate ayu)"
 alias dbc='osascript ~/init/setDefaultBrowser.scpt chrome'
 alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
 
-if [ -f ~/cloud/private_init/private_init.sh ]; then
-    source ~/cloud/private_init/private_init.sh
+if [ -f ~/cloud/private_init/zshrc.sh ]; then
+    source ~/cloud/private_init/zshrc.sh
 fi
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 

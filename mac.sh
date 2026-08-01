@@ -3,6 +3,7 @@
 echo "Setting up mac..."
 
 export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INTERACTIVE=1
 
 # show full path in finder
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
@@ -78,7 +79,8 @@ brew_install eza vivid zsh zsh-syntax-highlighting tree zoxide
 
 # utils
 brew_install htop git nmap telnet uv watch wget
-brew_install fzf bat trash gnu-sed coreutils p7zip duf entr ripgrep
+brew_install fzf bat trash gnu-sed coreutils p7zip duf entr ripgrep duti tldr
+duti -s dev.zed.Zed .md all
 
 # gui tools
 brew_install stats git-gui iterm2
