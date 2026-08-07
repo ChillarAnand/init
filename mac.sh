@@ -86,9 +86,11 @@ duti -s dev.zed.Zed .md all
 brew_install stats git-gui iterm2
 
 # casks
+brew_cask_install emacs visual-studio-code zed
+
 brew_cask_install activitywatch hammerspoon jordanbaird-ice raycast shottr
-brew_cask_install visual-studio-code emacs zed
-brew_cask_install grandperspective google-chrome google-drive karabiner-elements vlc
+brew_cask_install grandperspective fluidvoice karabiner-elements vlc
+brew_cask_install google-chrome google-drive
 
 npm install -g git-checkout-interactive
 
