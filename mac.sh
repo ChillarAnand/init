@@ -85,7 +85,8 @@ duti -s dev.zed.Zed .md all
 # gui tools
 brew_install stats git-gui iterm2
 
-brew_cask_install hammerspoon handy hiddenbar raycast shottr
+# casks
+brew_cask_install activitywatch hammerspoon jordanbaird-ice raycast shottr
 brew_cask_install visual-studio-code emacs zed
 brew_cask_install grandperspective google-chrome google-drive karabiner-elements vlc
 

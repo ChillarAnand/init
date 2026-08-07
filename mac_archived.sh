@@ -9,3 +9,6 @@
 # brew install --cask jetbrains-toolbox pycharm kdiff3
 # brew install --cask wireshark wireshark-chmodbpf alt-tab docker
 # brew install --cask codeql beekeeper-studio iglance
+
+#
+# brew_cask_installactivitywatch hiddenbar
