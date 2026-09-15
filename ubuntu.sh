@@ -7,7 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 sudo apt update
 
-sudo apt install --yes byobu git trash-cli tree unzip vim zsh eza lsd 
+sudo apt install --yes byobu git trash-cli tree unzip vim zsh
 sudo apt install --yes nmap net-tools telnet iotop-c htop atop
 
 sudo apt install --yes python3 python3-pip

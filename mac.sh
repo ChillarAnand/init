@@ -89,6 +89,11 @@ brew_install stats git-gui iterm2
 brew_cask_install emacs visual-studio-code zed
 
 brew_cask_install activitywatch hammerspoon jordanbaird-ice raycast shottr
+
+# start ActivityWatch on login
+if ! osascript -e 'tell application "System Events" to get the name of every login item' | grep -q "ActivityWatch"; then
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/ActivityWatch.app", hidden:false}'
+fi
 brew_cask_install grandperspective fluidvoice karabiner-elements vlc
 brew_cask_install google-chrome google-drive
 

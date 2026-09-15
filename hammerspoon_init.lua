@@ -14,9 +14,25 @@ function log(message)
 end
 
 
+local IGNORED_APPS = {
+   ['Microsoft AutoUpdate'] = true,
+   ['Raycast'] = true,
+   ['Alfred'] = true,
+   ['Stats'] = true,
+   ['Microsoft Teams'] = true,
+   ['Windows'] = true,
+   ['Windows App'] = true,
+   ['Clocker'] = true,
+}
+
 function resize(a, b, c, d, appObject)
    local win = appObject and appObject:focusedWindow() or hs.window.focusedWindow()
    if (not win) then
+      return
+   end
+   local winApp = win:application()
+   if (not winApp) or IGNORED_APPS[winApp:name()] then
+      log('Skipping resize for ' .. (winApp and winApp:name() or 'unknown app'))
       return
    end
    local f = win:frame()
@@ -58,13 +74,8 @@ end
 
 function applicationWatcher(appName, eventType, appObject)
    local w = hs.application.watcher
-   if (appName == 'Microsoft AutoUpdate' or appName == 'Raycast' or appName =='Alfred' or appName == 'Stats' or appName == 'Microsoft Teams' or appName == 'Windows' or appName == 'Windows App') then
+   if (IGNORED_APPS[appName]) then
       log('Ignoring ' .. appName)
-      return
-   end
-
-   if (appName == 'Clocker') then
-      log('Ignoring' .. appName)
       return
    end
 

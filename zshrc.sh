@@ -1,6 +1,8 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+export PATH="/opt/homebrew/bin:$PATH"
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -121,6 +123,7 @@ alias bst='bench --site t'
 alias bsz='brew services stop'
 alias bu='brew uninstall'
 alias c='bat'
+alias cc='cottagecrawl'
 alias ca='conda activate'
 alias charm='open -na "PyCharm.app" --args'
 alias ci="curl ipinfo.io"
@@ -368,6 +371,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # npm global path
 export PATH="$(npm prefix -g)/bin:$PATH"
 
+export PATH="$HOME/.agentmemory/bin:$HOME/.local/bin:$PATH"
+
 # WeasyPrint native libs (Pango/Cairo/GLib) — Homebrew on Apple Silicon
 export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 
@@ -375,7 +380,6 @@ export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH
 alias mlx-up='supervisorctl -c ~/supervisord.conf start rapid-mlx-9004'
 alias mlx-down='supervisorctl -c ~/supervisord.conf stop rapid-mlx-9004'
 alias mlx-status='supervisorctl -c ~/supervisord.conf status rapid-mlx-9004'
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 gh() {
   local gh_account=$(git config github.account 2>/dev/null)
