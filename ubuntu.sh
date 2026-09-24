@@ -14,12 +14,21 @@ sudo apt install --yes python3 python3-pip
 
 # zoxide
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
+
+# vivid
+if ! command -v vivid >/dev/null 2>&1; then
+    VIVID_VER="0.10.1"
+    curl -sSfL "https://github.com/sharkdp/vivid/releases/download/v${VIVID_VER}/vivid-v${VIVID_VER}-x86_64-unknown-linux-gnu.tar.gz" | tar xz -C /tmp
+    sudo mv "/tmp/vivid-v${VIVID_VER}-x86_64-unknown-linux-gnu/vivid" /usr/local/bin/vivid
+fi
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone --depth=1 https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone --depth=1 https://github.com/tom-auger/cmdtime ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/cmdtime
 
 git clone https://github.com/ChillarAnand/init.git
 INIT_DIR="$HOME/init"

@@ -157,10 +157,9 @@ alias f=z
 alias jd="~/Downloads/"
 alias jp="~/projects/"
 alias js="~/projects/sandbox/"
-alias ls='ls --color=tty'
-alias ll='ls --color=tty -ll'
+# alias ls='ls --color=tty'
 # alias l='ls --color=tty -ll'
-alias l='eza --icons=always'
+alias l='eza --icons=always -lh'
 alias rf='trash'
 alias o='orbctl start'
 alias me='chmod +x'
