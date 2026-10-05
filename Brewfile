@@ -1,0 +1,51 @@
+cask_args adopt: true
+
+# ls
+brew "eza"
+brew "vivid"
+brew "zsh"
+brew "zsh-syntax-highlighting"
+brew "tree"
+brew "zoxide"
+
+# utils
+brew "bat"
+brew "coreutils"
+brew "duf"
+brew "duti"
+brew "entr"
+brew "fzf"
+brew "git"
+brew "gnu-sed"
+brew "htop"
+brew "nmap"
+brew "p7zip"
+brew "ripgrep"
+brew "telnet"
+brew "tldr"
+brew "trash"
+brew "uv"
+brew "watch"
+brew "wget"
+
+# gui tools
+brew "git-gui"
+cask "stats"
+cask "iterm2"
+
+# casks
+cask "activitywatch"
+cask "emacs-app"
+cask "fluidvoice"
+cask "font-hack-nerd-font"
+cask "google-chrome"
+cask "google-drive"
+cask "grandperspective"
+cask "hammerspoon"
+cask "jordanbaird-ice"
+cask "karabiner-elements"
+cask "raycast"
+cask "shottr"
+cask "visual-studio-code"
+cask "vlc"
+cask "zed"

@@ -1,142 +1,74 @@
 #! /bin/bash
+set -u
 
 echo "Setting up mac..."
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INTERACTIVE=1
 
+INIT_DIR="$HOME/init"
+PRIVATE_INIT_DIR="$HOME/cloud/private_init"
+
 # show full path in finder
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 # set screenshots folder
 defaults write com.apple.screencapture location ~/Pictures
-# analog clock
+# digital clock
 defaults write com.apple.menuextra.clock IsAnalog -bool false
 
-# xcode command line tools (brew needs these; fresh mac has none)
+# xcode command line tools (brew installer triggers the GUI install)
 if ! xcode-select -p >/dev/null 2>&1; then
-    echo ">>> Xcode Command Line Tools missing."
-    echo ">>> A GUI dialog should pop up. Click 'Install' and wait for it to finish."
-    sudo xcode-select --install 2>/dev/null
-    echo ">>> If NO dialog appeared, run manually in another Terminal:"
-    echo ">>>     sudo rm -rf /Library/Developer/CommandLineTools"
-    echo ">>>     sudo xcode-select --install"
-    echo ">>> Waiting for command-line tools to finish installing..."
-    while ! xcode-select -p >/dev/null 2>&1; do
-        printf '.'
-        sleep 10
-    done
-    echo " done."
+    echo ">>> Installing Xcode Command Line Tools. Click 'Install' in the dialog."
+    xcode-select --install 2>/dev/null
+    until xcode-select -p >/dev/null 2>&1; do sleep 10; done
 fi
 
-# install homebrew
-which -s brew
-if [[ $? != 0 ]] ; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+# install homebrew, add to PATH (Apple Silicon: /opt/homebrew, Intel: /usr/local)
+command -v brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
+command -v brew >/dev/null 2>&1 || { echo "ERROR: homebrew install failed. Fix before continuing." >&2; exit 1; }
 
-# add brew to PATH for this shell (Apple Silicon: /opt/homebrew, Intel: /usr/local)
-if [[ -x /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x /usr/local/bin/brew ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-fi
-
-# bail if brew still missing
-if ! command -v brew >/dev/null 2>&1; then
-    echo "ERROR: homebrew install failed. Fix before continuing." >&2
-    exit 1
-fi
-
-brew_install() {
-    for pkg in "$@"; do
-        if brew list -1 | grep -q "^${pkg}\$"; then
-            echo "$pkg is already installed"
-            continue
-        fi
-        brew install "$pkg"
-    done
-}
-
-# install cask only if missing; skip if app already present (avoids
-# downgrading self-updating apps like zed/vscode/chrome that brew lags on)
-brew_cask_install() {
-    for pkg in "$@"; do
-        if brew list --cask -1 | grep -q "^${pkg}\$"; then
-            echo "$pkg cask already installed"
-            continue
-        fi
-        brew install --cask --adopt "$pkg"
-    done
+# clone or update a git repo
+git_sync() {
+    if [ -d "$2" ]; then
+        git -C "$2" pull --autostash
+    else
+        git clone --depth=1 "$1" "$2"
+    fi
 }
 
 # move a real file aside once; skip if missing or already our symlink
 backup() {
-    [ -e "$1" ] && [ ! -L "$1" ] && mv "$1" "$2"
+    if [ -e "$1" ] && [ ! -L "$1" ]; then mv "$1" "$2"; fi
 }
 
-# ls
-brew_install eza vivid zsh zsh-syntax-highlighting tree zoxide
+git_sync https://github.com/chillaranand/init "$INIT_DIR"
 
-# utils
-brew_install htop git nmap telnet uv watch wget
-brew_install fzf bat trash gnu-sed coreutils p7zip duf entr ripgrep duti tldr
+# packages
+brew bundle --file="$INIT_DIR/Brewfile"
 duti -s dev.zed.Zed .md all
-
-# gui tools
-brew_install stats git-gui iterm2
-
-# casks
-brew_cask_install emacs visual-studio-code zed
-
-brew_cask_install activitywatch hammerspoon jordanbaird-ice raycast shottr
 
 # start ActivityWatch on login
 if ! osascript -e 'tell application "System Events" to get the name of every login item' | grep -q "ActivityWatch"; then
     osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/ActivityWatch.app", hidden:false}'
 fi
-brew_cask_install grandperspective fluidvoice karabiner-elements vlc
-brew_cask_install google-chrome google-drive
 
-npm install -g git-checkout-interactive
-
-INIT_DIR="$HOME/init"
-PRIVATE_INIT_DIR="$HOME/cloud/private_init"
-
-if [ -d "$INIT_DIR" ]; then
-    git -C "$INIT_DIR" pull
-else
-    git clone https://github.com/chillaranand/init "$INIT_DIR"
-fi
+command -v npm >/dev/null 2>&1 && npm install -g git-checkout-interactive
 
 # emacs
 mkdir -p "$HOME/.emacs.d"
-ln -sf "$INIT_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
-ln -sf "$INIT_DIR/emacs/defaults.el" "$HOME/.emacs.d/defaults.el"
-ln -sf "$INIT_DIR/emacs/custom.el" "$HOME/.emacs.d/custom.el"
-ln -sf "$INIT_DIR/emacs/utils.el" "$HOME/.emacs.d/utils.el"
+for f in init defaults custom utils; do
+    ln -sf "$INIT_DIR/emacs/$f.el" "$HOME/.emacs.d/$f.el"
+done
 
 # oh-my-zsh
 [ -d "$HOME/.oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# p10k
-brew_install font-hack-nerd-font
+# p10k + zsh plugins
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
-if [ -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
-    git -C "$ZSH_CUSTOM/themes/powerlevel10k" pull
-else
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
-fi
-
-if [ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git -C "$ZSH_CUSTOM/plugins/zsh-autosuggestions" pull
-else
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-fi
-if [ -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ]; then
-    git -C "$ZSH_CUSTOM/plugins/zsh-autocomplete" pull
-else
-    git clone https://github.com/marlonrichert/zsh-autocomplete "$ZSH_CUSTOM/plugins/zsh-autocomplete"
-fi
+git_sync https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
+git_sync https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+git_sync https://github.com/marlonrichert/zsh-autocomplete "$ZSH_CUSTOM/plugins/zsh-autocomplete"
 
 backup "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -sf "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
@@ -145,23 +77,21 @@ backup "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bkp"
 ln -sf "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
 
 # karabiner
-backup "$HOME/.config/karabiner/assets/complex_modifications/space_control.json" "/tmp/space_control.json"
-ln -sf "$INIT_DIR/karabiner_space_control.json" "$HOME/.config/karabiner/assets/complex_modifications/space_control.json"
-ln -sf "$INIT_DIR/karabiner_windows_remote.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_remote.json"
-ln -sf "$INIT_DIR/karabiner_windows_app.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_windows_app.json"
-ln -sf "$INIT_DIR/karabiner_ignore_tab.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_ignore_tab.json"
-ln -sf "$INIT_DIR/karabiner_iterm.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_iterm.json"
-ln -sf "$INIT_DIR/karabiner_alt_win.json" "$HOME/.config/karabiner/assets/complex_modifications/karabiner_alt_win.json"
+KARABINER_DIR="$HOME/.config/karabiner/assets/complex_modifications"
+mkdir -p "$KARABINER_DIR"
+for f in "$INIT_DIR"/karabiner*.json; do
+    ln -sf "$f" "$KARABINER_DIR/$(basename "$f")"
+done
 
 # zsh_history
 backup "$HOME/.zsh_history" "$HOME/.zsh_history.bkp"
-ln -s "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
+ln -sf "$PRIVATE_INIT_DIR/zsh_history" "$HOME/.zsh_history"
 
 # hammerspoon
 mkdir -p "$HOME/.hammerspoon"
-ln -sf "$HOME/init/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
+ln -sf "$INIT_DIR/hammerspoon_init.lua" "$HOME/.hammerspoon/init.lua"
 
-echo "init.sh ran successfully"
+echo "mac.sh ran successfully"
 
 if [ -d "$PRIVATE_INIT_DIR" ]; then
     echo "Found private init dir, running private init..."

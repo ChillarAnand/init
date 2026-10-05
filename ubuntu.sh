@@ -24,6 +24,7 @@ if ! command -v vivid >/dev/null 2>&1; then
 fi
 
 # oh-my-zsh
+grep -qxF 'skip_global_compinit=1' "$HOME/.zshenv" 2>/dev/null || echo 'skip_global_compinit=1' >> "$HOME/.zshenv"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone --depth=1 https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
