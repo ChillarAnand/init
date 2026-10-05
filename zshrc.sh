@@ -276,7 +276,7 @@ export DOTNET_ROOT="/Users/chillaranand/homebrew/opt/dotnet/libexec"
 export ELECTRON_DEV=true
 export GOARCH="arm64"
 
-export LS_COLORS="$(vivid generate ayu)"
+# export LS_COLORS="$(vivid generate ayu)"
 
 alias dbc='osascript ~/init/setDefaultBrowser.scpt chrome'
 alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
@@ -314,7 +314,7 @@ chpwd_functions+=( my_chpwd_hook )
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
+fpath+=~/.zfunc
 
 # bun completions
 [ -s "/Users/anand/.bun/_bun" ] && source "/Users/anand/.bun/_bun"

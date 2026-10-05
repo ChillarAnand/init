@@ -31,7 +31,7 @@ command -v brew >/dev/null 2>&1 || { echo "ERROR: homebrew install failed. Fix b
 # clone or update a git repo
 git_sync() {
     if [ -d "$2" ]; then
-        git -C "$2" pull --autostash
+        git -C "$2" pull
     else
         git clone --depth=1 "$1" "$2"
     fi
@@ -68,7 +68,14 @@ done
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 git_sync https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 git_sync https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-git_sync https://github.com/marlonrichert/zsh-autocomplete "$ZSH_CUSTOM/plugins/zsh-autocomplete"
+
+# zsh-autocomplete: pinned to last pre-zasync (sync) commit + local fd-leak patch.
+# Newer upstream is always-async and broke autocomplete here.
+AUTOCOMPLETE_DIR="$ZSH_CUSTOM/plugins/zsh-autocomplete"
+[ -d "$AUTOCOMPLETE_DIR" ] || git clone https://github.com/marlonrichert/zsh-autocomplete "$AUTOCOMPLETE_DIR"
+git -C "$AUTOCOMPLETE_DIR" checkout -q 20f6c34
+git -C "$AUTOCOMPLETE_DIR" apply --check "$INIT_DIR/zsh-autocomplete-fd.patch" 2>/dev/null &&
+    git -C "$AUTOCOMPLETE_DIR" apply "$INIT_DIR/zsh-autocomplete-fd.patch"
 
 backup "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -sf "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
