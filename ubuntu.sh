@@ -27,7 +27,7 @@ fi
 grep -qxF 'skip_global_compinit=1' "$HOME/.zshenv" 2>/dev/null || echo 'skip_global_compinit=1' >> "$HOME/.zshenv"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
+git clone https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone --depth=1 https://github.com/tom-auger/cmdtime ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/cmdtime
 
@@ -36,6 +36,11 @@ INIT_DIR="$HOME/init"
 cd $INIT_DIR
 git fetch origin main
 git reset --hard origin/main
+
+# zsh-autocomplete: pinned to last pre-zasync (sync) commit + local fd-leak patch
+AUTOCOMPLETE_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autocomplete"
+git -C "$AUTOCOMPLETE_DIR" checkout -q 20f6c34
+git -C "$AUTOCOMPLETE_DIR" apply "$INIT_DIR/zsh-autocomplete-fd.patch"
 
 mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -sf "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
