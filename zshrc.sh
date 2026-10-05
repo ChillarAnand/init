@@ -106,28 +106,18 @@ disk_clean() {
 alias dc=disk_clean
 
 # alias
-alias awk=gawk
-alias bga='bench get-app'
 alias bi='brew install'
 alias bl='brew list'
 alias bs='bench start'
 alias bsa='brew services start'
 alias bsak='brew services start kafka'
-alias bsd='bench --site demo.localhost'
-alias bse='bench --site edge.localhost'
-alias bsec='bench --site edge.localhost console'
-alias bsem='bench --site edge.localhost migrate'
 alias bsl='brew services list'
 alias bsr='brew services restart'
-alias bst='bench --site t'
 alias bsz='brew services stop'
 alias bu='brew uninstall'
 alias c='bat'
-alias cc='cottagecrawl'
-alias ca='conda activate'
 alias charm='open -na "PyCharm.app" --args'
 alias ci="curl ipinfo.io"
-alias cie='conda info --envs'
 alias cl="git clone"
 alias dcu="docker compose up"
 alias dj='uv run python manage.py'
@@ -136,6 +126,7 @@ alias dmm='uv run python manage.py makemigrations'
 # alias dm='uv run python manage.py migrate'
 alias dr='uv run python manage.py runserver'
 alias drr='docker run --rm'
+alias dufl='duf --only local'
 alias gcom='gco master || gco main'
 alias glo="git pull origin"
 alias gpo="git push origin"
@@ -144,8 +135,6 @@ alias gpom="git push origin master"
 alias gpc="git push origin HEAD"
 alias gpcf="git push origin HEAD -f"
 alias hgi='history | grep -i'
-alias hgi='history | grep -i'
-alias hwc='history | wc'
 alias i='brew install'
 alias im='curl https://raw.githubusercontent.com/ChillarAnand/init/main/mac.sh | bash'
 alias iml='sh ~/init/mac.sh'
@@ -157,8 +146,6 @@ alias f=z
 alias jd="~/Downloads/"
 alias jp="~/projects/"
 alias js="~/projects/sandbox/"
-# alias ls='ls --color=tty'
-# alias l='ls --color=tty -ll'
 alias l='eza --icons=always -lh'
 alias rf='trash'
 alias o='orbctl start'
@@ -168,7 +155,6 @@ alias naf='j avilpage.com; trash output; trash cache; nikola auto'
 alias p="ping 8.8.8.8"
 alias pf='python -m pip freeze'
 alias pgi='ps -ef | grep -i'
-# alias pi='uv pip install'
 alias piu='uv pip install -U'
 alias pir='uv pip install -r'
 alias pirr='uv pip install -r requirements.txt'
@@ -177,7 +163,6 @@ alias py="python"
 alias s=sudo
 alias sc="supervisorctl"
 alias se='source .env'
-# alias cat=gcat
 alias sz='source ~/.zshrc'
 alias t='tree -Cfh'
 alias tgi='tree -Cfh | grep -i'
@@ -210,6 +195,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # echo "mac"
     alias xargs=gxargs
     alias sed=gsed
+    alias awk=gawk
 fi
 
 
@@ -220,31 +206,14 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export LC_CTYPE=C
 export LANG=C
 
-# kafka - confluent-kafka
-export C_INCLUDE_PATH=~/homebrew/Cellar/librdkafka/2.2.0/include
-export LIBRARY_PATH=~/homebrew/Cellar/librdkafka/2.2.0/lib
-
-# if [ -f /usr/libexec/java_home ]; then
-#     export JAVA_HOME="$(/usr/libexec/java_home)"
-#     export ES_JAVA_HOME="$JAVA_HOME"
-# fi
-
 export PATH="/Users/chillaranand/homebrew/opt/socket_vmnet/bin:$PATH"
 
 export PYTHONDONTWRITEBYTECODE=1
 
 export PATH="/Users/chillaranand/homebrew/opt/make/libexec/gnubin:$PATH"
-# export LDFLAGS="-L/Users/chillaranand/homebrew/opt/zlib/lib"
-# export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/zlib/include"
-
-# export LDFLAGS="$LDFLAGS -L/Users/chillaranand/homebrew/opt/libpq/lib"
-# export CPPFLAGS="$CPPFLAGS -I/Users/chillaranand/homebrew/opt/libpq/include"
 
 export LDFLAGS="-L/Users/chillaranand/homebrew/opt/curl/lib"
 export CPPFLAGS="-I/Users/chillaranand/homebrew/opt/curl/include"
-
-# export GDAL_LIBRARY_PATH="$(gdal-config --prefix)/lib/libgdal.dylib"
-# export GEOS_LIBRARY_PATH="$(geos-config --prefix)/lib/libgeos_c.dylib"
 
 export PATH="/Users/chillaranand/homebrew/sbin:$PATH"
 
@@ -255,28 +224,14 @@ ji() {
 
 export NODE_OPTIONS="--max-old-space-size=8192"
 
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
-# autoload -Uz compinit
-# zstyle ':completion:*' menu select
-# fpath+=~/.zfunc
-
-# [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
 export PATH="/Users/chillaranand/homebrew/opt/libpq/bin:$PATH"
-export PATH="/Users/chillaranand/homebrew/opt/dotnet@6/bin:$PATH"
 
-# add Pulumi to the PATH
-export PATH=$PATH:/Users/chillaranand/.pulumi/bin
-
-export DOTNET_ROOT="/Users/chillaranand/homebrew/opt/dotnet/libexec"
 export ELECTRON_DEV=true
 export GOARCH="arm64"
-
-# export LS_COLORS="$(vivid generate ayu)"
 
 alias dbc='osascript ~/init/setDefaultBrowser.scpt chrome'
 alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
@@ -284,7 +239,6 @@ alias dbb='osascript ~/init/setDefaultBrowser.scpt browser'
 if [ -f ~/cloud/private_init/zshrc.sh ]; then
     source ~/cloud/private_init/zshrc.sh
 fi
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
@@ -294,12 +248,6 @@ export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# export MCFLY_LIGHT=TRUE
-# export MCFLY_DISABLE_MENU=TRUE
-# eval "$(mcfly init zsh)"
-
-# source /Users/chillaranand/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 my_chpwd_hook() {
     clear
@@ -323,9 +271,6 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH="/opt/homebrew/opt/ruby@3.2/bin:$PATH"
 
 export PATH="/Users/anand/.pixi/bin:$PATH"
-
-# export SPACESHIP_PROMPT_ASYNC=false
-# eval "$(starship init zsh)"
 
 # pnpm
 export PNPM_HOME="/Users/anand/Library/pnpm"
@@ -371,14 +316,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$(npm prefix -g)/bin:$PATH"
 
 export PATH="$HOME/.agentmemory/bin:$HOME/.local/bin:$PATH"
-
-# WeasyPrint native libs (Pango/Cairo/GLib) — Homebrew on Apple Silicon
-export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH"
-
-# rapid-mlx local model control (supervisor manual start; idle watchdog auto-stops)
-alias mlx-up='supervisorctl -c ~/supervisord.conf start rapid-mlx-9004'
-alias mlx-down='supervisorctl -c ~/supervisord.conf stop rapid-mlx-9004'
-alias mlx-status='supervisorctl -c ~/supervisord.conf status rapid-mlx-9004'
 
 gh() {
   local gh_account=$(git config github.account 2>/dev/null)
