@@ -3,6 +3,14 @@
 
 ;;; Code:
 
+;; fewer GCs during startup
+(setq gc-cons-threshold (* 128 1024 1024))
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold (* 20 1024 1024))))
+
+;; libgccjit passes invalid -mmacosx-version-min=18.0 on new macOS
+(setq native-comp-driver-options '("-mmacosx-version-min=15.0"))
+
 (require 'cl)
 (require 'package)
 
@@ -19,18 +27,18 @@
 ;; Third party packages
 
 ;; add melpa to archives
-(package-initialize)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
-(package-refresh-contents)
 (package-initialize)
 
 ;; dont check signatures
 (setq package-check-signature nil)
 
 
-;; install use package
+;; install use package; refresh index only when something missing
+;; (run M-x package-refresh-contents manually to update)
 (unless (package-installed-p 'use-package)
+  (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
@@ -210,19 +218,22 @@
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
-(use-package elpy)
+;; elpy loaded lazily on first python file
 (add-to-list 'load-path "~/projects/elpy")
-(load "elpy" nil t)
-(elpy-enable)
-
 (setq elpy-test-runner 'elpy-test-pytest-runner)
 (setq elpy-rpc-timeout nil)
 (setq elpy-rgrep-file-pattern "*.py *.html")
 (setq elpy-rpc-backend "jedi")
 (setq elpy-rpc-virtualenv-path `current)
 ;; (setq elpy-rpc-python-command "python3")
-(pyvenv-workon "py35")
-(elpy-rpc-restart)
+
+(with-eval-after-load 'python
+  (load "elpy" nil t)
+  (elpy-enable)
+  (pyvenv-workon "py35")
+  (define-key elpy-mode-map (kbd "C-c C-c") 'my/send-region-or-buffer)
+  (define-key elpy-mode-map (kbd "<return>") 'elpy-open-and-indent-line-below)
+  (define-key elpy-mode-map (kbd "M-,") 'pop-tag-mark))
 
 (add-to-list 'grep-find-ignored-files "flycheck_*")
 (add-to-list 'grep-find-ignored-directories "htmlcov")
@@ -250,10 +261,6 @@
   (with-current-buffer (process-buffer (elpy-shell-get-or-create-process))
     (set-window-point (get-buffer-window (current-buffer))
                       (point-max))))
-
-(define-key elpy-mode-map (kbd "C-c C-c") 'my/send-region-or-buffer)
-(define-key elpy-mode-map (kbd "<return>") 'elpy-open-and-indent-line-below)
-(define-key elpy-mode-map (kbd "M-,") 'pop-tag-mark)
 
 (defun company-yasnippet-or-completion ()
   "Solve company yasnippet conflicts."

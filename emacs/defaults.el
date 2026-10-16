@@ -83,8 +83,8 @@
 
 ;; maximize on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(toggle-frame-fullscreen)
-(set-frame-parameter nil 'fullscreen 'fullboth)
+;; (toggle-frame-fullscreen)
+;; (set-frame-parameter nil 'fullscreen 'fullboth)
 
 
 ;; disable tool bar
