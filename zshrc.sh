@@ -26,7 +26,7 @@ plugins=(
     zsh-autocomplete
     zsh-autosuggestions
     # pyautoenv
-    # zsh-syntax-highlighting
+    zsh-syntax-highlighting
 )
 
 # ZSH_THEME="ys2"
@@ -328,3 +328,10 @@ gh() {
 
   command gh "$@"
 }
+
+# weasyprint: find homebrew pango/glib
+export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/anand/.local/bin:$PATH"

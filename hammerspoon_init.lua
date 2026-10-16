@@ -23,6 +23,7 @@ local IGNORED_APPS = {
    ['Windows'] = true,
    ['Windows App'] = true,
    ['Clocker'] = true,
+   ['TinyCast'] = true,
 }
 
 function resize(a, b, c, d, appObject)

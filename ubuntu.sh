@@ -1,58 +1,61 @@
-#! /bin/sh
+#! /bin/bash
+set -u
 
-
-set -x
+echo "Setting up ubuntu..."
 
 export DEBIAN_FRONTEND=noninteractive
 
-sudo apt update
+INIT_DIR="$HOME/init"
+PRIVATE_INIT_DIR="$HOME/cloud/private_init"
 
+# clone or update a git repo
+git_sync() {
+    if [ -d "$2" ]; then
+        git -C "$2" pull
+    else
+        git clone --depth=1 "$1" "$2"
+    fi
+}
+
+# move a real file aside once; skip if missing or already our symlink
+backup() {
+    if [ -e "$1" ] && [ ! -L "$1" ]; then mv "$1" "$2"; fi
+}
+
+# packages
+sudo apt update
 sudo apt install --yes byobu git trash-cli tree unzip vim zsh
 sudo apt install --yes nmap net-tools telnet iotop-c htop atop
 
-sudo apt install --yes python3 python3-pip
-
-# zoxide
-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-export PATH="$HOME/.local/bin:$PATH"
-
-# vivid
-if ! command -v vivid >/dev/null 2>&1; then
-    VIVID_VER="0.10.1"
-    curl -sSfL "https://github.com/sharkdp/vivid/releases/download/v${VIVID_VER}/vivid-v${VIVID_VER}-x86_64-unknown-linux-gnu.tar.gz" | tar xz -C /tmp
-    sudo mv "/tmp/vivid-v${VIVID_VER}-x86_64-unknown-linux-gnu/vivid" /usr/local/bin/vivid
-fi
+git_sync https://github.com/chillaranand/init "$INIT_DIR"
 
 # oh-my-zsh
 grep -qxF 'skip_global_compinit=1' "$HOME/.zshenv" 2>/dev/null || echo 'skip_global_compinit=1' >> "$HOME/.zshenv"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-git clone --depth=1 https://github.com/tom-auger/cmdtime ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/cmdtime
+[ -d "$HOME/.oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-git clone https://github.com/ChillarAnand/init.git
-INIT_DIR="$HOME/init"
-cd $INIT_DIR
-git fetch origin main
-git reset --hard origin/main
+# p10k + zsh plugins
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+git_sync https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
+git_sync https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+git_sync https://github.com/tom-auger/cmdtime "$ZSH_CUSTOM/plugins/cmdtime"
 
-# zsh-autocomplete: pinned to last pre-zasync (sync) commit + local fd-leak patch
-AUTOCOMPLETE_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autocomplete"
+# zsh-autocomplete: pinned to last pre-zasync (sync) commit + local fd-leak patch.
+# Newer upstream is always-async and broke autocomplete here.
+AUTOCOMPLETE_DIR="$ZSH_CUSTOM/plugins/zsh-autocomplete"
+[ -d "$AUTOCOMPLETE_DIR" ] || git clone https://github.com/marlonrichert/zsh-autocomplete "$AUTOCOMPLETE_DIR"
 git -C "$AUTOCOMPLETE_DIR" checkout -q 20f6c34
-git -C "$AUTOCOMPLETE_DIR" apply "$INIT_DIR/zsh-autocomplete-fd.patch"
+git -C "$AUTOCOMPLETE_DIR" apply --check "$INIT_DIR/zsh-autocomplete-fd.patch" 2>/dev/null &&
+    git -C "$AUTOCOMPLETE_DIR" apply "$INIT_DIR/zsh-autocomplete-fd.patch"
 
-mv "$HOME/.zshrc" "$HOME/.zshrc.bkp"
+backup "$HOME/.zshrc" "$HOME/.zshrc.bkp"
 ln -sf "$INIT_DIR/zshrc.sh" "$HOME/.zshrc"
 
-mv "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bkp"
+backup "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bkp"
 ln -sf "$INIT_DIR/p10k.zsh" "$HOME/.p10k.zsh"
 
+echo "ubuntu.sh ran successfully"
 
-# starship
-# curl -sS https://starship.rs/install.sh | sh
-
-# pip install pyflash glances
-
-#wget -c "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-#bash Miniforge3-$(uname)-$(uname -m).sh -b -f
+if [ -d "$PRIVATE_INIT_DIR" ]; then
+    echo "Found private init dir, running private init..."
+    bash "$PRIVATE_INIT_DIR/init.sh"
+fi
